@@ -1,0 +1,237 @@
+/* This sets the background color and font for the whole page */
+body {
+  font-family: 'Lato', sans-serif;
+  background-color: #e6f7ff; /* Light blue */
+  margin: 0;
+  padding: 0;
+  color: #333;
+}
+
+/* This styles the main container for the home page */
+.home-container {
+  background-color: #ffffff;
+  max-width: 700px;
+  margin: 30px auto;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  animation-name: myAnimation;
+  animation-duration: 5s;  
+  animation-fill-mode: forwards;
+}
+
+/* This styles the name at the top */
+h1 {
+  color: #007acc; /* Azure blue */
+  margin-bottom: 5px;
+}
+
+/* This styles the section headings */
+h2 {
+  color: #007acc; /* Azure blue */
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 5px;
+  margin-top: 30px;
+}
+
+/* This styles the list of labs */
+ul {
+  list-style-type: disc;
+  margin-left: 20px;
+}
+
+/* This styles general paragraphs */
+.item {
+  margin-bottom: 15px;
+}
+
+.secret{
+  color: white;
+}
+
+.picture {
+  display: block;
+  margin: 20px auto;
+  max-width: 700px;
+  height: auto;
+}
+
+@keyframes myAnimation {
+  from {background-color: white;}
+  to { background-color: 7b93f1;}
+}
+
+.hero {
+  background: linear-gradient(135deg, #007acc, #005b99); /* Azure to navy gradient */
+  color: white;
+  text-align: center;
+  padding: 100px 20px;
+}
+
+.hero-content h1 {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+}
+
+.hero-content p {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+}
+
+/* Button styles */
+a {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: transform 0.3s ease;
+}
+
+a:hover {
+    transform: scale(1.1);
+}
+
+.cta-button {
+  background-color: #005b99; /* Navy blue */
+  color: white;
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.cta-button:hover {
+  background-color: #003f73; /* Dark navy */
+}
+
+/* Confetti animation styles */
+.confetti {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  animation: fall 5s infinite;
+}
+
+.confetti:nth-child(1) {
+  top: 0;
+  left: 10%;
+  animation-delay: 0s;
+  background-color: #007acc;
+}
+
+.confetti:nth-child(2) {
+  top: 0;
+  left: 30%;
+  animation-delay: 0.5s;
+  background-color: #005b99;
+}
+
+.confetti:nth-child(3) {
+  top: 0;
+  left: 50%;
+  animation-delay: 1s;
+  background-color: #003f73;
+}
+
+.confetti:nth-child(4) {
+  top: 0;
+  left: 70%;
+  animation-delay: 1.5s;
+  background-color: #007acc;
+}
+
+.confetti:nth-child(5) {
+  top: 0;
+  left: 90%;
+  animation-delay: 2s;
+  background-color: #005b99;
+}
+
+@keyframes fall {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(100vh);
+  }
+}
+
+/* Add more blue-themed styles for other pages */
+.about, .labs-list, .item {
+  background: #f0f8ff; /* Alice blue */
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Add interesting shapes to the background */
+body {
+  background-color: #f0f0f0; /* Light background */
+  position: relative;
+  overflow: hidden;
+}
+
+/* Container for SVG shapes */
+.background-shapes {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* Style for individual shapes */
+.shape {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  opacity: 0.8;
+  animation: float 10s infinite ease-in-out;
+}
+
+.shape.gem {
+  background: url('../images/gem.svg') no-repeat center/contain;
+  top: 20%;
+  left: 5%;
+}
+
+.shape.sword {
+  background: url('../images/sword.svg') no-repeat center/contain;
+  top: 50%;
+  right: 5%;
+}
+
+.shape.jet {
+  background: url('../images/jet.svg') no-repeat center/contain;
+  bottom: 20%;
+  left: 10%;
+}
+
+/* Animation for floating effect */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+/* Adjust body overflow to ensure scrolling */
+body {
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+  overflow-y: auto; /* Ensure vertical scrolling */
+}
+
+/* Add shapes to the left and right sides of the background */
+.shape.left {
+  left: -50px;
+}
+
+.shape.right {
+  right: -50px;
+}
