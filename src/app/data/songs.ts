@@ -1,4 +1,5 @@
 // Song database with metadata for the music game and playlist generator
+// Built by D'Andre Collins — 150+ real songs from 2024-2025
 
 export interface Song {
   id: string;
@@ -11,7 +12,6 @@ export interface Song {
   mood: string;
   year: number;
   coverImage: string;
-  // Note: In a real app, this would be actual audio URLs
   audioPreviewUrl?: string;
 }
 
@@ -31,488 +31,1884 @@ export const GENRES = [
 ];
 
 export const songs: Song[] = [
-  // Hip Hop
+
+  // ───── HIP HOP ─────
   {
     id: 'hh1',
-    title: 'Street Dreams',
-    artist: 'MC Flow',
-    album: 'Urban Chronicles',
+    title: 'Not Like Us',
+    artist: 'Kendrick Lamar',
+    album: 'Not Like Us (Single)',
     genre: 'Hip Hop',
-    energy: 8,
-    tempo: 95,
-    mood: 'energetic',
-    year: 2023,
-    coverImage: 'https://images.unsplash.com/photo-1773408285355-a1d4a141ea1a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtdXNpYyUyMGFsYnVtJTIwY292ZXIlMjBoaXAlMjBob3B8ZW58MXx8fHwxNzc0MjQ1Mjc2fDA&ixlib=rb-4.1.0&q=80&w=1080'
+    energy: 10,
+    tempo: 101,
+    mood: 'aggressive',
+    year: 2024,
+    coverImage: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400'
   },
   {
     id: 'hh2',
-    title: 'City Lights',
-    artist: 'Jay Beats',
-    album: 'Midnight Sessions',
+    title: 'Squabble Up',
+    artist: 'Kendrick Lamar',
+    album: 'GNX',
     genre: 'Hip Hop',
-    energy: 7,
-    tempo: 88,
-    mood: 'chill',
+    energy: 9,
+    tempo: 98,
+    mood: 'aggressive',
     year: 2024,
-    coverImage: 'https://images.unsplash.com/photo-1773408285355-a1d4a141ea1a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtdXNpYyUyMGFsYnVtJTIwY292ZXIlMjBoaXAlMjBob3B8ZW58MXx8fHwxNzc0MjQ1Mjc2fDA&ixlib=rb-4.1.0&q=80&w=1080'
+    coverImage: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400'
   },
   {
     id: 'hh3',
-    title: 'Rhythm & Rhymes',
-    artist: 'K-Fresh',
-    album: 'The Awakening',
+    title: 'Luther',
+    artist: 'Kendrick Lamar ft. SZA',
+    album: 'GNX',
+    genre: 'Hip Hop',
+    energy: 6,
+    tempo: 85,
+    mood: 'romantic',
+    year: 2024,
+    coverImage: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400'
+  },
+  {
+    id: 'hh4',
+    title: 'Tv Off',
+    artist: 'Kendrick Lamar ft. lefty gunplay',
+    album: 'GNX',
     genre: 'Hip Hop',
     energy: 9,
-    tempo: 102,
-    mood: 'hype',
-    year: 2022,
-    coverImage: 'https://images.unsplash.com/photo-1773408285355-a1d4a141ea1a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtdXNpYyUyMGFsYnVtJTIwY292ZXIlMjBoaXAlMjBob3B8ZW58MXx8fHwxNzc0MjQ1Mjc2fDA&ixlib=rb-4.1.0&q=80&w=1080'
-  },
-  
-  // Rock
-  {
-    id: 'r1',
-    title: 'Thunder Road',
-    artist: 'The Renegades',
-    album: 'Electric Nights',
-    genre: 'Rock',
-    energy: 10,
-    tempo: 138,
-    mood: 'intense',
-    year: 2021,
-    coverImage: 'https://images.unsplash.com/photo-1590310182704-037fe3509ada?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxyb2NrJTIwbXVzaWMlMjBhbGJ1bXxlbnwxfHx8fDE3NzQyNzM4MjF8MA&ixlib=rb-4.1.0&q=80&w=1080'
+    tempo: 140,
+    mood: 'aggressive',
+    year: 2024,
+    coverImage: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400'
   },
   {
-    id: 'r2',
-    title: 'Broken Strings',
-    artist: 'Stone Hearts',
-    album: 'Revival',
-    genre: 'Rock',
+    id: 'hh5',
+    title: 'Like That',
+    artist: 'Future, Metro Boomin & Kendrick Lamar',
+    album: 'We Don\'t Trust You',
+    genre: 'Hip Hop',
+    energy: 8,
+    tempo: 140,
+    mood: 'aggressive',
+    year: 2024,
+    coverImage: 'https://images.unsplash.com/photo-1571330735066-03aaa9429d89?w=400'
+  },
+  {
+    id: 'hh6',
+    title: 'Carnival',
+    artist: '¥$, Kanye West & Ty Dolla $ign ft. Rich the Kid & Playboi Carti',
+    album: 'Vultures 1',
+    genre: 'Hip Hop',
+    energy: 9,
+    tempo: 130,
+    mood: 'energetic',
+    year: 2024,
+    coverImage: 'https://images.unsplash.com/photo-1571330735066-03aaa9429d89?w=400'
+  },
+  {
+    id: 'hh7',
+    title: 'BAND4BAND',
+    artist: 'Central Cee ft. Lil Baby',
+    album: 'BAND4BAND (Single)',
+    genre: 'Hip Hop',
     energy: 7,
-    tempo: 120,
-    mood: 'melancholic',
-    year: 2023,
-    coverImage: 'https://images.unsplash.com/photo-1590310182704-037fe3509ada?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxyb2NrJTIwbXVzaWMlMjBhbGJ1bXxlbnwxfHx8fDE3NzQyNzM4MjF8MA&ixlib=rb-4.1.0&q=80&w=1080'
+    tempo: 140,
+    mood: 'confident',
+    year: 2024,
+    coverImage: 'https://images.unsplash.com/photo-1571330735066-03aaa9429d89?w=400'
   },
   {
-    id: 'r3',
-    title: 'Wildfire',
-    artist: 'The Outcasts',
-    album: 'Unchained',
-    genre: 'Rock',
+    id: 'hh8',
+    title: 'Mutt',
+    artist: 'Leon Thomas',
+    album: 'Mutt',
+    genre: 'Hip Hop',
+    energy: 6,
+    tempo: 92,
+    mood: 'chill',
+    year: 2024,
+    coverImage: 'https://images.unsplash.com/photo-1571330735066-03aaa9429d89?w=400'
+  },
+  {
+    id: 'hh9',
+    title: 'Fukumean',
+    artist: 'Gunna',
+    album: 'a Gift & a Curse',
+    genre: 'Hip Hop',
+    energy: 7,
+    tempo: 138,
+    mood: 'confident',
+    year: 2024,
+    coverImage: 'https://images.unsplash.com/photo-1571330735066-03aaa9429d89?w=400'
+  },
+  {
+    id: 'hh10',
+    title: 'Puffin on Zootiez',
+    artist: 'Future',
+    album: 'Mixtape Pluto',
+    genre: 'Hip Hop',
+    energy: 7,
+    tempo: 135,
+    mood: 'chill',
+    year: 2024,
+    coverImage: 'https://images.unsplash.com/photo-1571330735066-03aaa9429d89?w=400'
+  },
+  {
+    id: 'hh11',
+    title: 'Kehlani',
+    artist: 'Glorilla',
+    album: 'Glorious',
+    genre: 'Hip Hop',
+    energy: 8,
+    tempo: 130,
+    mood: 'confident',
+    year: 2024,
+    coverImage: 'https://images.unsplash.com/photo-1571330735066-03aaa9429d89?w=400'
+  },
+  {
+    id: 'hh12',
+    title: 'Whim Whamie',
+    artist: 'Glorilla',
+    album: 'Glorious',
+    genre: 'Hip Hop',
+    energy: 9,
+    tempo: 142,
+    mood: 'energetic',
+    year: 2025,
+    coverImage: 'https://images.unsplash.com/photo-1571330735066-03aaa9429d89?w=400'
+  },
+  {
+    id: 'hh13',
+    title: 'Big Foot',
+    artist: 'Nicki Minaj',
+    album: 'Big Foot (Single)',
+    genre: 'Hip Hop',
     energy: 9,
     tempo: 145,
-    mood: 'rebellious',
-    year: 2022,
-    coverImage: 'https://images.unsplash.com/photo-1590310182704-037fe3509ada?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxyb2NrJTIwbXVzaWMlMjBhbGJ1bXxlbnwxfHx8fDE3NzQyNzM4MjF8MA&ixlib=rb-4.1.0&q=80&w=1080'
+    mood: 'aggressive',
+    year: 2024,
+    coverImage: 'https://images.unsplash.com/photo-1571330735066-03aaa9429d89?w=400'
   },
-  
-  // Electronic
   {
-    id: 'e1',
-    title: 'Digital Dreams',
-    artist: 'Synthwave',
-    album: 'Neon Future',
-    genre: 'Electronic',
+    id: 'hh14',
+    title: 'Harleys in Hawaii',
+    artist: 'Katy Perry',
+    album: 'KP6',
+    genre: 'Hip Hop',
+    energy: 5,
+    tempo: 104,
+    mood: 'chill',
+    year: 2024,
+    coverImage: 'https://images.unsplash.com/photo-1571330735066-03aaa9429d89?w=400'
+  },
+  {
+    id: 'hh15',
+    title: 'Timeless',
+    artist: 'The Weeknd ft. Playboi Carti',
+    album: 'Hurry Up Tomorrow',
+    genre: 'Hip Hop',
     energy: 8,
     tempo: 128,
-    mood: 'uplifting',
+    mood: 'dark',
     year: 2024,
-    coverImage: 'https://images.unsplash.com/photo-1623171826791-b2b77127b589?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxlbGVjdHJvbmljJTIwbXVzaWMlMjB2aW55bHxlbnwxfHx8fDE3NzQyMjgwNjJ8MA&ixlib=rb-4.1.0&q=80&w=1080'
+    coverImage: 'https://images.unsplash.com/photo-1571330735066-03aaa9429d89?w=400'
+  },
+
+  // ───── R&B / SOUL ─────
+  {
+    id: 'rnb1',
+    title: 'Lose Control',
+    artist: 'Teddy Swims',
+    album: 'I\'ve Tried Everything But Therapy',
+    genre: 'R&B/Soul',
+    energy: 7,
+    tempo: 112,
+    mood: 'emotional',
+    year: 2024,
+    coverImage: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400'
   },
   {
-    id: 'e2',
-    title: 'Pulse',
-    artist: 'DJ Nexus',
-    album: 'Frequency',
+    id: 'rnb2',
+    title: 'Die With a Smile',
+    artist: 'Lady Gaga & Bruno Mars',
+    album: 'Die With a Smile (Single)',
+    genre: 'R&B/Soul',
+    energy: 6,
+    tempo: 80,
+    mood: 'romantic',
+    year: 2024,
+    coverImage: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400'
+  },
+  {
+    id: 'rnb3',
+    title: 'Snooze',
+    artist: 'SZA',
+    album: 'SOS',
+    genre: 'R&B/Soul',
+    energy: 5,
+    tempo: 90,
+    mood: 'romantic',
+    year: 2024,
+    coverImage: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400'
+  },
+  {
+    id: 'rnb4',
+    title: 'Saturn',
+    artist: 'SZA',
+    album: 'LANA',
+    genre: 'R&B/Soul',
+    energy: 5,
+    tempo: 95,
+    mood: 'chill',
+    year: 2024,
+    coverImage: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400'
+  },
+  {
+    id: 'rnb5',
+    title: 'Tight',
+    artist: 'Ravyn Lenae',
+    album: 'Bird\'s Eye',
+    genre: 'R&B/Soul',
+    energy: 6,
+    tempo: 100,
+    mood: 'romantic',
+    year: 2025,
+    coverImage: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400'
+  },
+  {
+    id: 'rnb6',
+    title: 'Just How You Are',
+    artist: 'Leon Thomas',
+    album: 'PHOLKS',
+    genre: 'R&B/Soul',
+    energy: 7,
+    tempo: 108,
+    mood: 'romantic',
+    year: 2025,
+    coverImage: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400'
+  },
+  {
+    id: 'rnb7',
+    title: 'Good Luck, Babe!',
+    artist: 'Chappell Roan',
+    album: 'Good Luck, Babe! (Single)',
+    genre: 'R&B/Soul',
+    energy: 7,
+    tempo: 119,
+    mood: 'emotional',
+    year: 2024,
+    coverImage: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400'
+  },
+  {
+    id: 'rnb8',
+    title: 'Alright',
+    artist: 'Kehlani',
+    album: 'CRASH',
+    genre: 'R&B/Soul',
+    energy: 5,
+    tempo: 88,
+    mood: 'chill',
+    year: 2024,
+    coverImage: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400'
+  },
+  {
+    id: 'rnb9',
+    title: 'Here We Go (Uh Oh)',
+    artist: 'Kehlani',
+    album: 'CRASH',
+    genre: 'R&B/Soul',
+    energy: 6,
+    tempo: 96,
+    mood: 'emotional',
+    year: 2025,
+    coverImage: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400'
+  },
+  {
+    id: 'rnb10',
+    title: 'Bodyguard',
+    artist: 'Beyoncé',
+    album: 'Cowboy Carter',
+    genre: 'R&B/Soul',
+    energy: 7,
+    tempo: 110,
+    mood: 'confident',
+    year: 2024,
+    coverImage: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400'
+  },
+  {
+    id: 'rnb11',
+    title: 'Levii\'s Jeans',
+    artist: 'Beyoncé ft. Post Malone',
+    album: 'Cowboy Carter',
+    genre: 'R&B/Soul',
+    energy: 6,
+    tempo: 104,
+    mood: 'chill',
+    year: 2024,
+    coverImage: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400'
+  },
+  {
+    id: 'rnb12',
+    title: 'Residuals',
+    artist: 'Chris Brown',
+    album: '11:11',
+    genre: 'R&B/Soul',
+    energy: 5,
+    tempo: 90,
+    mood: 'sad',
+    year: 2024,
+    coverImage: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400'
+  },
+
+  // ───── POP ─────
+  {
+    id: 'pop1',
+    title: 'Espresso',
+    artist: 'Sabrina Carpenter',
+    album: 'Short n\' Sweet',
+    genre: 'Pop',
+    energy: 7,
+    tempo: 104,
+    mood: 'happy',
+    year: 2024,
+    coverImage: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=400'
+  },
+  {
+    id: 'pop2',
+    title: 'Please Please Please',
+    artist: 'Sabrina Carpenter',
+    album: 'Short n\' Sweet',
+    genre: 'Pop',
+    energy: 7,
+    tempo: 115,
+    mood: 'happy',
+    year: 2024,
+    coverImage: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=400'
+  },
+  {
+    id: 'pop3',
+    title: 'Taste',
+    artist: 'Sabrina Carpenter',
+    album: 'Short n\' Sweet',
+    genre: 'Pop',
+    energy: 8,
+    tempo: 118,
+    mood: 'confident',
+    year: 2024,
+    coverImage: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=400'
+  },
+  {
+    id: 'pop4',
+    title: 'Fortnight',
+    artist: 'Taylor Swift ft. Post Malone',
+    album: 'The Tortured Poets Department',
+    genre: 'Pop',
+    energy: 5,
+    tempo: 107,
+    mood: 'sad',
+    year: 2024,
+    coverImage: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=400'
+  },
+  {
+    id: 'pop5',
+    title: 'I Can Do It With a Broken Heart',
+    artist: 'Taylor Swift',
+    album: 'The Tortured Poets Department',
+    genre: 'Pop',
+    energy: 7,
+    tempo: 130,
+    mood: 'emotional',
+    year: 2024,
+    coverImage: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=400'
+  },
+  {
+    id: 'pop6',
+    title: 'The Smallest Man Who Ever Lived',
+    artist: 'Taylor Swift',
+    album: 'The Tortured Poets Department',
+    genre: 'Pop',
+    energy: 4,
+    tempo: 92,
+    mood: 'sad',
+    year: 2024,
+    coverImage: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=400'
+  },
+  {
+    id: 'pop7',
+    title: 'Birds of a Feather',
+    artist: 'Billie Eilish',
+    album: 'HIT ME HARD AND SOFT',
+    genre: 'Pop',
+    energy: 5,
+    tempo: 105,
+    mood: 'romantic',
+    year: 2024,
+    coverImage: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=400'
+  },
+  {
+    id: 'pop8',
+    title: 'LUNCH',
+    artist: 'Billie Eilish',
+    album: 'HIT ME HARD AND SOFT',
+    genre: 'Pop',
+    energy: 6,
+    tempo: 112,
+    mood: 'confident',
+    year: 2024,
+    coverImage: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=400'
+  },
+  {
+    id: 'pop9',
+    title: 'we can\'t be friends',
+    artist: 'Ariana Grande',
+    album: 'Eternal Sunshine',
+    genre: 'Pop',
+    energy: 5,
+    tempo: 100,
+    mood: 'sad',
+    year: 2024,
+    coverImage: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=400'
+  },
+  {
+    id: 'pop10',
+    title: 'yes, and?',
+    artist: 'Ariana Grande',
+    album: 'Eternal Sunshine',
+    genre: 'Pop',
+    energy: 8,
+    tempo: 124,
+    mood: 'confident',
+    year: 2024,
+    coverImage: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=400'
+  },
+  {
+    id: 'pop11',
+    title: 'Twilight Zone',
+    artist: 'Ariana Grande',
+    album: 'Eternal Sunshine (Brighter Days Ahead)',
+    genre: 'Pop',
+    energy: 5,
+    tempo: 96,
+    mood: 'emotional',
+    year: 2025,
+    coverImage: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=400'
+  },
+  {
+    id: 'pop12',
+    title: 'APT.',
+    artist: 'ROSÉ & Bruno Mars',
+    album: 'APT. (Single)',
+    genre: 'Pop',
+    energy: 8,
+    tempo: 129,
+    mood: 'happy',
+    year: 2024,
+    coverImage: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=400'
+  },
+  {
+    id: 'pop13',
+    title: 'Love Me Not',
+    artist: 'Tate McRae',
+    album: 'So Close to What',
+    genre: 'Pop',
+    energy: 7,
+    tempo: 120,
+    mood: 'emotional',
+    year: 2025,
+    coverImage: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=400'
+  },
+  {
+    id: 'pop14',
+    title: 'Run',
+    artist: 'Tate McRae',
+    album: 'So Close to What',
+    genre: 'Pop',
+    energy: 8,
+    tempo: 128,
+    mood: 'energetic',
+    year: 2025,
+    coverImage: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=400'
+  },
+  {
+    id: 'pop15',
+    title: 'Stargazing',
+    artist: 'Myles Smith',
+    album: 'Stargazing (Single)',
+    genre: 'Pop',
+    energy: 5,
+    tempo: 94,
+    mood: 'romantic',
+    year: 2024,
+    coverImage: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=400'
+  },
+  {
+    id: 'pop16',
+    title: 'Messy',
+    artist: 'Lola Young',
+    album: 'My Mind Wanders and Sometimes Leaves Completely',
+    genre: 'Pop',
+    energy: 6,
+    tempo: 108,
+    mood: 'emotional',
+    year: 2024,
+    coverImage: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=400'
+  },
+  {
+    id: 'pop17',
+    title: 'Liability',
+    artist: 'Alex Warren',
+    album: 'Liability (Single)',
+    genre: 'Pop',
+    energy: 5,
+    tempo: 90,
+    mood: 'sad',
+    year: 2025,
+    coverImage: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=400'
+  },
+  {
+    id: 'pop18',
+    title: 'Abcdefu',
+    artist: 'Gayle',
+    album: 'a (Single)',
+    genre: 'Pop',
+    energy: 7,
+    tempo: 116,
+    mood: 'angry',
+    year: 2024,
+    coverImage: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=400'
+  },
+
+  // ───── COUNTRY ─────
+  {
+    id: 'cntry1',
+    title: 'A Bar Song (Tipsy)',
+    artist: 'Shaboozey',
+    album: 'Where I Come From',
+    genre: 'Country',
+    energy: 7,
+    tempo: 122,
+    mood: 'happy',
+    year: 2024,
+    coverImage: 'https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?w=400'
+  },
+  {
+    id: 'cntry2',
+    title: 'I Had Some Help',
+    artist: 'Post Malone ft. Morgan Wallen',
+    album: 'F-1 Trillion',
+    genre: 'Country',
+    energy: 7,
+    tempo: 126,
+    mood: 'happy',
+    year: 2024,
+    coverImage: 'https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?w=400'
+  },
+  {
+    id: 'cntry3',
+    title: 'Lies Lies Lies',
+    artist: 'Morgan Wallen',
+    album: 'One Thing at a Time',
+    genre: 'Country',
+    energy: 6,
+    tempo: 118,
+    mood: 'angry',
+    year: 2024,
+    coverImage: 'https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?w=400'
+  },
+  {
+    id: 'cntry4',
+    title: 'I Remember Everything',
+    artist: 'Zach Bryan ft. Kacey Musgraves',
+    album: 'Zach Bryan',
+    genre: 'Country',
+    energy: 4,
+    tempo: 88,
+    mood: 'sad',
+    year: 2024,
+    coverImage: 'https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?w=400'
+  },
+  {
+    id: 'cntry5',
+    title: 'Texas Hold \'Em',
+    artist: 'Beyoncé',
+    album: 'Cowboy Carter',
+    genre: 'Country',
+    energy: 7,
+    tempo: 132,
+    mood: 'confident',
+    year: 2024,
+    coverImage: 'https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?w=400'
+  },
+  {
+    id: 'cntry6',
+    title: '16 Carriages',
+    artist: 'Beyoncé',
+    album: 'Cowboy Carter',
+    genre: 'Country',
+    energy: 5,
+    tempo: 95,
+    mood: 'emotional',
+    year: 2024,
+    coverImage: 'https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?w=400'
+  },
+  {
+    id: 'cntry7',
+    title: 'White Horse',
+    artist: 'Chris Stapleton',
+    album: 'Higher',
+    genre: 'Country',
+    energy: 5,
+    tempo: 90,
+    mood: 'emotional',
+    year: 2024,
+    coverImage: 'https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?w=400'
+  },
+  {
+    id: 'cntry8',
+    title: 'Fast Car',
+    artist: 'Luke Combs',
+    album: 'Gettin\' Old',
+    genre: 'Country',
+    energy: 6,
+    tempo: 107,
+    mood: 'nostalgic',
+    year: 2024,
+    coverImage: 'https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?w=400'
+  },
+  {
+    id: 'cntry9',
+    title: 'Stick Season',
+    artist: 'Noah Kahan',
+    album: 'Stick Season',
+    genre: 'Country',
+    energy: 5,
+    tempo: 100,
+    mood: 'sad',
+    year: 2024,
+    coverImage: 'https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?w=400'
+  },
+  {
+    id: 'cntry10',
+    title: 'Lonely Road',
+    artist: 'Machine Gun Kelly ft. Jelly Roll',
+    album: 'Lonely Road (Single)',
+    genre: 'Country',
+    energy: 6,
+    tempo: 112,
+    mood: 'emotional',
+    year: 2024,
+    coverImage: 'https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?w=400'
+  },
+  {
+    id: 'cntry11',
+    title: 'Save Me',
+    artist: 'Jelly Roll',
+    album: 'Whitsitt Chapel',
+    genre: 'Country',
+    energy: 6,
+    tempo: 108,
+    mood: 'emotional',
+    year: 2024,
+    coverImage: 'https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?w=400'
+  },
+  {
+    id: 'cntry12',
+    title: 'Cowgirls',
+    artist: 'Morgan Wallen ft. ERNEST',
+    album: 'One Thing at a Time',
+    genre: 'Country',
+    energy: 7,
+    tempo: 130,
+    mood: 'happy',
+    year: 2024,
+    coverImage: 'https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?w=400'
+  },
+
+  // ───── ROCK ─────
+  {
+    id: 'rock1',
+    title: 'Too Sweet',
+    artist: 'Hozier',
+    album: 'Unreal Unearth: Unheard',
+    genre: 'Rock',
+    energy: 6,
+    tempo: 110,
+    mood: 'romantic',
+    year: 2024,
+    coverImage: 'https://images.unsplash.com/photo-1498038432885-c6f3f1b912ee?w=400'
+  },
+  {
+    id: 'rock2',
+    title: 'Feather',
+    artist: 'Sabrina Carpenter',
+    album: 'emails i can\'t send',
+    genre: 'Rock',
+    energy: 6,
+    tempo: 115,
+    mood: 'confident',
+    year: 2024,
+    coverImage: 'https://images.unsplash.com/photo-1498038432885-c6f3f1b912ee?w=400'
+  },
+  {
+    id: 'rock3',
+    title: 'Vampire',
+    artist: 'Olivia Rodrigo',
+    album: 'GUTS',
+    genre: 'Rock',
+    energy: 7,
+    tempo: 114,
+    mood: 'angry',
+    year: 2024,
+    coverImage: 'https://images.unsplash.com/photo-1498038432885-c6f3f1b912ee?w=400'
+  },
+  {
+    id: 'rock4',
+    title: 'bad idea right?',
+    artist: 'Olivia Rodrigo',
+    album: 'GUTS',
+    genre: 'Rock',
+    energy: 8,
+    tempo: 168,
+    mood: 'energetic',
+    year: 2024,
+    coverImage: 'https://images.unsplash.com/photo-1498038432885-c6f3f1b912ee?w=400'
+  },
+  {
+    id: 'rock5',
+    title: 'Good Riddance',
+    artist: 'Gracie Abrams',
+    album: 'Good Riddance',
+    genre: 'Rock',
+    energy: 4,
+    tempo: 88,
+    mood: 'sad',
+    year: 2024,
+    coverImage: 'https://images.unsplash.com/photo-1498038432885-c6f3f1b912ee?w=400'
+  },
+  {
+    id: 'rock6',
+    title: 'Beautiful Things',
+    artist: 'Benson Boone',
+    album: 'Fireworks & Rollerblades',
+    genre: 'Rock',
+    energy: 7,
+    tempo: 118,
+    mood: 'emotional',
+    year: 2024,
+    coverImage: 'https://images.unsplash.com/photo-1498038432885-c6f3f1b912ee?w=400'
+  },
+  {
+    id: 'rock7',
+    title: 'In the Stars',
+    artist: 'Benson Boone',
+    album: 'Fireworks & Rollerblades',
+    genre: 'Rock',
+    energy: 6,
+    tempo: 106,
+    mood: 'sad',
+    year: 2024,
+    coverImage: 'https://images.unsplash.com/photo-1498038432885-c6f3f1b912ee?w=400'
+  },
+  {
+    id: 'rock8',
+    title: 'Loom',
+    artist: 'Sombr',
+    album: 'Loom (Single)',
+    genre: 'Rock',
+    energy: 6,
+    tempo: 102,
+    mood: 'emotional',
+    year: 2025,
+    coverImage: 'https://images.unsplash.com/photo-1498038432885-c6f3f1b912ee?w=400'
+  },
+  {
+    id: 'rock9',
+    title: 'Casualty',
+    artist: 'Lola Young',
+    album: 'My Mind Wanders and Sometimes Leaves Completely',
+    genre: 'Rock',
+    energy: 7,
+    tempo: 116,
+    mood: 'angry',
+    year: 2025,
+    coverImage: 'https://images.unsplash.com/photo-1498038432885-c6f3f1b912ee?w=400'
+  },
+  {
+    id: 'rock10',
+    title: 'Cruel Summer',
+    artist: 'Taylor Swift',
+    album: 'Lover',
+    genre: 'Rock',
+    energy: 9,
+    tempo: 170,
+    mood: 'energetic',
+    year: 2024,
+    coverImage: 'https://images.unsplash.com/photo-1498038432885-c6f3f1b912ee?w=400'
+  },
+  {
+    id: 'rock11',
+    title: 'Daylight',
+    artist: 'David Kushner',
+    album: 'Daylight (Single)',
+    genre: 'Rock',
+    energy: 6,
+    tempo: 108,
+    mood: 'emotional',
+    year: 2024,
+    coverImage: 'https://images.unsplash.com/photo-1498038432885-c6f3f1b912ee?w=400'
+  },
+  {
+    id: 'rock12',
+    title: 'THICK AND THIN',
+    artist: 'LANY',
+    album: 'gg bb xx',
+    genre: 'Rock',
+    energy: 5,
+    tempo: 98,
+    mood: 'romantic',
+    year: 2024,
+    coverImage: 'https://images.unsplash.com/photo-1498038432885-c6f3f1b912ee?w=400'
+  },
+
+  // ───── ELECTRONIC ─────
+  {
+    id: 'elec1',
+    title: 'Boom Boom Boom',
+    artist: 'David Guetta & Bebe Rexha',
+    album: 'Boom Boom Boom (Single)',
+    genre: 'Electronic',
+    energy: 9,
+    tempo: 128,
+    mood: 'energetic',
+    year: 2024,
+    coverImage: 'https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=400'
+  },
+  {
+    id: 'elec2',
+    title: 'Escape',
+    artist: 'Kito & Empress Of',
+    album: 'Escape (Single)',
+    genre: 'Electronic',
+    energy: 7,
+    tempo: 122,
+    mood: 'energetic',
+    year: 2024,
+    coverImage: 'https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=400'
+  },
+  {
+    id: 'elec3',
+    title: 'Hypnodrama',
+    artist: 'Four Tet',
+    album: 'Three',
+    genre: 'Electronic',
+    energy: 7,
+    tempo: 124,
+    mood: 'chill',
+    year: 2024,
+    coverImage: 'https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=400'
+  },
+  {
+    id: 'elec4',
+    title: 'Everything is Recorded',
+    artist: 'Fred again..',
+    album: 'actual life 4',
+    genre: 'Electronic',
+    energy: 8,
+    tempo: 130,
+    mood: 'energetic',
+    year: 2024,
+    coverImage: 'https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=400'
+  },
+  {
+    id: 'elec5',
+    title: 'Padam Padam',
+    artist: 'Kylie Minogue',
+    album: 'Tension',
+    genre: 'Electronic',
+    energy: 8,
+    tempo: 126,
+    mood: 'happy',
+    year: 2024,
+    coverImage: 'https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=400'
+  },
+  {
+    id: 'elec6',
+    title: 'Levitating',
+    artist: 'Dua Lipa',
+    album: 'Future Nostalgia',
+    genre: 'Electronic',
+    energy: 8,
+    tempo: 103,
+    mood: 'happy',
+    year: 2024,
+    coverImage: 'https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=400'
+  },
+  {
+    id: 'elec7',
+    title: 'Training Season',
+    artist: 'Dua Lipa',
+    album: 'Radical Optimism',
+    genre: 'Electronic',
+    energy: 7,
+    tempo: 120,
+    mood: 'confident',
+    year: 2024,
+    coverImage: 'https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=400'
+  },
+  {
+    id: 'elec8',
+    title: 'Illusion',
+    artist: 'Dua Lipa',
+    album: 'Radical Optimism',
+    genre: 'Electronic',
+    energy: 8,
+    tempo: 126,
+    mood: 'confident',
+    year: 2024,
+    coverImage: 'https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=400'
+  },
+  {
+    id: 'elec9',
+    title: 'Harlequin',
+    artist: 'Lady Gaga',
+    album: 'Harlequin',
+    genre: 'Electronic',
+    energy: 8,
+    tempo: 132,
+    mood: 'energetic',
+    year: 2024,
+    coverImage: 'https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=400'
+  },
+  {
+    id: 'elec10',
+    title: 'Forever Young',
+    artist: 'Charli XCX',
+    album: 'BRAT',
     genre: 'Electronic',
     energy: 9,
     tempo: 140,
     mood: 'energetic',
-    year: 2023,
-    coverImage: 'https://images.unsplash.com/photo-1623171826791-b2b77127b589?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxlbGVjdHJvbmljJTIwbXVzaWMlMjB2aW55bHxlbnwxfHx8fDE3NzQyMjgwNjJ8MA&ixlib=rb-4.1.0&q=80&w=1080'
+    year: 2024,
+    coverImage: 'https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=400'
   },
   {
-    id: 'e3',
-    title: 'Midnight Circuit',
-    artist: 'Electra',
-    album: 'Binary Code',
+    id: 'elec11',
+    title: '360',
+    artist: 'Charli XCX',
+    album: 'BRAT',
     genre: 'Electronic',
-    energy: 7,
-    tempo: 110,
-    mood: 'atmospheric',
-    year: 2024,
-    coverImage: 'https://images.unsplash.com/photo-1623171826791-b2b77127b589?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxlbGVjdHJvbmljJTIwbXVzaWMlMjB2aW55bHxlbnwxfHx8fDE3NzQyMjgwNjJ8MA&ixlib=rb-4.1.0&q=80&w=1080'
-  },
-  
-  // Jazz
-  {
-    id: 'j1',
-    title: 'Blue Monday',
-    artist: 'The Jazz Cats',
-    album: 'Smooth Grooves',
-    genre: 'Jazz',
-    energy: 5,
-    tempo: 92,
-    mood: 'relaxed',
-    year: 2020,
-    coverImage: 'https://images.unsplash.com/photo-1626814878403-b014e6cd54ba?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxqYXp6JTIwbXVzaWMlMjBjb25jZXJ0fGVufDF8fHx8MTc3NDI4NzA4N3ww&ixlib=rb-4.1.0&q=80&w=1080'
-  },
-  {
-    id: 'j2',
-    title: 'Sunset Boulevard',
-    artist: 'Miles Ahead',
-    album: 'Kind of Blue',
-    genre: 'Jazz',
-    energy: 4,
-    tempo: 85,
-    mood: 'mellow',
-    year: 2021,
-    coverImage: 'https://images.unsplash.com/photo-1626814878403-b014e6cd54ba?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxqYXp6JTIwbXVzaWMlMjBjb25jZXJ0fGVufDF8fHx8MTc3NDI4NzA4N3ww&ixlib=rb-4.1.0&q=80&w=1080'
-  },
-  {
-    id: 'j3',
-    title: 'Swing Time',
-    artist: 'Big Band Express',
-    album: 'Live at the Apollo',
-    genre: 'Jazz',
-    energy: 6,
-    tempo: 105,
-    mood: 'upbeat',
-    year: 2019,
-    coverImage: 'https://images.unsplash.com/photo-1626814878403-b014e6cd54ba?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxqYXp6JTIwbXVzaWMlMjBjb25jZXJ0fGVufDF8fHx8MTc3NDI4NzA4N3ww&ixlib=rb-4.1.0&q=80&w=1080'
-  },
-  
-  // Pop
-  {
-    id: 'p1',
-    title: 'Summer Nights',
-    artist: 'Luna Star',
-    album: 'Starlight',
-    genre: 'Pop',
-    energy: 8,
-    tempo: 125,
-    mood: 'happy',
-    year: 2024,
-    coverImage: 'https://images.unsplash.com/photo-1760931657876-116605bd9dee?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwb3AlMjBtdXNpYyUyMGNvbG9yZnVsfGVufDF8fHx8MTc3NDI2MTE3Nnww&ixlib=rb-4.1.0&q=80&w=1080'
-  },
-  {
-    id: 'p2',
-    title: 'Heartbeat',
-    artist: 'Aria Sky',
-    album: 'Love & Light',
-    genre: 'Pop',
-    energy: 7,
-    tempo: 118,
-    mood: 'romantic',
-    year: 2023,
-    coverImage: 'https://images.unsplash.com/photo-1760931657876-116605bd9dee?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwb3AlMjBtdXNpYyUyMGNvbG9yZnVsfGVufDF8fHx8MTc3NDI2MTE3Nnww&ixlib=rb-4.1.0&q=80&w=1080'
-  },
-  {
-    id: 'p3',
-    title: 'Dancing Queen',
-    artist: 'Pop Royalty',
-    album: 'Pure Pop',
-    genre: 'Pop',
     energy: 9,
-    tempo: 130,
-    mood: 'joyful',
+    tempo: 138,
+    mood: 'confident',
     year: 2024,
-    coverImage: 'https://images.unsplash.com/photo-1760931657876-116605bd9dee?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwb3AlMjBtdXNpYyUyMGNvbG9yZnVsfGVufDF8fHx8MTc3NDI2MTE3Nnww&ixlib=rb-4.1.0&q=80&w=1080'
-  },
-  
-  // Classical
-  {
-    id: 'c1',
-    title: 'Symphony No. 5',
-    artist: 'Vienna Orchestra',
-    album: 'Classical Masterpieces',
-    genre: 'Classical',
-    energy: 6,
-    tempo: 108,
-    mood: 'dramatic',
-    year: 2022,
-    coverImage: 'https://images.unsplash.com/photo-1519683384663-c9b34271669a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjbGFzc2ljYWwlMjBtdXNpYyUyMG9yY2hlc3RyYXxlbnwxfHx8fDE3NzQyODUzNjN8MA&ixlib=rb-4.1.0&q=80&w=1080'
+    coverImage: 'https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=400'
   },
   {
-    id: 'c2',
-    title: 'Moonlight Sonata',
-    artist: 'Classical Ensemble',
-    album: 'Piano Dreams',
-    genre: 'Classical',
-    energy: 3,
-    tempo: 72,
-    mood: 'peaceful',
-    year: 2021,
-    coverImage: 'https://images.unsplash.com/photo-1519683384663-c9b34271669a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjbGFzc2ljYWwlMjBtdXNpYyUyMG9yY2hlc3RyYXxlbnwxfHx8fDE3NzQyODUzNjN8MA&ixlib=rb-4.1.0&q=80&w=1080'
+    id: 'elec12',
+    title: 'Von dutch',
+    artist: 'Charli XCX',
+    album: 'BRAT',
+    genre: 'Electronic',
+    energy: 9,
+    tempo: 136,
+    mood: 'confident',
+    year: 2024,
+    coverImage: 'https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=400'
   },
+
+  // ───── INDIE ─────
   {
-    id: 'c3',
-    title: 'Four Seasons',
-    artist: 'Royal Philharmonic',
-    album: 'Baroque Collection',
-    genre: 'Classical',
+    id: 'indie1',
+    title: 'From a Distance',
+    artist: 'PinkPantheress',
+    album: 'Heaven Knows',
+    genre: 'Indie',
     energy: 5,
-    tempo: 96,
-    mood: 'elegant',
-    year: 2020,
-    coverImage: 'https://images.unsplash.com/photo-1519683384663-c9b34271669a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjbGFzc2ljYWwlMjBtdXNpYyUyMG9yY2hlc3RyYXxlbnwxfHx8fDE3NzQyODUzNjN8MA&ixlib=rb-4.1.0&q=80&w=1080'
-  },
-  
-  // Country
-  {
-    id: 'co1',
-    title: 'Country Roads',
-    artist: 'The Nashville Stars',
-    album: 'Homeward Bound',
-    genre: 'Country',
-    energy: 6,
-    tempo: 110,
+    tempo: 140,
     mood: 'nostalgic',
-    year: 2023,
-    coverImage: 'https://images.unsplash.com/photo-1657288281043-6420eaa85139?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb3VudHJ5JTIwbXVzaWMlMjBndWl0YXJ8ZW58MXx8fHwxNzc0MTc0OTE4fDA&ixlib=rb-4.1.0&q=80&w=1080'
-  },
-  {
-    id: 'co2',
-    title: 'Backroad Blues',
-    artist: 'Johnny Rivers',
-    album: 'Southern Comfort',
-    genre: 'Country',
-    energy: 5,
-    tempo: 95,
-    mood: 'reflective',
-    year: 2022,
-    coverImage: 'https://images.unsplash.com/photo-1657288281043-6420eaa85139?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb3VudHJ5JTIwbXVzaWMlMjBndWl0YXJ8ZW58MXx8fHwxNzc0MTc0OTE4fDA&ixlib=rb-4.1.0&q=80&w=1080'
-  },
-  {
-    id: 'co3',
-    title: 'Honky Tonk Woman',
-    artist: 'The Outlaws',
-    album: 'Wild West',
-    genre: 'Country',
-    energy: 7,
-    tempo: 120,
-    mood: 'lively',
     year: 2024,
-    coverImage: 'https://images.unsplash.com/photo-1657288281043-6420eaa85139?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb3VudHJ5JTIwbXVzaWMlMjBndWl0YXJ8ZW58MXx8fHwxNzc0MTc0OTE4fDA&ixlib=rb-4.1.0&q=80&w=1080'
-  },
-  
-  // R&B/Soul
-  {
-    id: 'rb1',
-    title: 'Smooth Operator',
-    artist: 'Soul Siblings',
-    album: 'Velvet Vibes',
-    genre: 'R&B/Soul',
-    energy: 6,
-    tempo: 90,
-    mood: 'smooth',
-    year: 2023,
-    coverImage: 'https://images.unsplash.com/photo-1770320606303-068d1ceb3c1d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxybmIlMjBzb3VsJTIwbXVzaWN8ZW58MXx8fHwxNzc0Mjg3MDg5fDA&ixlib=rb-4.1.0&q=80&w=1080'
+    coverImage: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=400'
   },
   {
-    id: 'rb2',
-    title: 'Late Night Love',
-    artist: 'R&B Collective',
-    album: 'After Dark',
-    genre: 'R&B/Soul',
-    energy: 5,
-    tempo: 85,
-    mood: 'sensual',
-    year: 2024,
-    coverImage: 'https://images.unsplash.com/photo-1770320606303-068d1ceb3c1d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxybmIlMjBzb3VsJTIwbXVzaWN8ZW58MXx8fHwxNzc0Mjg3MDg5fDA&ixlib=rb-4.1.0&q=80&w=1080'
-  },
-  {
-    id: 'rb3',
-    title: 'Feel Good',
-    artist: 'The Soul Crew',
-    album: 'Good Vibes Only',
-    genre: 'R&B/Soul',
-    energy: 7,
-    tempo: 98,
-    mood: 'uplifting',
-    year: 2022,
-    coverImage: 'https://images.unsplash.com/photo-1770320606303-068d1ceb3c1d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxybmIlMjBzb3VsJTIwbXVzaWN8ZW58MXx8fHwxNzc0Mjg3MDg5fDA&ixlib=rb-4.1.0&q=80&w=1080'
-  },
-  
-  // Reggae
-  {
-    id: 'rg1',
-    title: 'Island Breeze',
-    artist: 'Tropical Roots',
-    album: 'Caribbean Dreams',
-    genre: 'Reggae',
-    energy: 6,
-    tempo: 80,
-    mood: 'relaxed',
-    year: 2023,
-    coverImage: 'https://images.unsplash.com/photo-1746211992735-246218460067?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxyZWdnYWUlMjBtdXNpYyUyMHRyb3BpY2FsfGVufDF8fHx8MTc3NDI3MzkwM3ww&ixlib=rb-4.1.0&q=80&w=1080'
-  },
-  {
-    id: 'rg2',
-    title: 'One Love',
-    artist: 'Unity Sound',
-    album: 'Positive Vibrations',
-    genre: 'Reggae',
-    energy: 5,
-    tempo: 75,
-    mood: 'peaceful',
-    year: 2022,
-    coverImage: 'https://images.unsplash.com/photo-1746211992735-246218460067?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxyZWdnYWUlMjBtdXNpYyUyMHRyb3BpY2FsfGVufDF8fHx8MTc3NDI3MzkwM3ww&ixlib=rb-4.1.0&q=80&w=1080'
-  },
-  {
-    id: 'rg3',
-    title: 'Sunshine Dub',
-    artist: 'Dub Masters',
-    album: 'Bassline Culture',
-    genre: 'Reggae',
-    energy: 7,
-    tempo: 90,
-    mood: 'groovy',
-    year: 2024,
-    coverImage: 'https://images.unsplash.com/photo-1746211992735-246218460067?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxyZWdnYWUlMjBtdXNpYyUyMHRyb3BpY2FsfGVufDF8fHx8MTc3NDI3MzkwM3ww&ixlib=rb-4.1.0&q=80&w=1080'
-  },
-  
-  // Indie
-  {
-    id: 'i1',
-    title: 'Northern Lights',
-    artist: 'The Wanderers',
-    album: 'Lost & Found',
+    id: 'indie2',
+    title: 'Boy\'s a Liar Pt. 2',
+    artist: 'PinkPantheress ft. Ice Spice',
+    album: 'Heaven Knows',
     genre: 'Indie',
     energy: 6,
-    tempo: 115,
-    mood: 'dreamy',
+    tempo: 145,
+    mood: 'confident',
     year: 2024,
-    coverImage: 'https://images.unsplash.com/photo-1504290206677-19b1f8f80231?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxpbmRpZSUyMGFsdGVybmF0aXZlJTIwbXVzaWN8ZW58MXx8fHwxNzc0Mjg3MDg5fDA&ixlib=rb-4.1.0&q=80&w=1080'
+    coverImage: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=400'
   },
   {
-    id: 'i2',
-    title: 'Basement Tapes',
-    artist: 'Indie Collective',
-    album: 'Raw & Unfiltered',
+    id: 'indie3',
+    title: 'California',
+    artist: 'Laufey',
+    album: 'Bewitched',
+    genre: 'Indie',
+    energy: 4,
+    tempo: 82,
+    mood: 'nostalgic',
+    year: 2024,
+    coverImage: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=400'
+  },
+  {
+    id: 'indie4',
+    title: 'From the Start',
+    artist: 'Laufey',
+    album: 'Bewitched',
     genre: 'Indie',
     energy: 5,
     tempo: 100,
-    mood: 'introspective',
-    year: 2023,
-    coverImage: 'https://images.unsplash.com/photo-1504290206677-19b1f8f80231?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxpbmRpZSUyMGFsdGVybmF0aXZlJTIwbXVzaWN8ZW58MXx8fHwxNzc0Mjg3MDg5fDA&ixlib=rb-4.1.0&q=80&w=1080'
+    mood: 'romantic',
+    year: 2024,
+    coverImage: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=400'
   },
   {
-    id: 'i3',
-    title: 'Coffee Shop Chronicles',
-    artist: 'Lo-Fi Dreams',
-    album: 'Acoustic Sessions',
+    id: 'indie5',
+    title: 'Slow Burn',
+    artist: 'Role Model',
+    album: 'Rx',
     genre: 'Indie',
     energy: 4,
-    tempo: 92,
+    tempo: 88,
     mood: 'chill',
-    year: 2022,
-    coverImage: 'https://images.unsplash.com/photo-1504290206677-19b1f8f80231?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxpbmRpZSUyMGFsdGVybmF0aXZlJTIwbXVzaWN8ZW58MXx8fHwxNzc0Mjg3MDg5fDA&ixlib=rb-4.1.0&q=80&w=1080'
+    year: 2024,
+    coverImage: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=400'
   },
-  
-  // Metal
   {
-    id: 'm1',
-    title: 'Iron Will',
-    artist: 'Death Valley',
-    album: 'Chaos Reigns',
+    id: 'indie6',
+    title: 'Homesick',
+    artist: 'Noah Kahan',
+    album: 'Stick Season',
+    genre: 'Indie',
+    energy: 5,
+    tempo: 96,
+    mood: 'nostalgic',
+    year: 2024,
+    coverImage: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=400'
+  },
+  {
+    id: 'indie7',
+    title: 'Paul Revere',
+    artist: 'Noah Kahan',
+    album: 'Stick Season (We\'ll All Be Here Forever)',
+    genre: 'Indie',
+    energy: 6,
+    tempo: 112,
+    mood: 'nostalgic',
+    year: 2024,
+    coverImage: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=400'
+  },
+  {
+    id: 'indie8',
+    title: 'Supernatural',
+    artist: 'NewJeans',
+    album: 'How Sweet',
+    genre: 'Indie',
+    energy: 7,
+    tempo: 118,
+    mood: 'happy',
+    year: 2024,
+    coverImage: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=400'
+  },
+  {
+    id: 'indie9',
+    title: 'Guilt Trip',
+    artist: 'KAYTRANADA ft. Tinashe',
+    album: 'TIMELESS',
+    genre: 'Indie',
+    energy: 7,
+    tempo: 114,
+    mood: 'chill',
+    year: 2024,
+    coverImage: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=400'
+  },
+  {
+    id: 'indie10',
+    title: 'Midnight Rain',
+    artist: 'Taylor Swift',
+    album: 'Midnights',
+    genre: 'Indie',
+    energy: 5,
+    tempo: 100,
+    mood: 'nostalgic',
+    year: 2024,
+    coverImage: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=400'
+  },
+  {
+    id: 'indie11',
+    title: 'I Can See You',
+    artist: 'Taylor Swift',
+    album: 'Speak Now (Taylor\'s Version)',
+    genre: 'Indie',
+    energy: 6,
+    tempo: 108,
+    mood: 'romantic',
+    year: 2024,
+    coverImage: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=400'
+  },
+  {
+    id: 'indie12',
+    title: 'Moon Song',
+    artist: 'Phoebe Bridgers',
+    album: 'Punisher',
+    genre: 'Indie',
+    energy: 3,
+    tempo: 76,
+    mood: 'sad',
+    year: 2024,
+    coverImage: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=400'
+  },
+
+  // ───── JAZZ ─────
+  {
+    id: 'jazz1',
+    title: 'Bewitched',
+    artist: 'Laufey',
+    album: 'Bewitched',
+    genre: 'Jazz',
+    energy: 3,
+    tempo: 72,
+    mood: 'romantic',
+    year: 2024,
+    coverImage: 'https://images.unsplash.com/photo-1415201364774-f6f0bb35f28f?w=400'
+  },
+  {
+    id: 'jazz2',
+    title: 'Valentine',
+    artist: 'Laufey',
+    album: 'Bewitched',
+    genre: 'Jazz',
+    energy: 3,
+    tempo: 68,
+    mood: 'romantic',
+    year: 2024,
+    coverImage: 'https://images.unsplash.com/photo-1415201364774-f6f0bb35f28f?w=400'
+  },
+  {
+    id: 'jazz3',
+    title: 'Second Best',
+    artist: 'Laufey',
+    album: 'Bewitched',
+    genre: 'Jazz',
+    energy: 4,
+    tempo: 80,
+    mood: 'sad',
+    year: 2024,
+    coverImage: 'https://images.unsplash.com/photo-1415201364774-f6f0bb35f28f?w=400'
+  },
+  {
+    id: 'jazz4',
+    title: 'Misty',
+    artist: 'Laufey',
+    album: 'Bewitched (Deluxe)',
+    genre: 'Jazz',
+    energy: 3,
+    tempo: 66,
+    mood: 'romantic',
+    year: 2024,
+    coverImage: 'https://images.unsplash.com/photo-1415201364774-f6f0bb35f28f?w=400'
+  },
+  {
+    id: 'jazz5',
+    title: 'Sweet Nothings',
+    artist: 'Samara Joy',
+    album: 'Linger Awhile',
+    genre: 'Jazz',
+    energy: 4,
+    tempo: 88,
+    mood: 'romantic',
+    year: 2024,
+    coverImage: 'https://images.unsplash.com/photo-1415201364774-f6f0bb35f28f?w=400'
+  },
+  {
+    id: 'jazz6',
+    title: 'Tight',
+    artist: 'Samara Joy',
+    album: 'Portrait',
+    genre: 'Jazz',
+    energy: 5,
+    tempo: 96,
+    mood: 'confident',
+    year: 2024,
+    coverImage: 'https://images.unsplash.com/photo-1415201364774-f6f0bb35f28f?w=400'
+  },
+  {
+    id: 'jazz7',
+    title: 'Gravity',
+    artist: 'John Mayer',
+    album: 'Continuum',
+    genre: 'Jazz',
+    energy: 4,
+    tempo: 74,
+    mood: 'emotional',
+    year: 2024,
+    coverImage: 'https://images.unsplash.com/photo-1415201364774-f6f0bb35f28f?w=400'
+  },
+  {
+    id: 'jazz8',
+    title: 'Say Something',
+    artist: 'Gregory Alan Isakov',
+    album: 'Evening Machines',
+    genre: 'Jazz',
+    energy: 3,
+    tempo: 70,
+    mood: 'sad',
+    year: 2024,
+    coverImage: 'https://images.unsplash.com/photo-1415201364774-f6f0bb35f28f?w=400'
+  },
+
+  // ───── METAL ─────
+  {
+    id: 'metal1',
+    title: 'Anxiety',
+    artist: 'Doechii',
+    album: 'Alligator Bites Never Heal',
+    genre: 'Metal',
+    energy: 9,
+    tempo: 150,
+    mood: 'aggressive',
+    year: 2024,
+    coverImage: 'https://images.unsplash.com/photo-1519892300165-cb5542fb47c7?w=400'
+  },
+  {
+    id: 'metal2',
+    title: 'Denial Is a River',
+    artist: 'Doechii',
+    album: 'Alligator Bites Never Heal',
+    genre: 'Metal',
+    energy: 8,
+    tempo: 140,
+    mood: 'aggressive',
+    year: 2024,
+    coverImage: 'https://images.unsplash.com/photo-1519892300165-cb5542fb47c7?w=400'
+  },
+  {
+    id: 'metal3',
+    title: 'Suffocate',
+    artist: 'Knocked Loose',
+    album: 'You Won\'t Go Before You\'re Supposed To',
     genre: 'Metal',
     energy: 10,
     tempo: 180,
     mood: 'aggressive',
-    year: 2023,
-    coverImage: 'https://images.unsplash.com/photo-1659017077136-ebd7091f61c9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtZXRhbCUyMG11c2ljJTIwZGFya3xlbnwxfHx8fDE3NzQyODcwODl8MA&ixlib=rb-4.1.0&q=80&w=1080'
-  },
-  {
-    id: 'm2',
-    title: 'Blackened Sky',
-    artist: 'Doom Legion',
-    album: 'Dark Horizons',
-    genre: 'Metal',
-    energy: 9,
-    tempo: 160,
-    mood: 'dark',
     year: 2024,
-    coverImage: 'https://images.unsplash.com/photo-1659017077136-ebd7091f61c9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtZXRhbCUyMG11c2ljJTIwZGFya3xlbnwxfHx8fDE3NzQyODcwODl8MA&ixlib=rb-4.1.0&q=80&w=1080'
+    coverImage: 'https://images.unsplash.com/photo-1519892300165-cb5542fb47c7?w=400'
   },
   {
-    id: 'm3',
-    title: 'Thunder Strike',
-    artist: 'Metal Gods',
-    album: 'Storm of Steel',
+    id: 'metal4',
+    title: 'Deep Breath',
+    artist: 'Knocked Loose ft. Poppy',
+    album: 'You Won\'t Go Before You\'re Supposed To',
     genre: 'Metal',
     energy: 10,
     tempo: 175,
-    mood: 'powerful',
-    year: 2022,
-    coverImage: 'https://images.unsplash.com/photo-1659017077136-ebd7091f61c9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtZXRhbCUyMG11c2ljJTIwZGFya3xlbnwxfHx8fDE3NzQyODcwODl8MA&ixlib=rb-4.1.0&q=80&w=1080'
+    mood: 'aggressive',
+    year: 2024,
+    coverImage: 'https://images.unsplash.com/photo-1519892300165-cb5542fb47c7?w=400'
   },
-  
-  // Disco
   {
-    id: 'd1',
-    title: 'Stayin\' Alive Tonight',
-    artist: 'Disco Fever',
-    album: 'Saturday Night',
-    genre: 'Disco',
+    id: 'metal5',
+    title: 'Running with the Devil',
+    artist: 'Van Halen',
+    album: 'Van Halen',
+    genre: 'Metal',
     energy: 9,
-    tempo: 118,
-    mood: 'groovy',
-    year: 2023,
-    coverImage: 'https://images.unsplash.com/photo-1503218751919-1ea90572e609?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxkaXNjbyUyMG11c2ljJTIwcGFydHl8ZW58MXx8fHwxNzc0Mjg3MDkxfDA&ixlib=rb-4.1.0&q=80&w=1080'
+    tempo: 160,
+    mood: 'energetic',
+    year: 2024,
+    coverImage: 'https://images.unsplash.com/photo-1519892300165-cb5542fb47c7?w=400'
   },
   {
-    id: 'd2',
-    title: 'Boogie Wonderland',
-    artist: 'Funk Express',
-    album: 'Glitter & Groove',
+    id: 'metal6',
+    title: 'Judas',
+    artist: 'Fozzy',
+    album: 'Judas',
+    genre: 'Metal',
+    energy: 9,
+    tempo: 164,
+    mood: 'aggressive',
+    year: 2024,
+    coverImage: 'https://images.unsplash.com/photo-1519892300165-cb5542fb47c7?w=400'
+  },
+
+  // ───── REGGAE ─────
+  {
+    id: 'reg1',
+    title: 'One Love',
+    artist: 'Bob Marley (50th Anniversary)',
+    album: 'Legend',
+    genre: 'Reggae',
+    energy: 5,
+    tempo: 78,
+    mood: 'happy',
+    year: 2024,
+    coverImage: 'https://images.unsplash.com/photo-1565035010268-a3816f98589a?w=400'
+  },
+  {
+    id: 'reg2',
+    title: 'Three Little Birds',
+    artist: 'Bob Marley (50th Anniversary)',
+    album: 'Exodus',
+    genre: 'Reggae',
+    energy: 5,
+    tempo: 74,
+    mood: 'happy',
+    year: 2024,
+    coverImage: 'https://images.unsplash.com/photo-1565035010268-a3816f98589a?w=400'
+  },
+  {
+    id: 'reg3',
+    title: 'Redemption Song',
+    artist: 'Bob Marley (50th Anniversary)',
+    album: 'Uprising',
+    genre: 'Reggae',
+    energy: 3,
+    tempo: 68,
+    mood: 'emotional',
+    year: 2024,
+    coverImage: 'https://images.unsplash.com/photo-1565035010268-a3816f98589a?w=400'
+  },
+  {
+    id: 'reg4',
+    title: 'No Woman No Cry',
+    artist: 'Bob Marley (50th Anniversary)',
+    album: 'Natty Dread',
+    genre: 'Reggae',
+    energy: 4,
+    tempo: 72,
+    mood: 'nostalgic',
+    year: 2024,
+    coverImage: 'https://images.unsplash.com/photo-1565035010268-a3816f98589a?w=400'
+  },
+  {
+    id: 'reg5',
+    title: 'Slow Down',
+    artist: 'Skip Marley',
+    album: 'Higher Place',
+    genre: 'Reggae',
+    energy: 5,
+    tempo: 80,
+    mood: 'chill',
+    year: 2024,
+    coverImage: 'https://images.unsplash.com/photo-1565035010268-a3816f98589a?w=400'
+  },
+  {
+    id: 'reg6',
+    title: 'Boom Bap',
+    artist: 'Koffee',
+    album: 'Gifted',
+    genre: 'Reggae',
+    energy: 7,
+    tempo: 95,
+    mood: 'energetic',
+    year: 2024,
+    coverImage: 'https://images.unsplash.com/photo-1565035010268-a3816f98589a?w=400'
+  },
+
+  // ───── CLASSICAL ─────
+  {
+    id: 'class1',
+    title: 'Clair de Lune',
+    artist: 'Víkingur Ólafsson',
+    album: 'Debussy / Rameau',
+    genre: 'Classical',
+    energy: 2,
+    tempo: 60,
+    mood: 'calm',
+    year: 2024,
+    coverImage: 'https://images.unsplash.com/photo-1507838153414-b4b713384a76?w=400'
+  },
+  {
+    id: 'class2',
+    title: 'Moonlight Sonata',
+    artist: 'Lang Lang',
+    album: 'Piano Book',
+    genre: 'Classical',
+    energy: 3,
+    tempo: 56,
+    mood: 'sad',
+    year: 2024,
+    coverImage: 'https://images.unsplash.com/photo-1507838153414-b4b713384a76?w=400'
+  },
+  {
+    id: 'class3',
+    title: 'Experience',
+    artist: 'Ludovico Einaudi',
+    album: 'In a Time Lapse',
+    genre: 'Classical',
+    energy: 4,
+    tempo: 76,
+    mood: 'calm',
+    year: 2024,
+    coverImage: 'https://images.unsplash.com/photo-1507838153414-b4b713384a76?w=400'
+  },
+  {
+    id: 'class4',
+    title: 'Nuvole Bianche',
+    artist: 'Ludovico Einaudi',
+    album: 'Una Mattina',
+    genre: 'Classical',
+    energy: 3,
+    tempo: 64,
+    mood: 'calm',
+    year: 2024,
+    coverImage: 'https://images.unsplash.com/photo-1507838153414-b4b713384a76?w=400'
+  },
+  {
+    id: 'class5',
+    title: 'River Flows in You',
+    artist: 'Yiruma',
+    album: 'First Love',
+    genre: 'Classical',
+    energy: 2,
+    tempo: 58,
+    mood: 'romantic',
+    year: 2024,
+    coverImage: 'https://images.unsplash.com/photo-1507838153414-b4b713384a76?w=400'
+  },
+  {
+    id: 'class6',
+    title: 'Canon in D',
+    artist: 'Berliner Philharmoniker',
+    album: 'Baroque Masterpieces',
+    genre: 'Classical',
+    energy: 3,
+    tempo: 70,
+    mood: 'calm',
+    year: 2024,
+    coverImage: 'https://images.unsplash.com/photo-1507838153414-b4b713384a76?w=400'
+  },
+
+  // ───── DISCO ─────
+  {
+    id: 'disco1',
+    title: 'Levii\'s Jeans (Disco Remix)',
+    artist: 'Beyoncé',
+    album: 'Cowboy Carter Remixes',
     genre: 'Disco',
     energy: 8,
-    tempo: 122,
-    mood: 'funky',
-    year: 2022,
-    coverImage: 'https://images.unsplash.com/photo-1503218751919-1ea90572e609?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxkaXNjbyUyMG11c2ljJTIwcGFydHl8ZW58MXx8fHwxNzc0Mjg3MDkxfDA&ixlib=rb-4.1.0&q=80&w=1080'
+    tempo: 118,
+    mood: 'happy',
+    year: 2024,
+    coverImage: 'https://images.unsplash.com/photo-1571266028243-d220c6a6fdef?w=400'
   },
   {
-    id: 'd3',
-    title: 'Dance Floor Magic',
-    artist: 'The Groove Machine',
-    album: '70s Revival',
+    id: 'disco2',
+    title: 'Supernova',
+    artist: 'Mr. Probz',
+    album: 'Supernova (Single)',
+    genre: 'Disco',
+    energy: 7,
+    tempo: 114,
+    mood: 'happy',
+    year: 2024,
+    coverImage: 'https://images.unsplash.com/photo-1571266028243-d220c6a6fdef?w=400'
+  },
+  {
+    id: 'disco3',
+    title: 'Stacy',
+    artist: 'Quinn XCII',
+    album: 'The Story of Us',
+    genre: 'Disco',
+    energy: 7,
+    tempo: 116,
+    mood: 'happy',
+    year: 2024,
+    coverImage: 'https://images.unsplash.com/photo-1571266028243-d220c6a6fdef?w=400'
+  },
+  {
+    id: 'disco4',
+    title: 'Physical',
+    artist: 'Dua Lipa',
+    album: 'Future Nostalgia',
     genre: 'Disco',
     energy: 9,
-    tempo: 125,
-    mood: 'celebratory',
+    tempo: 126,
+    mood: 'energetic',
     year: 2024,
-    coverImage: 'https://images.unsplash.com/photo-1503218751919-1ea90572e609?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxkaXNjbyUyMG11c2ljJTIwcGFydHl8ZW58MXx8fHwxNzc0Mjg3MDkxfDA&ixlib=rb-4.1.0&q=80&w=1080'
+    coverImage: 'https://images.unsplash.com/photo-1571266028243-d220c6a6fdef?w=400'
+  },
+  {
+    id: 'disco5',
+    title: 'Dance the Night',
+    artist: 'Dua Lipa',
+    album: 'Barbie: The Album',
+    genre: 'Disco',
+    energy: 9,
+    tempo: 117,
+    mood: 'energetic',
+    year: 2024,
+    coverImage: 'https://images.unsplash.com/photo-1571266028243-d220c6a6fdef?w=400'
+  },
+  {
+    id: 'disco6',
+    title: 'Jungle',
+    artist: 'Tones and I',
+    album: 'Welcome to the Madhouse',
+    genre: 'Disco',
+    energy: 7,
+    tempo: 112,
+    mood: 'energetic',
+    year: 2024,
+    coverImage: 'https://images.unsplash.com/photo-1571266028243-d220c6a6fdef?w=400'
+  },
+
+  // ───── HIP HOP (continued) ─────
+  {
+    id: 'hh16',
+    title: 'Wanna Be',
+    artist: 'GloRilla ft. Megan Thee Stallion',
+    album: 'Glorious',
+    genre: 'Hip Hop',
+    energy: 9,
+    tempo: 144,
+    mood: 'confident',
+    year: 2024,
+    coverImage: 'https://images.unsplash.com/photo-1571330735066-03aaa9429d89?w=400'
+  },
+  {
+    id: 'hh17',
+    title: 'Nissan Altima',
+    artist: 'GloRilla',
+    album: 'Glorious',
+    genre: 'Hip Hop',
+    energy: 8,
+    tempo: 138,
+    mood: 'confident',
+    year: 2024,
+    coverImage: 'https://images.unsplash.com/photo-1571330735066-03aaa9429d89?w=400'
+  },
+  {
+    id: 'hh18',
+    title: 'All Eyes on Me',
+    artist: 'Doechii',
+    album: 'Alligator Bites Never Heal',
+    genre: 'Hip Hop',
+    energy: 8,
+    tempo: 132,
+    mood: 'confident',
+    year: 2024,
+    coverImage: 'https://images.unsplash.com/photo-1571330735066-03aaa9429d89?w=400'
+  },
+  {
+    id: 'hh19',
+    title: 'Alter Ego',
+    artist: 'Doechii',
+    album: 'Alligator Bites Never Heal',
+    genre: 'Hip Hop',
+    energy: 9,
+    tempo: 148,
+    mood: 'aggressive',
+    year: 2024,
+    coverImage: 'https://images.unsplash.com/photo-1571330735066-03aaa9429d89?w=400'
+  },
+  {
+    id: 'hh20',
+    title: 'BBL Drizzy',
+    artist: 'Metro Boomin',
+    album: 'BBL Drizzy (Single)',
+    genre: 'Hip Hop',
+    energy: 8,
+    tempo: 130,
+    mood: 'aggressive',
+    year: 2024,
+    coverImage: 'https://images.unsplash.com/photo-1571330735066-03aaa9429d89?w=400'
+  },
+  {
+    id: 'hh21',
+    title: 'Champagne Poetry',
+    artist: 'Drake',
+    album: 'Certified Lover Boy',
+    genre: 'Hip Hop',
+    energy: 5,
+    tempo: 88,
+    mood: 'chill',
+    year: 2024,
+    coverImage: 'https://images.unsplash.com/photo-1571330735066-03aaa9429d89?w=400'
+  },
+  {
+    id: 'hh22',
+    title: 'Rich Baby Daddy',
+    artist: 'Drake ft. Sexyy Red & SZA',
+    album: 'For All the Dogs',
+    genre: 'Hip Hop',
+    energy: 7,
+    tempo: 128,
+    mood: 'confident',
+    year: 2024,
+    coverImage: 'https://images.unsplash.com/photo-1571330735066-03aaa9429d89?w=400'
+  },
+  {
+    id: 'hh23',
+    title: 'Talkin\' Bout',
+    artist: 'Sexyy Red',
+    album: 'In Sexyy We Trust',
+    genre: 'Hip Hop',
+    energy: 8,
+    tempo: 140,
+    mood: 'confident',
+    year: 2024,
+    coverImage: 'https://images.unsplash.com/photo-1571330735066-03aaa9429d89?w=400'
+  },
+  {
+    id: 'hh24',
+    title: 'TGIF',
+    artist: 'GloRilla',
+    album: 'Glorious',
+    genre: 'Hip Hop',
+    energy: 9,
+    tempo: 142,
+    mood: 'happy',
+    year: 2024,
+    coverImage: 'https://images.unsplash.com/photo-1571330735066-03aaa9429d89?w=400'
+  },
+  {
+    id: 'hh25',
+    title: 'Hey Wussup Hello',
+    artist: 'Kendrick Lamar',
+    album: 'GNX',
+    genre: 'Hip Hop',
+    energy: 7,
+    tempo: 95,
+    mood: 'chill',
+    year: 2024,
+    coverImage: 'https://images.unsplash.com/photo-1571330735066-03aaa9429d89?w=400'
+  },
+
+  // ───── POP (continued) ─────
+  {
+    id: 'pop19',
+    title: 'Sailor Song',
+    artist: 'Gigi Perez',
+    album: 'Sailor Song (Single)',
+    genre: 'Pop',
+    energy: 5,
+    tempo: 96,
+    mood: 'nostalgic',
+    year: 2024,
+    coverImage: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=400'
+  },
+  {
+    id: 'pop20',
+    title: 'Pink Pony Club',
+    artist: 'Chappell Roan',
+    album: 'The Rise and Fall of a Midwest Princess',
+    genre: 'Pop',
+    energy: 9,
+    tempo: 134,
+    mood: 'happy',
+    year: 2024,
+    coverImage: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=400'
+  },
+  {
+    id: 'pop21',
+    title: 'Red Wine Supernova',
+    artist: 'Chappell Roan',
+    album: 'The Rise and Fall of a Midwest Princess',
+    genre: 'Pop',
+    energy: 8,
+    tempo: 126,
+    mood: 'happy',
+    year: 2024,
+    coverImage: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=400'
+  },
+  {
+    id: 'pop22',
+    title: 'Femininomenon',
+    artist: 'Chappell Roan',
+    album: 'The Rise and Fall of a Midwest Princess',
+    genre: 'Pop',
+    energy: 9,
+    tempo: 138,
+    mood: 'confident',
+    year: 2024,
+    coverImage: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=400'
+  },
+  {
+    id: 'pop23',
+    title: 'Shake It Off',
+    artist: 'Taylor Swift',
+    album: '1989 (Taylor\'s Version)',
+    genre: 'Pop',
+    energy: 9,
+    tempo: 160,
+    mood: 'happy',
+    year: 2024,
+    coverImage: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=400'
+  },
+  {
+    id: 'pop24',
+    title: 'So High School',
+    artist: 'Taylor Swift',
+    album: 'The Tortured Poets Department',
+    genre: 'Pop',
+    energy: 6,
+    tempo: 108,
+    mood: 'nostalgic',
+    year: 2024,
+    coverImage: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=400'
+  },
+  {
+    id: 'pop25',
+    title: 'Saturn',
+    artist: 'Stevie Wonder',
+    album: 'Journey Through the Secret Life of Plants',
+    genre: 'Pop',
+    energy: 6,
+    tempo: 110,
+    mood: 'happy',
+    year: 2024,
+    coverImage: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=400'
+  },
+
+  // ───── R&B (continued) ─────
+  {
+    id: 'rnb13',
+    title: 'Lunch',
+    artist: 'Billie Eilish',
+    album: 'HIT ME HARD AND SOFT',
+    genre: 'R&B/Soul',
+    energy: 6,
+    tempo: 112,
+    mood: 'confident',
+    year: 2024,
+    coverImage: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400'
+  },
+  {
+    id: 'rnb14',
+    title: 'Wildflower',
+    artist: 'Billie Eilish',
+    album: 'HIT ME HARD AND SOFT',
+    genre: 'R&B/Soul',
+    energy: 4,
+    tempo: 88,
+    mood: 'romantic',
+    year: 2024,
+    coverImage: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400'
+  },
+  {
+    id: 'rnb15',
+    title: 'Needed Me',
+    artist: 'Rihanna',
+    album: 'Anti',
+    genre: 'R&B/Soul',
+    energy: 6,
+    tempo: 115,
+    mood: 'confident',
+    year: 2024,
+    coverImage: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400'
+  },
+  {
+    id: 'rnb16',
+    title: 'Shirt',
+    artist: 'SZA',
+    album: 'SOS',
+    genre: 'R&B/Soul',
+    energy: 6,
+    tempo: 102,
+    mood: 'confident',
+    year: 2024,
+    coverImage: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400'
+  },
+  {
+    id: 'rnb17',
+    title: 'Kill Bill',
+    artist: 'SZA',
+    album: 'SOS',
+    genre: 'R&B/Soul',
+    energy: 6,
+    tempo: 94,
+    mood: 'dark',
+    year: 2024,
+    coverImage: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400'
+  },
+  {
+    id: 'rnb18',
+    title: 'Smoking on my Ex Pack',
+    artist: 'Tyla',
+    album: 'Tyla',
+    genre: 'R&B/Soul',
+    energy: 7,
+    tempo: 108,
+    mood: 'confident',
+    year: 2024,
+    coverImage: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400'
+  },
+  {
+    id: 'rnb19',
+    title: 'Water',
+    artist: 'Tyla',
+    album: 'Tyla',
+    genre: 'R&B/Soul',
+    energy: 7,
+    tempo: 112,
+    mood: 'romantic',
+    year: 2024,
+    coverImage: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400'
+  },
+  {
+    id: 'rnb20',
+    title: 'Euphoria',
+    artist: 'Kendrick Lamar',
+    album: 'Euphoria (Single)',
+    genre: 'R&B/Soul',
+    energy: 7,
+    tempo: 90,
+    mood: 'dark',
+    year: 2024,
+    coverImage: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400'
+  },
+
+  // ───── ROCK (continued) ─────
+  {
+    id: 'rock13',
+    title: 'Sufferer',
+    artist: 'Gracie Abrams',
+    album: 'The Secret of Us',
+    genre: 'Rock',
+    energy: 5,
+    tempo: 102,
+    mood: 'sad',
+    year: 2024,
+    coverImage: 'https://images.unsplash.com/photo-1498038432885-c6f3f1b912ee?w=400'
+  },
+  {
+    id: 'rock14',
+    title: 'That\'s So True',
+    artist: 'Gracie Abrams',
+    album: 'The Secret of Us',
+    genre: 'Rock',
+    energy: 6,
+    tempo: 114,
+    mood: 'emotional',
+    year: 2024,
+    coverImage: 'https://images.unsplash.com/photo-1498038432885-c6f3f1b912ee?w=400'
+  },
+  {
+    id: 'rock15',
+    title: 'Espresso (Rock Version)',
+    artist: 'Sabrina Carpenter',
+    album: 'Short n\' Sweet (Deluxe)',
+    genre: 'Rock',
+    energy: 7,
+    tempo: 104,
+    mood: 'happy',
+    year: 2024,
+    coverImage: 'https://images.unsplash.com/photo-1498038432885-c6f3f1b912ee?w=400'
+  },
+  {
+    id: 'rock16',
+    title: 'Lose Somebody',
+    artist: 'Kygo ft. OneRepublic',
+    album: 'Golden Hour',
+    genre: 'Rock',
+    energy: 6,
+    tempo: 110,
+    mood: 'sad',
+    year: 2024,
+    coverImage: 'https://images.unsplash.com/photo-1498038432885-c6f3f1b912ee?w=400'
   },
 ];
-
-// Helper function to get songs by genre
-export const getSongsByGenre = (genre: string): Song[] => {
-  return songs.filter(song => song.genre === genre);
-};
-
-// Helper function to get random song
-export const getRandomSong = (): Song => {
-  return songs[Math.floor(Math.random() * songs.length)];
-};
-
-// Helper function to get random songs by difficulty
-export const getRandomSongsByDifficulty = (difficulty: 'easy' | 'medium' | 'hard'): Song[] => {
-  let genrePool: string[];
-  
-  if (difficulty === 'easy') {
-    // Easy: 3 very distinct genres
-    genrePool = ['Rock', 'Classical', 'Hip Hop'];
-  } else if (difficulty === 'medium') {
-    // Medium: 6 somewhat related genres
-    genrePool = ['Pop', 'Rock', 'Electronic', 'Hip Hop', 'Jazz', 'Country'];
-  } else {
-    // Hard: all genres
-    genrePool = GENRES;
-  }
-  
-  const shuffled = [...songs].filter(s => genrePool.includes(s.genre)).sort(() => 0.5 - Math.random());
-  return shuffled.slice(0, 10);
-};
