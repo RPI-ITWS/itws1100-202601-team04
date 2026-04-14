@@ -10,6 +10,35 @@ import { Search, Music, Heart, Play, Sparkles } from "lucide-react";
 import { songs, GENRES, Song } from "../data/songs";
 import { addFavorite, removeFavorite, isFavorite } from "../utils/storage";
 
+/**
+ * Weighted Similarity Algorithm — D'Andre Collins
+ *
+ * Scores every song in the dataset against a reference song using four
+ * weighted factors:
+ *
+ *   genre_match  (0.40) — same genre gets full credit, different gets 0
+ *   energy_sim   (0.30) — 1 minus the normalized energy difference (scale 1–10)
+ *   tempo_sim    (0.20) — 1 minus the normalized tempo difference (capped at 60 BPM)
+ *   mood_match   (0.10) — same mood string gets full credit, different gets 0
+ *
+ * Final score is in [0, 1]. Songs are ranked descending and the top 12 are
+ * returned. Runs entirely client-side — no network calls, no latency.
+ */
+function scoreSong(candidate: Song, reference: Song): number {
+  const genreMatch  = candidate.genre === reference.genre ? 1 : 0;
+  const energySim   = 1 - Math.abs(candidate.energy - reference.energy) / 9;
+  const tempoDiff   = Math.abs(candidate.tempo - reference.tempo);
+  const tempoSim    = 1 - Math.min(tempoDiff, 60) / 60;
+  const moodMatch   = candidate.mood === reference.mood ? 1 : 0;
+
+  return (
+    genreMatch * 0.40 +
+    energySim  * 0.30 +
+    tempoSim   * 0.20 +
+    moodMatch  * 0.10
+  );
+}
+
 export function PlaylistGenerator() {
   const [searchType, setSearchType] = useState<'genre' | 'artist' | 'song' | 'mood'>('genre');
   const [searchQuery, setSearchQuery] = useState('');
@@ -18,46 +47,64 @@ export function PlaylistGenerator() {
   const [favorites, setFavorites] = useState<Set<string>>(new Set());
 
   const handleGeneratePlaylist = () => {
-    let filtered: Song[] = [];
-    
+    const start = performance.now();
+
+    // Step 1 — find seed songs that match the user's input
+    let seeds: Song[] = [];
+
     if (searchType === 'genre' && selectedGenre) {
-      filtered = songs.filter(s => s.genre === selectedGenre);
+      seeds = songs.filter(s => s.genre === selectedGenre);
     } else if (searchType === 'artist' && searchQuery) {
-      filtered = songs.filter(s => 
+      seeds = songs.filter(s =>
         s.artist.toLowerCase().includes(searchQuery.toLowerCase())
       );
     } else if (searchType === 'song' && searchQuery) {
-      filtered = songs.filter(s => 
+      seeds = songs.filter(s =>
         s.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
         s.album.toLowerCase().includes(searchQuery.toLowerCase())
       );
     } else if (searchType === 'mood' && searchQuery) {
-      filtered = songs.filter(s => 
+      seeds = songs.filter(s =>
         s.mood.toLowerCase().includes(searchQuery.toLowerCase())
       );
     }
-    
-    // If we have results, add similar songs based on energy and tempo
-    if (filtered.length > 0) {
-      const baseSong = filtered[0];
-      const similar = songs.filter(s => {
-        const energyDiff = Math.abs(s.energy - baseSong.energy);
-        const tempoDiff = Math.abs(s.tempo - baseSong.tempo);
-        return energyDiff <= 2 && tempoDiff <= 20 && s.id !== baseSong.id;
-      });
-      
-      // Combine and remove duplicates using a Set based on song ID
-      const combined = [...filtered, ...similar];
-      const uniqueSongs = Array.from(
-        new Map(combined.map(song => [song.id, song])).values()
-      );
-      
-      // Shuffle and limit
-      const shuffled = uniqueSongs.sort(() => 0.5 - Math.random());
-      setPlaylist(shuffled.slice(0, 12));
-    } else {
+
+    if (seeds.length === 0) {
       setPlaylist([]);
+      return;
     }
+
+    // Step 2 — build a reference profile by averaging seed song attributes
+    const reference: Song = {
+      ...seeds[0],
+      energy: seeds.reduce((sum, s) => sum + s.energy, 0) / seeds.length,
+      tempo:  seeds.reduce((sum, s) => sum + s.tempo,  0) / seeds.length,
+    };
+
+    // Step 3 — score every song in the dataset against the reference profile
+    const scored = songs
+      .filter(s => !seeds.find(seed => seed.id === s.id)) // exclude exact seeds
+      .map(s => ({ song: s, score: scoreSong(s, reference) }))
+      .sort((a, b) => b.score - a.score);
+
+    // Step 4 — combine seeds first, then top-ranked similar songs, cap at 12
+    const combined = [
+      ...seeds,
+      ...scored.map(item => item.song),
+    ];
+
+    // Deduplicate by id
+    const seen = new Set<string>();
+    const unique = combined.filter(s => {
+      if (seen.has(s.id)) return false;
+      seen.add(s.id);
+      return true;
+    });
+
+    const elapsed = performance.now() - start;
+    console.log(`Playlist generated in ${elapsed.toFixed(2)}ms`);
+
+    setPlaylist(unique.slice(0, 12));
   };
 
   const toggleFavorite = (song: Song) => {
@@ -286,7 +333,7 @@ export function PlaylistGenerator() {
           </li>
         </ul>
         <p className="mt-4 text-sm text-gray-400">
-          Our algorithm finds similar songs based on energy levels, tempo, and genre to create the perfect playlist for you!
+          Songs are ranked using a weighted similarity score: genre (40%), energy (30%), tempo (20%), and mood (10%).
         </p>
       </motion.div>
     </div>
