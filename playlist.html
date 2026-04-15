@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Playlist - MusicQuest</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<nav class="top-nav">
+  <div class="nav-inner">
+
+    <div class="logo">🎵 MusicQuest</div>
+
+    <ul class="nav-links">
+      <li><a href="index.html">⌂ Home</a></li>
+      <li><a href="play.html">▷ Play Game</a></li>
+      <li><a class="active" href="playlist.html">☰ Playlist</a></li>
+      <li><a href="scoreboard.html">🏆 Scoreboard</a></li>
+    </ul>
+
+  </div>
+</nav>
+
+<section class="hero">
+  <h1>Playlist Generator</h1>
+  <p>Find music based on your preferences</p>
+</section>
+
+<section class="playlist-controls">
+
+  <label>Search By:</label>
+  <select id="searchType">
+    <option value="genre">Genre</option>
+    <option value="artist">Artist</option>
+  </select>
+
+  <input type="text" id="searchInput" placeholder="Enter genre or artist">
+
+  <button onclick="generatePlaylist()">Generate Playlist</button>
+
+</section>
+
+<section id="playlistResults">
+  <h2>Your Playlist</h2>
+  <div id="playlist"></div>
+</section>
+
+<!-- LOAD DATA FIRST -->
+<script src="js/songs.js"></script>
+
+<!-- THEN YOUR LOGIC -->
+<script src="js/script.js"></script>
+
+</body>
+</html>

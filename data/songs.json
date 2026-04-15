@@ -1,0 +1,62 @@
+[
+  {
+    "id": "hh1",
+    "title": "Not Like Us",
+    "artist": "Kendrick Lamar",
+    "album": "Not Like Us (Single)",
+    "genre": "Hip Hop",
+    "energy": 10,
+    "tempo": 101,
+    "mood": "aggressive",
+    "year": 2024,
+    "coverImage": "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400"
+  },
+  {
+    "id": "hh2",
+    "title": "Squabble Up",
+    "artist": "Kendrick Lamar",
+    "album": "GNX",
+    "genre": "Hip Hop",
+    "energy": 9,
+    "tempo": 98,
+    "mood": "aggressive",
+    "year": 2024,
+    "coverImage": "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400"
+  },
+  {
+    "id": "hh3",
+    "title": "Luther",
+    "artist": "Kendrick Lamar ft. SZA",
+    "album": "GNX",
+    "genre": "Hip Hop",
+    "energy": 6,
+    "tempo": 85,
+    "mood": "romantic",
+    "year": 2024,
+    "coverImage": "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400"
+  },
+  {
+    "id": "hh4",
+    "title": "Tv Off",
+    "artist": "Kendrick Lamar ft. lefty gunplay",
+    "album": "GNX",
+    "genre": "Hip Hop",
+    "energy": 9,
+    "tempo": 140,
+    "mood": "aggressive",
+    "year": 2024,
+    "coverImage": "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400"
+  },
+  {
+    "id": "hh5",
+    "title": "Like That",
+    "artist": "Future, Metro Boomin & Kendrick Lamar",
+    "album": "We Don't Trust You",
+    "genre": "Hip Hop",
+    "energy": 8,
+    "tempo": 140,
+    "mood": "aggressive",
+    "year": 2024,
+    "coverImage": "https://images.unsplash.com/photo-1571330735066-03aaa9429d89?w=400"
+  }
+]
