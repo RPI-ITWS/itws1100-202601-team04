@@ -1,0 +1,13 @@
+node_modules/
+src/
+dist/
+build/
+.vscode/
+*.log
+.env
+Thumbs.db
+.DS_Store
+*.zip
+vite.config.ts
+package.json
+package-lock.json
