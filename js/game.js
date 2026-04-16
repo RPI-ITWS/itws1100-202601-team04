@@ -25,9 +25,9 @@ function nextRound() {
 
     // show cover
     $("#cover")
-  .attr("src", currentSong.coverImage)
-  .on("error", function () {
-      $(this).attr("src", "https://via.placeholder.com/200?text=No+Image");
+        .attr("src", currentSong.coverImage)
+        .on("error", function () {
+        $(this).attr("src", "https://via.placeholder.com/200?text=No+Image");
   });
 
     // generate options
