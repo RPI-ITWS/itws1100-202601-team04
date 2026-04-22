@@ -15,10 +15,15 @@ const DIFFICULTY_OPTIONS = {
     hard: ALL_GENRES.length
 };
 
-// LOAD DATA — nothing runs until songs are ready
+// Single shared audio player
+const audioPlayer = new Audio();
+audioPlayer.volume = 0.6;
+
+// LOAD DATA — only keep songs that have a preview URL
 $(document).ready(function () {
     $.getJSON("data/songs.json", function (data) {
-        songs = data;
+        songs = data.filter(s => s.previewUrl && s.previewUrl.trim() !== "");
+        console.log(`Loaded ${songs.length} songs with previews`);
     }).fail(function () {
         console.error("Failed to load songs.json");
     });
@@ -30,6 +35,11 @@ function startGame(difficulty) {
         alert("Songs are still loading, try again in a second.");
         return;
     }
+
+    // Ask for player name before starting
+    let playerName = prompt("Enter your name for the scoreboard:") || "Player";
+    playerName = playerName.trim() || "Player";
+    window.currentPlayerName = playerName;
 
     currentDifficulty = difficulty;
     score = 0;
@@ -43,7 +53,6 @@ function startGame(difficulty) {
 }
 
 function nextRound() {
-    // End game after MAX_ROUNDS
     if (roundsPlayed >= MAX_ROUNDS) {
         endGame();
         return;
@@ -52,8 +61,16 @@ function nextRound() {
     $("#result").text("");
     $("#options button").prop("disabled", false);
 
-    // Pick a random song
+    // Pick a random song (all have previews)
     currentSong = songs[Math.floor(Math.random() * songs.length)];
+
+    // Play preview
+    audioPlayer.pause();
+    audioPlayer.src = currentSong.previewUrl;
+    audioPlayer.currentTime = 0;
+    audioPlayer.play().catch(err => {
+        console.warn("Audio playback failed:", err);
+    });
 
     // Show cover image
     $("#cover")
@@ -67,14 +84,10 @@ function nextRound() {
     let numOptions = DIFFICULTY_OPTIONS[currentDifficulty];
     let correct = currentSong.genre;
 
-    // Start with the correct answer, then fill with random others
     let optionPool = ALL_GENRES.filter(g => g !== correct);
-    // Shuffle pool
     optionPool.sort(() => Math.random() - 0.5);
-    // Take (numOptions - 1) wrong answers and add correct
     let options = optionPool.slice(0, numOptions - 1);
     options.push(correct);
-    // Shuffle final options
     options.sort(() => Math.random() - 0.5);
 
     // Render buttons
@@ -85,12 +98,11 @@ function nextRound() {
         );
     });
 
-    // Update round counter if element exists
     $("#round").text(`Round ${roundsPlayed + 1} / ${MAX_ROUNDS}`);
 }
 
 function checkAnswer(choice) {
-    // Disable buttons so they can't click again before Next
+    audioPlayer.pause();
     $("#options button").prop("disabled", true);
 
     if (choice === currentSong.genre) {
@@ -105,14 +117,15 @@ function checkAnswer(choice) {
 }
 
 function endGame() {
-    // Save score to localStorage
+    audioPlayer.pause();
+
     let scores = JSON.parse(localStorage.getItem("scores")) || [];
-    scores.push({ name: "Player", score: score });
+    scores.push({ name: window.currentPlayerName || "Player", score: score });
     localStorage.setItem("scores", JSON.stringify(scores));
 
-    // Show end screen
     $("#gameSection").html(`
         <h2>Game Over!</h2>
+        <p>Nice work, ${window.currentPlayerName || "Player"}!</p>
         <p>Your final score: <strong>${score} / ${MAX_ROUNDS}</strong></p>
         <a href="scoreboard.html"><button>View Scoreboard</button></a>
         <button onclick="location.reload()">Play Again</button>
