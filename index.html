@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Playlist & Genre Guessing Game</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <nav id="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <span class="icon">🎵</span>
+                <span class="brand-text">MusicGame</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html"      class="nav-link active">Home</a></li>
+                <li><a href="game.html"        class="nav-link">Play Game</a></li>
+                <li><a href="playlist.html"    class="nav-link">Playlist Generator</a></li>
+                <li><a href="scoreboard.html"  class="nav-link">Scoreboard</a></li>
+                <li><a href="#favorites"       class="nav-link">Favorites</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main id="app">
+
+        <!-- Home Page -->
+        <section id="home-page" class="page active">
+            <div class="container">
+                <div class="hero-section">
+                    <h1 class="hero-title">Music Playlist &amp; Genre Guessing Game</h1>
+                    <p class="hero-subtitle">Test your music knowledge and discover new playlists</p>
+                    <p class="team-info">Created by: Nathen Pride, Kevin Chen, D'Andre Collins &bull; ITWS 1100</p>
+                </div>
+
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">🎮</div>
+                        <h3>Genre Guessing Game</h3>
+                        <p>Test your knowledge by guessing genres from blurred album covers</p>
+                        <a href="game.html" class="btn btn-primary">Start Playing</a>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🎵</div>
+                        <h3>Playlist Generator</h3>
+                        <p>Create personalized playlists based on genre, artist, song, or mood</p>
+                        <a href="playlist.html" class="btn btn-primary">Generate Playlist</a>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🏆</div>
+                        <h3>Scoreboard</h3>
+                        <p>Track your high scores and compete with yourself</p>
+                        <a href="scoreboard.html" class="btn btn-primary">View Scores</a>
+                    </div>
+                </div>
+
+                <div class="info-section">
+                    <h2>Game Features</h2>
+                    <ul class="features-list">
+                        <li><strong>Three Difficulty Levels:</strong> Easy, Medium, and Hard with varying blur effects</li>
+                        <li><strong>Timer-Based Scoring:</strong> Earn more points for faster correct answers</li>
+                        <li><strong>Smart Playlist Generator:</strong> Finds similar songs based on energy, tempo, and mood</li>
+                        <li><strong>Favorites System:</strong> Save your favorite songs for quick access</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Favorites Page -->
+        <section id="favorites-page" class="page">
+            <div class="container">
+                <div class="page-header">
+                    <span class="page-icon">❤️</span>
+                    <h1>Your Favorites</h1>
+                    <p>Songs you've saved</p>
+                </div>
+                <div id="favorites-grid" class="playlist-grid"></div>
+            </div>
+        </section>
+
+    </main>
+
+    <script src="data/songs.js"></script>
+    <script src="js/storage.js"></script>
+    <script src="js/favorites.js"></script>
+    <script>
+        function playPreview(songId) {
+            const song = songs.find(s => s.id === songId);
+            if (song && song.audioPreviewUrl) {
+                new Audio(song.audioPreviewUrl).play();
+            } else {
+                alert('Audio preview not available (demo mode)');
+            }
+        }
+
+        function navigateTo(hash) {
+            window.location.hash = hash;
+        }
+
+        function handleRoute() {
+            const hash = window.location.hash || '#home';
+            const page = hash.substring(1);
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+            const el = document.getElementById(page + '-page');
+            (el || document.getElementById('home-page')).classList.add('active');
+            const navLink = document.querySelector(`.nav-link[href="${hash}"]`);
+            if (navLink) navLink.classList.add('active');
+            if (page === 'favorites') loadFavorites();
+        }
+
+        window.addEventListener('hashchange', handleRoute);
+        document.addEventListener('DOMContentLoaded', handleRoute);
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Playlist Generator – MusicGame</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <nav id="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <span class="icon">🎵</span>
+                <span class="brand-text">MusicGame</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html"      class="nav-link">Home</a></li>
+                <li><a href="game.html"        class="nav-link">Play Game</a></li>
+                <li><a href="playlist.html"    class="nav-link active">Playlist Generator</a></li>
+                <li><a href="scoreboard.html"  class="nav-link">Scoreboard</a></li>
+                <li><a href="index.html#favorites" class="nav-link">Favorites</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main id="app">
+
+        <section id="playlist-page" class="page active">
+            <div class="container">
+                <div class="page-header">
+                    <span class="page-icon">✨</span>
+                    <h1>Playlist Generator</h1>
+                    <p>Discover new music based on your preferences</p>
+                </div>
+
+                <div class="search-panel">
+                    <div class="search-row">
+                        <div class="form-group">
+                            <label for="search-type">Search By</label>
+                            <select id="search-type" class="form-control" onchange="updateSearchInput()">
+                                <option value="genre">Genre</option>
+                                <option value="artist">Artist</option>
+                                <option value="song">Song/Album</option>
+                                <option value="mood">Mood</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="search-input" id="search-label">Select Genre</label>
+                            <select id="genre-select" class="form-control">
+                                <option value="">Choose a genre</option>
+                            </select>
+                            <input type="text" id="search-input" class="form-control hidden" placeholder="Enter search...">
+                        </div>
+                    </div>
+                    <button class="btn btn-primary btn-large" onclick="generatePlaylist()">
+                        <span>🔍</span> Generate Playlist
+                    </button>
+                </div>
+
+                <div id="playlist-results" class="playlist-results">
+                    <div class="empty-state">
+                        <span class="empty-icon">🎵</span>
+                        <h3>No Playlist Yet</h3>
+                        <p>Use the search above to generate a personalized playlist</p>
+                    </div>
+                </div>
+
+                <div class="info-panel">
+                    <h3>How It Works</h3>
+                    <ul>
+                        <li><strong>Genre:</strong> Find songs from your favorite music genre</li>
+                        <li><strong>Artist:</strong> Discover songs by searching for artist names</li>
+                        <li><strong>Song/Album:</strong> Search by song title or album name</li>
+                        <li><strong>Mood:</strong> Find music that matches your current vibe (energetic, chill, happy, etc.)</li>
+                    </ul>
+                    <p class="info-note">Our algorithm finds similar songs based on energy levels, tempo, and genre to create the perfect playlist for you!</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script src="data/songs.js"></script>
+    <script src="js/storage.js"></script>
+    <script src="js/favorites.js"></script>
+    <script src="js/playlist.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', initPlaylistGenerator);
+    </script>
+
+</body>
+</html>
