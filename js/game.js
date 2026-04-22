@@ -46,6 +46,7 @@ function startGame(difficulty) {
     roundsPlayed = 0;
 
     $("#score").text(0);
+    $("#nextBtn").hide();
     $("#gameSection").show();
     $("html, body").animate({ scrollTop: $("#gameSection").offset().top }, 400);
 
@@ -59,6 +60,7 @@ function nextRound() {
     }
 
     $("#result").text("");
+    $("#nextBtn").hide();
     $("#options button").prop("disabled", false);
 
     // Pick a random song (all have previews)
@@ -103,7 +105,10 @@ function nextRound() {
 
 function checkAnswer(choice) {
     audioPlayer.pause();
+
+    // Disable answer buttons and show Next
     $("#options button").prop("disabled", true);
+    $("#nextBtn").show();
 
     if (choice === currentSong.genre) {
         score++;
