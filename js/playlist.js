@@ -149,11 +149,11 @@ function createSongCard(song, index) {
         <div style="position: relative;">
             <img src="${song.coverImage}" alt="${song.title}" class="playlist-card-image">
             <div class="playlist-card-overlay">
-                <button class="btn-icon" onclick="playPreview('${song.id}')" title="Play Preview">
-                    ▶️
-                </button>
-                <button class="btn-icon ${favorited ? 'favorited' : ''}"
-                        onclick="toggleFavorite('${song.id}')"
+                ${song.previewUrl && song.previewUrl.trim() !== '' ? `
+                <button class="btn-icon" onclick="playPreview('${song.id}')" title="Play Preview">▶️</button>` : 
+                `<button class="btn-icon" style="opacity:0.3;cursor:default;" title="No preview available" disabled>▶️</button>`}
+                <button class="btn-icon ${favorited ? 'favorited' : ''}" 
+                        onclick="toggleFavorite('${song.id}')" 
                         title="${favorited ? 'Remove from favorites' : 'Add to favorites'}">
                     ${favorited ? '❤️' : '🤍'}
                 </button>
@@ -176,18 +176,25 @@ function createSongCard(song, index) {
     return card;
 }
 
-// Uses audioPreviewUrl (separate from game's previewUrl) to play a clip inline
+let _previewAudio = null;
+
 function playPreview(songId) {
     const song = songs.find(s => s.id === songId);
-    if (song && song.audioPreviewUrl) {
-        const audio = new Audio(song.audioPreviewUrl);
-        audio.play();
-    } else {
-        alert('Audio preview not available (demo mode)');
+
+    // Stop any currently playing preview
+    if (_previewAudio) {
+        _previewAudio.pause();
+        _previewAudio = null;
     }
+
+    if (song && song.previewUrl && song.previewUrl.trim() !== '') {
+        _previewAudio = new Audio(song.previewUrl);
+        _previewAudio.volume = 0.6;
+        _previewAudio.play().catch(err => console.warn('Preview playback failed:', err));
+    }
+    // No alert — silently skip if no preview available
 }
 
-// Saves/removes from favorites, then re-renders the playlist and favorites page if open
 function toggleFavorite(songId) {
     const song = songs.find(s => s.id === songId);
 
