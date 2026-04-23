@@ -1,7 +1,9 @@
-// Scoreboard Logic
+// Scoreboard — reads saved scores from localStorage, sorts by score, and renders them
 
+// Remembers which filter button was last clicked so clearScores can re-render the same view
 let currentFilter = 'all';
 
+// Filters scores by difficulty (or shows all), sorts highest first, then renders
 function loadScoreboard(filter) {
     filter = filter || 'all';
     currentFilter  = filter;
@@ -38,6 +40,7 @@ function displayScores(scores) {
     });
 }
 
+// Builds one score row; top-3 entries get medal emojis instead of a rank number
 function createScoreItem(score, rank) {
     const item = document.createElement('div');
     item.className = 'score-item';
@@ -82,14 +85,16 @@ function createScoreItem(score, rank) {
     return item;
 }
 
+// Called by the filter buttons in scoreboard.html
 function filterScores(filter) {
     loadScoreboard(filter);
 }
 
 // Note: renamed to avoid conflict with clearScores() in storage.js
+// Asks for confirmation before wiping all scores, then refreshes the current filtered view
 function clearScores() {
     if (confirm('Are you sure you want to clear all scores? This cannot be undone.')) {
-        localStorage.removeItem('musicGameScores'); // directly clear storage
+        localStorage.removeItem('musicGameScores');
         loadScoreboard(currentFilter);
     }
 }

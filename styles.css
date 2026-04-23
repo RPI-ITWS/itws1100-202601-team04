@@ -1,4 +1,5 @@
-/* Reset and Base Styles */
+/* ── Reset & Base ─────────────────────────────────────────────────────────────
+   Box-sizing reset + full-viewport purple gradient background used on every page */
 * {
     margin: 0;
     padding: 0;
@@ -13,7 +14,8 @@ body {
     overflow-x: hidden;
 }
 
-/* Navigation */
+/* ── Navigation ───────────────────────────────────────────────────────────────
+   Sticky frosted-glass nav bar; active link gets a slightly brighter background */
 #navbar {
     background: rgba(0, 0, 0, 0.3);
     backdrop-filter: blur(10px);
@@ -67,14 +69,17 @@ body {
     background: rgba(255, 255, 255, 0.2);
 }
 
-/* Container */
+/* ── Layout ───────────────────────────────────────────────────────────────────
+   Centered max-width wrapper used inside every page section */
 .container {
     max-width: 1400px;
     margin: 0 auto;
     padding: 2rem;
 }
 
-/* Page Management */
+/* ── Page Routing ─────────────────────────────────────────────────────────────
+   All .page sections are hidden by default; the router adds .active to show one.
+   fadeIn animation runs every time a page becomes active. */
 .page {
     display: none;
     animation: fadeIn 0.5s ease;
@@ -95,7 +100,9 @@ body {
     }
 }
 
-/* Buttons */
+/* ── Buttons ──────────────────────────────────────────────────────────────────
+   Base .btn + three variants (primary gradient, secondary ghost, danger red)
+   and a full-width .btn-large modifier used in the playlist search panel */
 .btn {
     padding: 0.75rem 1.5rem;
     border: none;
@@ -142,7 +149,8 @@ body {
     margin-top: 1rem;
 }
 
-/* Home Page */
+/* ── Home Page ────────────────────────────────────────────────────────────────
+   Hero section with gradient text title + responsive 3-column feature card grid */
 .hero-section {
     text-align: center;
     padding: 3rem 0;
@@ -236,7 +244,8 @@ body {
     border-bottom: none;
 }
 
-/* Game Selection */
+/* ── Game Selection ───────────────────────────────────────────────────────────
+   Centered header + responsive grid of clickable game-mode and difficulty cards */
 .game-select-header {
     text-align: center;
     margin-bottom: 3rem;
@@ -312,7 +321,8 @@ body {
     text-align: left;
 }
 
-/* Song Guessing Game */
+/* ── Song Guessing Game ───────────────────────────────────────────────────────
+   Audio player card (wave animation, progress bar) + multiple choice option grid */
 .song-game-content {
     max-width: 700px;
     margin: 0 auto;
@@ -428,7 +438,9 @@ body {
     width: 100%;
 }
 
-/* Responsive Design */
+/* ── Responsive Design ────────────────────────────────────────────────────────
+   768px: stack grids to single column, collapse game stats vertically.
+   480px: hide nav links entirely and reduce container padding. */
 @media (max-width: 768px) {
     .nav-links {
         gap: 1rem;

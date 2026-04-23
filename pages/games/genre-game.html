@@ -1,13 +1,14 @@
 <!DOCTYPE html>
+<!-- Genre Guessing — self-contained SPA: difficulty picker → gameplay → results -->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Play Game – MusicGame</title>
+    <title>Genre Guessing – MusicGame</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="../../styles.css">
 </head>
 <body>
 
@@ -18,51 +19,19 @@
                 <span class="brand-text">MusicGame</span>
             </div>
             <ul class="nav-links">
-                <li><a href="index.html"      class="nav-link">Home</a></li>
-                <li><a href="game.html"        class="nav-link active">Play Game</a></li>
-                <li><a href="playlist.html"    class="nav-link">Playlist Generator</a></li>
-                <li><a href="scoreboard.html"  class="nav-link">Scoreboard</a></li>
-                <li><a href="index.html#favorites" class="nav-link">Favorites</a></li>
+                <li><a href="../../index.html"          class="nav-link">Home</a></li>
+                <li><a href="../game.html"               class="nav-link active">Play Game</a></li>
+                <li><a href="../playlist.html"           class="nav-link">Playlist Generator</a></li>
+                <li><a href="../scoreboard.html"         class="nav-link">Scoreboard</a></li>
+                <li><a href="../favorites.html"          class="nav-link">Favorites</a></li>
             </ul>
         </div>
     </nav>
 
     <main id="app">
 
-        <!-- Game Mode Selection -->
-        <section id="game-page" class="page active">
-            <div class="container">
-                <div class="game-select-header">
-                    <h1>Choose Your Game Mode</h1>
-                    <p>Select a game to test your music knowledge</p>
-                </div>
-                <div class="game-mode-grid">
-                    <div class="game-mode-card" onclick="navigateTo('#genre-game')">
-                        <div class="game-mode-icon">🖼️</div>
-                        <h3>Genre Guessing</h3>
-                        <p class="game-mode-desc">Guess the genre from blurred album covers</p>
-                        <div class="game-mode-features">
-                            <span>&bull; 3 Difficulty Levels</span>
-                            <span>&bull; Timer-Based Scoring</span>
-                            <span>&bull; 10 Rounds</span>
-                        </div>
-                    </div>
-                    <div class="game-mode-card" onclick="startSongGame()">
-                        <div class="game-mode-icon">🎵</div>
-                        <h3>Song Guessing</h3>
-                        <p class="game-mode-desc">Guess the song title and artist from a 30-second clip</p>
-                        <div class="game-mode-features">
-                            <span>&bull; Audio Clips</span>
-                            <span>&bull; Text Input</span>
-                            <span>&bull; 10 Rounds</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Genre Game Difficulty Selection -->
-        <section id="genre-game-page" class="page">
+        <!-- Step 1: Difficulty picker — each card calls startGame(difficulty) -->
+        <section id="genre-game-page" class="page active">
             <div class="container">
                 <div class="game-select-header">
                     <h1>Choose Your Difficulty</h1>
@@ -100,64 +69,7 @@
             </div>
         </section>
 
-        <!-- Song Guessing Game -->
-        <section id="song-game-page" class="page">
-            <div class="container">
-                <div class="game-header">
-                    <div class="game-stats">
-                        <div class="stat">
-                            <span class="stat-label">Round</span>
-                            <span class="stat-value" id="song-round-display">1/10</span>
-                        </div>
-                        <div class="stat">
-                            <span class="stat-label">Score</span>
-                            <span class="stat-value" id="song-score-display">0</span>
-                        </div>
-                        <div class="stat">
-                            <span class="stat-label">Points</span>
-                            <span class="stat-value" id="song-points-display">0/20</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="song-game-content">
-                    <div class="audio-player-container">
-                        <div class="audio-player-card">
-                            <div class="audio-wave">🎵 🎶 🎵</div>
-                            <div class="audio-info">
-                                <div class="audio-timer">
-                                    <span id="audio-current-time">0:00</span>
-                                    <span>/</span>
-                                    <span id="audio-duration">0:30</span>
-                                </div>
-                                <div class="audio-progress-bar">
-                                    <div id="audio-progress" class="audio-progress-fill"></div>
-                                </div>
-                            </div>
-                            <button id="play-audio-btn" class="btn-play" onclick="playSongAudio()">
-                                <span id="play-icon">▶️</span>
-                                <span id="play-text">Play Song</span>
-                            </button>
-                            <p class="audio-hint">Listen carefully to guess the song and artist!</p>
-                        </div>
-                    </div>
-
-                    <div class="guess-form">
-                        <p class="audio-hint" style="margin-bottom:0.75rem;">Which song is playing?</p>
-                        <div id="song-options" class="genre-options"></div>
-                    </div>
-
-                    <div id="song-feedback" class="feedback hidden">
-                        <div class="feedback-content">
-                            <span id="song-feedback-icon"></span>
-                            <div id="song-feedback-text"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Genre Gameplay -->
+        <!-- Step 2: Gameplay — blurred album cover + countdown + 4 genre buttons -->
         <section id="gameplay-page" class="page">
             <div class="container">
                 <div class="game-header">
@@ -178,6 +90,7 @@
                 </div>
 
                 <div class="game-content">
+                    <!-- Circular countdown + shrinking progress bar -->
                     <div class="timer-container">
                         <div class="timer-circle">
                             <span id="timer-display">20</span>
@@ -187,6 +100,7 @@
                         </div>
                     </div>
 
+                    <!-- Album cover; blur level set per difficulty by game.js -->
                     <div class="album-container">
                         <img id="album-cover" src="" alt="Album Cover" class="album-image">
                         <div class="audio-control">
@@ -197,8 +111,10 @@
                         </div>
                     </div>
 
+                    <!-- Genre buttons injected by displayQuestion() in game.js -->
                     <div class="genre-options" id="genre-options"></div>
 
+                    <!-- Correct/wrong banner shown by showFeedback() -->
                     <div id="feedback" class="feedback hidden">
                         <div class="feedback-content">
                             <span id="feedback-icon"></span>
@@ -209,7 +125,7 @@
             </div>
         </section>
 
-        <!-- Results -->
+        <!-- Step 3: Results screen shown by endGame() -->
         <section id="results-page" class="page">
             <div class="container results-container">
                 <div class="results-header">
@@ -234,33 +150,30 @@
                     </div>
                 </div>
                 <div class="results-actions">
-                    <button class="btn btn-primary"   onclick="navigateTo('#game')">Play Again</button>
-                    <button class="btn btn-secondary" onclick="window.location.href='scoreboard.html'">View Scoreboard</button>
-                    <button class="btn btn-secondary" onclick="window.location.href='index.html'">Home</button>
+                    <button class="btn btn-primary"   onclick="navigateTo('#genre-game')">Play Again</button>
+                    <button class="btn btn-secondary" onclick="window.location.href='../scoreboard.html'">View Scoreboard</button>
+                    <button class="btn btn-secondary" onclick="window.location.href='../../index.html'">Home</button>
                 </div>
             </div>
         </section>
 
     </main>
 
-    <audio id="game-audio"></audio>
-
-    <script src="data/songs.js"></script>
-    <script src="js/storage.js"></script>
-    <script src="js/game.js"></script>
-    <script src="js/songGame.js"></script>
+    <script src="../../data/songs.js"></script>
+    <script src="../../js/storage.js"></script>
+    <script src="../../js/game.js"></script>
     <script>
-        // Cross-page aware router for game.html
+        // Local hash router: game.js calls navigateTo('#gameplay') and navigateTo('#results')
         function navigateTo(hash) {
             window.location.hash = hash;
         }
 
         function handleRoute() {
-            const hash = window.location.hash || '#game';
+            const hash = window.location.hash || '#genre-game';
             const page = hash.substring(1);
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
             const el = document.getElementById(page + '-page');
-            (el || document.getElementById('game-page')).classList.add('active');
+            (el || document.getElementById('genre-game-page')).classList.add('active');
         }
 
         window.addEventListener('hashchange', handleRoute);

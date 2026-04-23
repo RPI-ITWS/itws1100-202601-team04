@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!-- Scoreboard page — reads scores from localStorage and renders them sorted by score -->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -7,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="../styles.css">
 </head>
 <body>
 
@@ -18,11 +19,11 @@
                 <span class="brand-text">MusicGame</span>
             </div>
             <ul class="nav-links">
-                <li><a href="index.html"      class="nav-link">Home</a></li>
-                <li><a href="game.html"        class="nav-link">Play Game</a></li>
-                <li><a href="playlist.html"    class="nav-link">Playlist Generator</a></li>
-                <li><a href="scoreboard.html"  class="nav-link active">Scoreboard</a></li>
-                <li><a href="index.html#favorites" class="nav-link">Favorites</a></li>
+                <li><a href="../index.html"          class="nav-link">Home</a></li>
+                <li><a href="game.html"               class="nav-link">Play Game</a></li>
+                <li><a href="playlist.html"           class="nav-link">Playlist Generator</a></li>
+                <li><a href="scoreboard.html"         class="nav-link active">Scoreboard</a></li>
+                <li><a href="favorites.html"          class="nav-link">Favorites</a></li>
             </ul>
         </div>
     </nav>
@@ -36,23 +37,30 @@
                     <h1>Scoreboard</h1>
                     <p>Your best game performances</p>
                 </div>
+
+                <!-- Filter buttons call filterScores(difficulty) in scoreboard.js -->
                 <div class="scoreboard-controls">
                     <button class="btn btn-secondary" onclick="filterScores('all')">All Scores</button>
                     <button class="btn btn-secondary" onclick="filterScores('easy')">Easy</button>
                     <button class="btn btn-secondary" onclick="filterScores('medium')">Medium</button>
                     <button class="btn btn-secondary" onclick="filterScores('hard')">Hard</button>
                     <button class="btn btn-secondary" onclick="filterScores('song-guess')">Song Guessing</button>
+                    <!-- Danger button — triggers confirmation dialog before wiping scores -->
                     <button class="btn btn-danger"    onclick="clearScores()">Clear All</button>
                 </div>
+
+                <!-- Score rows are injected here by displayScores() -->
                 <div id="scoreboard-list" class="scoreboard-list"></div>
             </div>
         </section>
 
     </main>
 
-    <script src="js/storage.js"></script>
-    <script src="js/scoreboard.js"></script>
+    <!-- No songs.js needed here — scoreboard only reads saved score objects -->
+    <script src="../js/storage.js"></script>
+    <script src="../js/scoreboard.js"></script>
     <script>
+        // Load all scores immediately when the page opens
         document.addEventListener('DOMContentLoaded', () => loadScoreboard('all'));
     </script>
 

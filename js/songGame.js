@@ -1,10 +1,11 @@
-// Song Guessing Game Logic — Multiple Choice
+// Song Guessing Game — player hears a 30-second clip and picks the matching song from 4 options
 
+// Tracks round progress and whether audio is currently playing
 let songGameState = {
     currentRound:   0,
     score:          0,
     questions:      [],
-    audioInterval:  null,
+    audioInterval:  null,  // interval that drives the progress bar
     isPlaying:      false
 };
 
@@ -12,6 +13,7 @@ let songGameState = {
 const songAudioPlayer = new Audio();
 songAudioPlayer.volume = 0.5;
 
+// Stops audio and clears the progress-bar interval
 function stopSongDemoAudio() {
     songAudioPlayer.pause();
     songAudioPlayer.src = '';
@@ -36,8 +38,8 @@ function startSongGame() {
     startSongRound();
 }
 
+// Prefer iTunes URLs since they're most reliable; fall back to any preview URL
 function generateSongQuestions() {
-    // Prefer iTunes preview URLs; fall back to any non-empty preview URL
     let pool = songs.filter(s => s.previewUrl && s.previewUrl.includes('itunes.apple.com'));
     if (pool.length < 10) {
         pool = songs.filter(s => s.previewUrl && s.previewUrl.trim() !== '');
@@ -48,6 +50,7 @@ function generateSongQuestions() {
 
 // ─── Round Logic ──────────────────────────────────────────────────────────────
 
+// Sets up the UI for a new round and auto-plays the preview clip
 function startSongRound() {
     if (songGameState.questions.length === 0) {
         alert('Not enough songs with previews to play this mode.');
@@ -60,7 +63,6 @@ function startSongRound() {
     hideSongFeedback();
     displaySongQuestion();
 
-    // Auto-play the preview for this round
     playSongAudio();
 }
 
@@ -72,10 +74,10 @@ function updateSongGameDisplay() {
         `${songGameState.currentRound}/10`;
 }
 
+// Shows 4 multiple-choice buttons: 1 correct song + 3 random decoys
 function displaySongQuestion() {
     const currentSong = songGameState.questions[songGameState.currentRound];
 
-    // Build 4 options: correct + 3 random decoys from the full songs list
     const wrongPool = songs.filter(s => s.id !== currentSong.id);
     const wrongs    = [...wrongPool].sort(() => 0.5 - Math.random()).slice(0, 3);
     const options   = [currentSong, ...wrongs].sort(() => 0.5 - Math.random());
@@ -93,13 +95,13 @@ function displaySongQuestion() {
     });
 }
 
+// Locks buttons, highlights correct/wrong, awards 100 pts for a correct pick, then advances
 function handleSongAnswer(chosenId) {
     stopSongDemoAudio();
 
     const currentSong = songGameState.questions[songGameState.currentRound];
     const isCorrect   = chosenId === currentSong.id;
 
-    // Disable all buttons, highlight correct/wrong
     document.querySelectorAll('#song-options .genre-option').forEach(btn => {
         btn.classList.add('disabled');
         btn.onclick = null;
@@ -134,6 +136,7 @@ function handleSongAnswer(chosenId) {
 
 // ─── Audio ────────────────────────────────────────────────────────────────────
 
+// Resets progress bar and play button back to their initial state for a new round
 function resetAudioPlayer() {
     stopSongDemoAudio();
 
@@ -151,12 +154,12 @@ function resetAudioPlayer() {
     if (progress) progress.style.width        = '0%';
 }
 
+// Toggles play/pause; when playing, drives a 30-second progress bar via setInterval
 function playSongAudio() {
     const playIcon    = document.getElementById('play-icon');
     const playText    = document.getElementById('play-text');
     const currentSong = songGameState.questions[songGameState.currentRound];
 
-    // Toggle pause/play
     if (songGameState.isPlaying) {
         songAudioPlayer.pause();
         stopSongDemoAudio();
@@ -181,8 +184,9 @@ function playSongAudio() {
         if (playText) playText.textContent = 'Pause';
 
         let elapsed = 0;
-        const dur   = 30;
+        const dur   = 30; // clips are capped at 30 seconds
 
+        // Tick every 100ms so the progress bar moves smoothly
         songGameState.audioInterval = setInterval(() => {
             elapsed += 0.1;
 
@@ -203,12 +207,13 @@ function playSongAudio() {
 
     }).catch(err => {
         console.warn('Song audio playback failed:', err);
-        // Show fallback UI — player can still answer without audio
+        // Player can still answer without audio — just show a muted icon
         if (playIcon) playIcon.textContent = '🔇';
         if (playText) playText.textContent = 'No Preview';
     });
 }
 
+// Converts raw seconds to "m:ss" format for the progress timer display
 function formatTime(seconds) {
     const mins = Math.floor(seconds / 60);
     const secs = Math.floor(seconds % 60);
@@ -239,10 +244,11 @@ function hideSongFeedback() {
 
 // ─── End Game ─────────────────────────────────────────────────────────────────
 
+// Calculates final stats, saves to localStorage, and shows the shared results screen
 function endSongGame() {
     stopSongDemoAudio();
 
-    const correct  = Math.round(songGameState.score / 100);
+    const correct  = Math.round(songGameState.score / 100); // 100 pts per correct answer
     const accuracy = Math.round((correct / 10) * 100);
 
     const finalScore = {

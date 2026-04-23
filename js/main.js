@@ -1,17 +1,17 @@
-// Main application initialization
+// Entry point — runs once when the page loads, then hands off to the router
 
 function initApp() {
     console.log('Music Playlist & Genre Guessing Game loaded!');
     console.log('Created by: Nathen Pride, Kevin Chen, D\'Andre Collins');
 
-    // Set up audio element
+    // Lower volume so previews aren't jarring; disable looping
     const audio = document.getElementById('game-audio');
     if (audio) {
         audio.volume = 0.3;
         audio.loop   = false;
     }
 
-    // Run initial route
+    // Trigger the router so the correct page shows immediately on load
     if (typeof handleRoute === 'function') handleRoute();
 }
 
@@ -23,7 +23,7 @@ if (document.readyState === 'loading') {
     initApp();
 }
 
-// Global utility
+// Fisher-Yates shuffle — returns a new shuffled copy, never mutates the original
 function shuffle(array) {
     const newArray = [...array];
     for (let i = newArray.length - 1; i > 0; i--) {

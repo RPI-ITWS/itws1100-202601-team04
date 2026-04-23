@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<!-- Game mode selector — links out to the two game pages in pages/games/ -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Play Game – MusicGame</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+
+    <nav id="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <span class="icon">🎵</span>
+                <span class="brand-text">MusicGame</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="../index.html"          class="nav-link">Home</a></li>
+                <li><a href="game.html"               class="nav-link active">Play Game</a></li>
+                <li><a href="playlist.html"           class="nav-link">Playlist Generator</a></li>
+                <li><a href="scoreboard.html"         class="nav-link">Scoreboard</a></li>
+                <li><a href="favorites.html"          class="nav-link">Favorites</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main id="app">
+
+        <!-- Choose between the two game modes — each card navigates to its own page -->
+        <section id="game-page" class="page active">
+            <div class="container">
+                <div class="game-select-header">
+                    <h1>Choose Your Game Mode</h1>
+                    <p>Select a game to test your music knowledge</p>
+                </div>
+                <div class="game-mode-grid">
+                    <!-- Navigates to the difficulty picker for the genre guessing game -->
+                    <div class="game-mode-card" onclick="window.location.href='games/genre-game.html'">
+                        <div class="game-mode-icon">🖼️</div>
+                        <h3>Genre Guessing</h3>
+                        <p class="game-mode-desc">Guess the genre from blurred album covers</p>
+                        <div class="game-mode-features">
+                            <span>&bull; 3 Difficulty Levels</span>
+                            <span>&bull; Timer-Based Scoring</span>
+                            <span>&bull; 10 Rounds</span>
+                        </div>
+                    </div>
+                    <!-- Navigates directly to the song guessing game (no difficulty selection) -->
+                    <div class="game-mode-card" onclick="window.location.href='games/song-game.html'">
+                        <div class="game-mode-icon">🎵</div>
+                        <h3>Song Guessing</h3>
+                        <p class="game-mode-desc">Guess the song title and artist from a 30-second clip</p>
+                        <div class="game-mode-features">
+                            <span>&bull; Audio Clips</span>
+                            <span>&bull; Multiple Choice</span>
+                            <span>&bull; 10 Rounds</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+</body>
+</html>
