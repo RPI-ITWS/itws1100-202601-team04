@@ -149,7 +149,7 @@ function createSongCard(song, index) {
             <img src="${song.coverImage}" alt="${song.title}" class="playlist-card-image">
             <div class="playlist-card-overlay">
                 ${song.previewUrl && song.previewUrl.trim() !== '' ? `
-                <button class="btn-icon" onclick="playPreview('${song.id}')" title="Play Preview">▶️</button>` : 
+                <button class="btn-icon" id="play-btn-${song.id}" onclick="playPreview('${song.id}')" title="Play Preview">▶️</button>` : 
                 `<button class="btn-icon" style="opacity:0.3;cursor:default;" title="No preview available" disabled>▶️</button>`}
                 <button class="btn-icon ${favorited ? 'favorited' : ''}" 
                         onclick="toggleFavorite('${song.id}')" 
@@ -176,22 +176,54 @@ function createSongCard(song, index) {
 }
 
 let _previewAudio = null;
+let _previewSongId = null;
 
-function playPreview(songId) {
-    const song = songs.find(s => s.id === songId);
+function setPlayBtnIcon(songId, icon) {
+    const btn = document.getElementById('play-btn-' + songId);
+    if (btn) btn.textContent = icon;
+}
 
-    // Stop any currently playing preview
+function stopPreview() {
     if (_previewAudio) {
         _previewAudio.pause();
         _previewAudio = null;
     }
-
-    if (song && song.previewUrl && song.previewUrl.trim() !== '') {
-        _previewAudio = new Audio(song.previewUrl);
-        _previewAudio.volume = 0.6;
-        _previewAudio.play().catch(err => console.warn('Preview playback failed:', err));
+    if (_previewSongId) {
+        setPlayBtnIcon(_previewSongId, '▶️');
+        _previewSongId = null;
     }
-    // No alert — silently skip if no preview available
+}
+
+function playPreview(songId) {
+    // Clicking the currently playing song pauses it
+    if (_previewSongId === songId) {
+        stopPreview();
+        return;
+    }
+
+    // Stop whatever was playing before
+    stopPreview();
+
+    const song = songs.find(s => s.id === songId);
+    if (!song || !song.previewUrl || song.previewUrl.trim() === '') return;
+
+    _previewAudio  = new Audio(song.previewUrl);
+    _previewSongId = songId;
+    _previewAudio.volume = 0.6;
+
+    _previewAudio.addEventListener('ended', () => {
+        setPlayBtnIcon(songId, '▶️');
+        _previewAudio  = null;
+        _previewSongId = null;
+    });
+
+    _previewAudio.play()
+        .then(() => setPlayBtnIcon(songId, '⏸️'))
+        .catch(err => {
+            console.warn('Preview playback failed:', err);
+            _previewAudio  = null;
+            _previewSongId = null;
+        });
 }
 
 function toggleFavorite(songId) {
