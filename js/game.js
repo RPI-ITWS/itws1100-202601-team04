@@ -75,7 +75,11 @@ function displayQuestion() {
     const settings    = difficultySettings[gameState.difficulty];
 
     const albumImg = document.getElementById('album-cover');
-    albumImg.src   = currentSong.coverImage;
+    albumImg.onerror = function () {
+        this.onerror = null;
+        this.src = 'https://via.placeholder.com/300x300/1a1a2e/e0e0e0?text=🎵';
+    };
+    albumImg.src   = currentSong.coverImage || '';
     albumImg.style.filter = `blur(${settings.blur}px)`;
 
     const correctGenre = currentSong.genre;
