@@ -137,9 +137,9 @@ function handleAnswer(selectedGenre) {
         const roundScore = 100 + timeBonus;
         gameState.score += roundScore;
         gameState.correctAnswers++;
-        showFeedback(true, `Correct! +${roundScore} points`);
+        showFeedback(true, `Correct! +${roundScore} points`, currentSong);
     } else {
-        showFeedback(false, `Wrong! The correct genre was ${currentSong.genre}`);
+        showFeedback(false, `Wrong! The correct genre was ${currentSong.genre}`, currentSong);
     }
 
     updateGameDisplay();
@@ -155,7 +155,7 @@ function handleAnswer(selectedGenre) {
     }, 3000);
 }
 
-function showFeedback(isCorrect, message) {
+function showFeedback(isCorrect, message, song) {
     const feedback = document.getElementById('feedback');
     const icon     = document.getElementById('feedback-icon');
     const text     = document.getElementById('feedback-text');
@@ -163,7 +163,7 @@ function showFeedback(isCorrect, message) {
     feedback.className = 'feedback';
     feedback.classList.add(isCorrect ? 'correct' : 'incorrect');
     icon.textContent = isCorrect ? '✓' : '✗';
-    text.textContent = message;
+    text.innerHTML = `${message}<br><span class="feedback-song">"${song.title}" — ${song.artist}</span>`;
 }
 
 // Counts down every second; auto-submits an empty answer when time hits zero
