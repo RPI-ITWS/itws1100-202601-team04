@@ -85,13 +85,18 @@ function generatePlaylist() {
             break;
     }
 
-    // Expand the list by finding songs with similar energy (±2) and tempo (±20 BPM)
+    // Expand the list with same-genre songs that have similar energy (±2) and tempo (±20 BPM)
     if (filtered.length > 0) {
+        // Collect all genres present in the filtered results so padding stays on-genre
+        const filteredGenres = new Set(filtered.map(s => s.genre));
         const baseSong = filtered[0];
+
         const similar = songs.filter(s => {
+            if (!filteredGenres.has(s.genre)) return false; // must match a genre in results
+            if (filtered.some(f => f.id === s.id)) return false; // already in results
             const energyDiff = Math.abs(s.energy - baseSong.energy);
-            const tempoDiff = Math.abs(s.tempo - baseSong.tempo);
-            return energyDiff <= 2 && tempoDiff <= 20 && s.id !== baseSong.id;
+            const tempoDiff  = Math.abs(s.tempo  - baseSong.tempo);
+            return energyDiff <= 2 && tempoDiff <= 20;
         });
 
         // Merge, deduplicate by id, shuffle, and cap at 12 cards
