@@ -85,15 +85,36 @@ function generatePlaylist() {
             break;
     }
 
-    // Expand the list with same-genre songs that have similar energy (±2) and tempo (±20 BPM)
+    // Related genres used to pad small-catalogue genres (e.g. K-Pop only has 2 songs)
+    const RELATED_GENRES = {
+        'K-Pop':       ['Pop', 'Indie Pop'],
+        'Afrobeats':   ['R&B', 'Hip Hop', 'Latin'],
+        'Indie Rock':  ['Indie Pop', 'Indie Folk', 'Pop'],
+        'Indie Pop':   ['Indie Rock', 'Indie Folk', 'Pop'],
+        'Indie Folk':  ['Indie Pop', 'Indie Rock', 'Country'],
+        'Country Pop': ['Country', 'Pop'],
+        'Latin':       ['Pop', 'R&B'],
+        'R&B':         ['Hip Hop', 'Pop'],
+        'Country':     ['Country Pop'],
+        'Hip Hop':     ['R&B'],
+        'Pop':         ['Indie Pop'],
+    };
+
+    // Expand the list with musically-related songs of similar energy (±2) and tempo (±20 BPM)
     if (filtered.length > 0) {
-        // Collect all genres present in the filtered results so padding stays on-genre
         const filteredGenres = new Set(filtered.map(s => s.genre));
+
+        // Build the set of allowed genres: exact matches first, then related genres as fallback
+        const allowedGenres = new Set(filteredGenres);
+        filteredGenres.forEach(g => {
+            (RELATED_GENRES[g] || []).forEach(r => allowedGenres.add(r));
+        });
+
         const baseSong = filtered[0];
 
         const similar = songs.filter(s => {
-            if (!filteredGenres.has(s.genre)) return false; // must match a genre in results
-            if (filtered.some(f => f.id === s.id)) return false; // already in results
+            if (!allowedGenres.has(s.genre)) return false;       // must be same or related genre
+            if (filtered.some(f => f.id === s.id)) return false; // skip songs already in results
             const energyDiff = Math.abs(s.energy - baseSong.energy);
             const tempoDiff  = Math.abs(s.tempo  - baseSong.tempo);
             return energyDiff <= 2 && tempoDiff <= 20;
