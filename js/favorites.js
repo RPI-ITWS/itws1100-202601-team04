@@ -26,7 +26,9 @@ function loadFavorites() {
 }
 
 // Builds a single song card with play + remove buttons
-function createFavoriteCard(song, index) {
+function createFavoriteCard(storedSong, index) {
+    // Use fresh data from songs array so stale localStorage coverImages are updated
+    const song = (typeof songs !== 'undefined' && songs.find(s => s.id === storedSong.id)) || storedSong;
     const card = document.createElement('div');
     card.className = 'playlist-card';
     card.style.animation = `fadeIn 0.5s ease ${index * 0.05}s both`;
