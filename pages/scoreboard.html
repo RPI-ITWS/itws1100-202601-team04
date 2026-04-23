@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="../styles.css">
 </head>
 <body>
 
@@ -19,11 +19,11 @@
                 <span class="brand-text">MusicGame</span>
             </div>
             <ul class="nav-links">
-                <li><a href="index.html"      class="nav-link">Home</a></li>
-                <li><a href="game.html"        class="nav-link">Play Game</a></li>
-                <li><a href="playlist.html"    class="nav-link">Playlist Generator</a></li>
-                <li><a href="scoreboard.html"  class="nav-link active">Scoreboard</a></li>
-                <li><a href="index.html#favorites" class="nav-link">Favorites</a></li>
+                <li><a href="../index.html"          class="nav-link">Home</a></li>
+                <li><a href="game.html"               class="nav-link">Play Game</a></li>
+                <li><a href="playlist.html"           class="nav-link">Playlist Generator</a></li>
+                <li><a href="scoreboard.html"         class="nav-link active">Scoreboard</a></li>
+                <li><a href="../index.html#favorites" class="nav-link">Favorites</a></li>
             </ul>
         </div>
     </nav>
@@ -57,8 +57,8 @@
     </main>
 
     <!-- No songs.js needed here — scoreboard only reads saved score objects -->
-    <script src="js/storage.js"></script>
-    <script src="js/scoreboard.js"></script>
+    <script src="../js/storage.js"></script>
+    <script src="../js/scoreboard.js"></script>
     <script>
         // Load all scores immediately when the page opens
         document.addEventListener('DOMContentLoaded', () => loadScoreboard('all'));

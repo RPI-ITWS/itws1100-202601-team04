@@ -30,8 +30,22 @@
 
     <main id="app">
 
+        <!-- Start screen — user must click so the browser grants audio autoplay permission -->
+        <section id="start-page" class="page active">
+            <div class="container" style="text-align:center; padding-top:4rem;">
+                <div class="game-select-header">
+                    <h1>Song Guessing</h1>
+                    <p>Listen to a 30-second clip and pick the correct song from 4 choices</p>
+                </div>
+                <button class="btn btn-primary btn-large" style="max-width:300px; margin:2rem auto;"
+                        onclick="startSongGame()">
+                    🎵 Start Game
+                </button>
+            </div>
+        </section>
+
         <!-- Gameplay section — audio player + 4-option multiple choice per round -->
-        <section id="song-game-page" class="page active">
+        <section id="song-game-page" class="page">
             <div class="container">
                 <!-- Round counter, running score, points earned so far -->
                 <div class="game-header">
@@ -136,20 +150,18 @@
         }
 
         function handleRoute() {
-            const hash = window.location.hash || '#song-game';
+            const hash = window.location.hash || '#start';
             const page = hash.substring(1);
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
             const el = document.getElementById(page + '-page');
-            (el || document.getElementById('song-game-page')).classList.add('active');
+            (el || document.getElementById('start-page')).classList.add('active');
         }
 
         window.addEventListener('hashchange', handleRoute);
 
-        // Start the game as soon as the DOM and songs are ready
-        document.addEventListener('DOMContentLoaded', () => {
-            handleRoute();
-            startSongGame();
-        });
+        // Only set up routing on load — startSongGame() is triggered by the Start button
+        // so the browser has a user gesture and allows audio autoplay on round 1
+        document.addEventListener('DOMContentLoaded', handleRoute);
     </script>
 
 </body>

@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="../styles.css">
 </head>
 <body>
 
@@ -19,11 +19,11 @@
                 <span class="brand-text">MusicGame</span>
             </div>
             <ul class="nav-links">
-                <li><a href="index.html"      class="nav-link">Home</a></li>
-                <li><a href="game.html"        class="nav-link">Play Game</a></li>
-                <li><a href="playlist.html"    class="nav-link active">Playlist Generator</a></li>
-                <li><a href="scoreboard.html"  class="nav-link">Scoreboard</a></li>
-                <li><a href="index.html#favorites" class="nav-link">Favorites</a></li>
+                <li><a href="../index.html"          class="nav-link">Home</a></li>
+                <li><a href="game.html"               class="nav-link">Play Game</a></li>
+                <li><a href="playlist.html"           class="nav-link active">Playlist Generator</a></li>
+                <li><a href="scoreboard.html"         class="nav-link">Scoreboard</a></li>
+                <li><a href="../index.html#favorites" class="nav-link">Favorites</a></li>
             </ul>
         </div>
     </nav>
@@ -91,11 +91,11 @@
 
     </main>
 
-    <script src="data/songs.js"></script>
-    <script src="js/storage.js"></script>
+    <script src="../data/songs.js"></script>
+    <script src="../js/storage.js"></script>
     <!-- favorites.js needed so toggleFavorite() works on playlist cards -->
-    <script src="js/favorites.js"></script>
-    <script src="js/playlist.js"></script>
+    <script src="../js/favorites.js"></script>
+    <script src="../js/playlist.js"></script>
     <script>
         // Populate the genre dropdown once the DOM is ready
         document.addEventListener('DOMContentLoaded', initPlaylistGenerator);
