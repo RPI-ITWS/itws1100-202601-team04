@@ -1,13 +1,14 @@
 // Song Guessing Game Logic
 
 let songGameState = {
-    currentRound: 0,
-    score:        0,
-    totalPoints:  0, // Out of 20 (2 points per round)
-    questions:    [],
-    audioElement: null,
-    audioInterval:null,
-    isPlaying:    false
+    currentRound:   0,
+    score:          0,
+    totalPoints:    0, // Out of 20 (2 points per round)
+    questions:      [],
+    preloadedAudio: [],
+    audioElement:   null,
+    audioInterval:  null,
+    isPlaying:      false
 };
 
 // ─── Web Audio Demo Engine ───────────────────────────────────────────────────
@@ -114,19 +115,36 @@ function playDemoSongAudio(song) {
 // ─────────────────────────────────────────────────────────────────────────────
 
 function startSongGame() {
-    songGameState.currentRound = 0;
-    songGameState.score        = 0;
-    songGameState.totalPoints  = 0;
-    songGameState.questions    = generateSongQuestions();
-    songGameState.isPlaying    = false;
+    // Stop any leftover audio from a previous game
+    songGameState.preloadedAudio.forEach(a => a.pause());
+
+    songGameState.currentRound   = 0;
+    songGameState.score          = 0;
+    songGameState.totalPoints    = 0;
+    songGameState.questions      = generateSongQuestions();
+    songGameState.preloadedAudio = preloadSongAudio(songGameState.questions);
+    songGameState.audioElement   = null;
+    songGameState.isPlaying      = false;
 
     navigateTo('#song-game');
-    setTimeout(() => startSongRound(), 100);
+    startSongRound();
 }
 
 function generateSongQuestions() {
-    const shuffled = [...songs].sort(() => 0.5 - Math.random());
+    const pool = songs.filter(s =>
+        s.previewUrl && s.previewUrl.includes('itunes.apple.com')
+    );
+    const shuffled = [...pool].sort(() => 0.5 - Math.random());
     return shuffled.slice(0, 10);
+}
+
+function preloadSongAudio(questions) {
+    return questions.map(song => {
+        const audio = new Audio(song.previewUrl);
+        audio.preload = 'auto';
+        audio.volume  = 0.5;
+        return audio;
+    });
 }
 
 function startSongRound() {
@@ -135,8 +153,7 @@ function startSongRound() {
     resetAudioPlayer();
     hideSongFeedback();
 
-    // Auto-play audio when the round begins (timer equivalent for song game)
-    setTimeout(() => playSongAudio(), 400);
+    playSongAudio();
 }
 
 function updateSongGameDisplay() {
@@ -197,46 +214,41 @@ function playSongAudio() {
         return;
     }
 
-    // Use real audio URL if available
-    if (currentSong.audioPreviewUrl) {
-        songGameState.audioElement = new Audio(currentSong.audioPreviewUrl);
-        songGameState.audioElement.volume = 0.5;
+    // Use preloaded audio for current round
+    const audio = songGameState.preloadedAudio[songGameState.currentRound];
+    if (!audio) return;
 
-        songGameState.audioElement.play().then(() => {
-            songGameState.isPlaying = true;
-            playIcon.textContent    = '⏸️';
-            playText.textContent    = 'Pause';
+    songGameState.audioElement  = audio;
+    audio.currentTime = 0;
+    audio.volume      = 0.5;
 
-            let elapsed  = 0;
-            const dur    = 30;
+    audio.play().then(() => {
+        songGameState.isPlaying = true;
+        playIcon.textContent    = '⏸️';
+        playText.textContent    = 'Pause';
 
-            songGameState.audioInterval = setInterval(() => {
-                elapsed += 0.1;
+        let elapsed = 0;
+        const dur   = 30;
 
-                if (elapsed >= dur || !songGameState.isPlaying) {
-                    clearInterval(songGameState.audioInterval);
-                    songGameState.isPlaying = false;
-                    playIcon.textContent    = '▶️';
-                    playText.textContent    = 'Replay';
-                    if (songGameState.audioElement) songGameState.audioElement.pause();
-                    return;
-                }
+        songGameState.audioInterval = setInterval(() => {
+            elapsed += 0.1;
 
-                const progress = (elapsed / dur) * 100;
-                document.getElementById('audio-progress').style.width = `${progress}%`;
-                document.getElementById('audio-current-time').textContent = formatTime(elapsed);
-            }, 100);
+            if (elapsed >= dur || !songGameState.isPlaying) {
+                clearInterval(songGameState.audioInterval);
+                songGameState.audioInterval = null;
+                songGameState.isPlaying     = false;
+                playIcon.textContent        = '▶️';
+                playText.textContent        = 'Replay';
+                audio.pause();
+                return;
+            }
 
-        }).catch(() => {
-            // Fallback to demo mode if real audio fails
-            playDemoSongAudio(currentSong);
-        });
+            const progress = (elapsed / dur) * 100;
+            document.getElementById('audio-progress').style.width = `${progress}%`;
+            document.getElementById('audio-current-time').textContent = formatTime(elapsed);
+        }, 100);
 
-        return;
-    }
-
-    // Demo mode – synthesised audio (no alert)
-    playDemoSongAudio(currentSong);
+    }).catch(err => console.warn('Audio playback failed:', err));
 }
 
 function simulateAudioPlayback() {
@@ -392,7 +404,8 @@ function hideSongFeedback() {
 
 function endSongGame() {
     stopSongDemoAudio();
-    if (songGameState.audioElement) songGameState.audioElement.pause();
+    songGameState.preloadedAudio.forEach(a => a.pause());
+    songGameState.preloadedAudio = [];
     if (songGameState.audioInterval) clearInterval(songGameState.audioInterval);
 
     const accuracy = Math.round((songGameState.totalPoints / 20) * 100);
