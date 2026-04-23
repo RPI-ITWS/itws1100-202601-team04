@@ -153,6 +153,7 @@ function createSongCard(song, index) {
                 <button class="btn-icon" id="play-btn-${song.id}" onclick="playPreview('${song.id}')" title="Play Preview">▶️</button>` : 
                 `<button class="btn-icon" style="opacity:0.3;cursor:default;" title="No preview available" disabled>▶️</button>`}
                 <button class="btn-icon ${favorited ? 'favorited' : ''}" 
+                        id="fav-btn-${song.id}"
                         onclick="toggleFavorite('${song.id}')" 
                         title="${favorited ? 'Remove from favorites' : 'Add to favorites'}">
                     ${favorited ? '❤️' : '🤍'}
@@ -236,11 +237,13 @@ function toggleFavorite(songId) {
         addFavorite(song);
     }
 
-    if (document.getElementById('playlist-grid')) {
-        generatePlaylist();
-    }
-
-    if (window.location.hash === '#favorites') {
-        loadFavorites();
+    // Update the heart button in-place — do NOT call generatePlaylist() here
+    // because rebuilding the grid destroys play button elements mid-playback
+    const nowFavorited = isFavorite(songId);
+    const favBtn = document.getElementById('fav-btn-' + songId);
+    if (favBtn) {
+        favBtn.textContent = nowFavorited ? '❤️' : '🤍';
+        favBtn.title       = nowFavorited ? 'Remove from favorites' : 'Add to favorites';
+        favBtn.classList.toggle('favorited', nowFavorited);
     }
 }
