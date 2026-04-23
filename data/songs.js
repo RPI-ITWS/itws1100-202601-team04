@@ -869,7 +869,7 @@ const songs = [
     "tempo": 138,
     "mood": "happy",
     "year": 2024,
-    "coverImage": "https://images.unsplash.com/photo-1605722243979-fe0be8cbb4b9?w=400",
+    "coverImage": "https://images.unsplash.com/photo-1510915361894-db8b60106cb1?w=400",
     "previewUrl": ""
   },
   {
@@ -882,7 +882,7 @@ const songs = [
     "tempo": 80,
     "mood": "melancholy",
     "year": 2024,
-    "coverImage": "https://images.unsplash.com/photo-1605722243979-fe0be8cbb4b9?w=400",
+    "coverImage": "https://images.unsplash.com/photo-1510915361894-db8b60106cb1?w=400",
     "previewUrl": ""
   },
   {
@@ -895,7 +895,7 @@ const songs = [
     "tempo": 88,
     "mood": "romantic",
     "year": 2024,
-    "coverImage": "https://images.unsplash.com/photo-1605722243979-fe0be8cbb4b9?w=400",
+    "coverImage": "https://images.unsplash.com/photo-1510915361894-db8b60106cb1?w=400",
     "previewUrl": ""
   },
   {
@@ -908,7 +908,7 @@ const songs = [
     "tempo": 95,
     "mood": "melancholy",
     "year": 2024,
-    "coverImage": "https://images.unsplash.com/photo-1605722243979-fe0be8cbb4b9?w=400",
+    "coverImage": "https://images.unsplash.com/photo-1510915361894-db8b60106cb1?w=400",
     "previewUrl": ""
   },
   {
@@ -921,7 +921,7 @@ const songs = [
     "tempo": 128,
     "mood": "happy",
     "year": 2024,
-    "coverImage": "https://images.unsplash.com/photo-1605722243979-fe0be8cbb4b9?w=400",
+    "coverImage": "https://images.unsplash.com/photo-1510915361894-db8b60106cb1?w=400",
     "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/87/0e/ef/870eef82-decb-8804-d0af-2f174f111e9b/mzaf_5505022907758473489.plus.aac.p.m4a"
   },
   {
@@ -934,7 +934,7 @@ const songs = [
     "tempo": 134,
     "mood": "happy",
     "year": 2024,
-    "coverImage": "https://images.unsplash.com/photo-1605722243979-fe0be8cbb4b9?w=400",
+    "coverImage": "https://images.unsplash.com/photo-1510915361894-db8b60106cb1?w=400",
     "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/c3/b8/0e/c3b80e32-f609-e392-cd71-d71a4334e820/mzaf_5217089654545302516.plus.aac.p.m4a"
   },
   {
@@ -947,7 +947,7 @@ const songs = [
     "tempo": 120,
     "mood": "melancholy",
     "year": 2024,
-    "coverImage": "https://images.unsplash.com/photo-1605722243979-fe0be8cbb4b9?w=400",
+    "coverImage": "https://images.unsplash.com/photo-1510915361894-db8b60106cb1?w=400",
     "previewUrl": ""
   },
   {
@@ -960,7 +960,7 @@ const songs = [
     "tempo": 112,
     "mood": "melancholy",
     "year": 2024,
-    "coverImage": "https://images.unsplash.com/photo-1605722243979-fe0be8cbb4b9?w=400",
+    "coverImage": "https://images.unsplash.com/photo-1510915361894-db8b60106cb1?w=400",
     "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/93/a3/08/93a30853-fdc9-8283-5b37-11afe1ecfb1e/mzaf_6148384636014588977.plus.aac.p.m4a"
   },
   {
@@ -973,7 +973,7 @@ const songs = [
     "tempo": 132,
     "mood": "confident",
     "year": 2024,
-    "coverImage": "https://images.unsplash.com/photo-1605722243979-fe0be8cbb4b9?w=400",
+    "coverImage": "https://images.unsplash.com/photo-1510915361894-db8b60106cb1?w=400",
     "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/04/fd/75/04fd75ca-8739-7c0a-614e-301f61cb5c90/mzaf_81439980041430609.plus.aac.p.m4a"
   },
   {
@@ -986,7 +986,7 @@ const songs = [
     "tempo": 116,
     "mood": "melancholy",
     "year": 2024,
-    "coverImage": "https://images.unsplash.com/photo-1605722243979-fe0be8cbb4b9?w=400",
+    "coverImage": "https://images.unsplash.com/photo-1510915361894-db8b60106cb1?w=400",
     "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/d2/e0/2f/d2e02f8b-b0f2-3224-04c6-92c8efe25753/mzaf_3384374692260019992.plus.aac.p.m4a"
   },
   {
@@ -999,7 +999,7 @@ const songs = [
     "tempo": 118,
     "mood": "chill",
     "year": 2024,
-    "coverImage": "https://images.unsplash.com/photo-1605722243979-fe0be8cbb4b9?w=400",
+    "coverImage": "https://images.unsplash.com/photo-1510915361894-db8b60106cb1?w=400",
     "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/f1/f0/59/f1f05934-3191-0a06-7f47-f1b0ad7e799c/mzaf_12038481403280354393.plus.aac.p.m4a"
   },
   {
@@ -1012,7 +1012,7 @@ const songs = [
     "tempo": 130,
     "mood": "melancholy",
     "year": 2024,
-    "coverImage": "https://images.unsplash.com/photo-1605722243979-fe0be8cbb4b9?w=400",
+    "coverImage": "https://images.unsplash.com/photo-1510915361894-db8b60106cb1?w=400",
     "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/30/dd/ac/30ddac01-6a0a-77bf-a597-10769a953e53/mzaf_14891233642259281470.plus.aac.p.m4a"
   },
   {
@@ -1025,7 +1025,7 @@ const songs = [
     "tempo": 95,
     "mood": "chill",
     "year": 2024,
-    "coverImage": "https://images.unsplash.com/photo-1605722243979-fe0be8cbb4b9?w=400",
+    "coverImage": "https://images.unsplash.com/photo-1510915361894-db8b60106cb1?w=400",
     "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/9b/66/e5/9b66e52f-d8b6-1bd4-99fa-1e4a2466f2a0/mzaf_4589816097369270712.plus.aac.p.m4a"
   },
   {
@@ -1038,7 +1038,7 @@ const songs = [
     "tempo": 128,
     "mood": "happy",
     "year": 2024,
-    "coverImage": "https://images.unsplash.com/photo-1605722243979-fe0be8cbb4b9?w=400",
+    "coverImage": "https://images.unsplash.com/photo-1510915361894-db8b60106cb1?w=400",
     "previewUrl": ""
   },
   {
@@ -1051,7 +1051,7 @@ const songs = [
     "tempo": 114,
     "mood": "melancholy",
     "year": 2024,
-    "coverImage": "https://images.unsplash.com/photo-1605722243979-fe0be8cbb4b9?w=400",
+    "coverImage": "https://images.unsplash.com/photo-1510915361894-db8b60106cb1?w=400",
     "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview126/v4/aa/ab/a4/aaaba466-05b1-e260-775f-8979f4262315/mzaf_2382554717732446700.plus.aac.p.m4a"
   },
   {
@@ -1064,7 +1064,7 @@ const songs = [
     "tempo": 100,
     "mood": "melancholy",
     "year": 2024,
-    "coverImage": "https://images.unsplash.com/photo-1605722243979-fe0be8cbb4b9?w=400",
+    "coverImage": "https://images.unsplash.com/photo-1510915361894-db8b60106cb1?w=400",
     "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/16/0b/17/160b1792-2882-b67e-e532-89f289cff2b1/mzaf_15232481872455217860.plus.aac.p.m4a"
   },
   {
@@ -1077,7 +1077,7 @@ const songs = [
     "tempo": 98,
     "mood": "melancholy",
     "year": 2024,
-    "coverImage": "https://images.unsplash.com/photo-1605722243979-fe0be8cbb4b9?w=400",
+    "coverImage": "https://images.unsplash.com/photo-1510915361894-db8b60106cb1?w=400",
     "previewUrl": ""
   },
   {
@@ -1090,7 +1090,7 @@ const songs = [
     "tempo": 106,
     "mood": "melancholy",
     "year": 2024,
-    "coverImage": "https://images.unsplash.com/photo-1605722243979-fe0be8cbb4b9?w=400",
+    "coverImage": "https://images.unsplash.com/photo-1510915361894-db8b60106cb1?w=400",
     "previewUrl": ""
   },
   {
@@ -1103,7 +1103,7 @@ const songs = [
     "tempo": 120,
     "mood": "melancholy",
     "year": 2024,
-    "coverImage": "https://images.unsplash.com/photo-1605722243979-fe0be8cbb4b9?w=400",
+    "coverImage": "https://images.unsplash.com/photo-1510915361894-db8b60106cb1?w=400",
     "previewUrl": ""
   },
   {
@@ -1116,7 +1116,7 @@ const songs = [
     "tempo": 92,
     "mood": "melancholy",
     "year": 2024,
-    "coverImage": "https://images.unsplash.com/photo-1605722243979-fe0be8cbb4b9?w=400",
+    "coverImage": "https://images.unsplash.com/photo-1510915361894-db8b60106cb1?w=400",
     "previewUrl": ""
   },
   {
@@ -1129,7 +1129,7 @@ const songs = [
     "tempo": 118,
     "mood": "chill",
     "year": 2024,
-    "coverImage": "https://images.unsplash.com/photo-1605722243979-fe0be8cbb4b9?w=400",
+    "coverImage": "https://images.unsplash.com/photo-1510915361894-db8b60106cb1?w=400",
     "previewUrl": ""
   },
   {
@@ -1142,7 +1142,7 @@ const songs = [
     "tempo": 130,
     "mood": "dark",
     "year": 2024,
-    "coverImage": "https://images.unsplash.com/photo-1605722243979-fe0be8cbb4b9?w=400",
+    "coverImage": "https://images.unsplash.com/photo-1510915361894-db8b60106cb1?w=400",
     "previewUrl": ""
   },
   {
@@ -1155,7 +1155,7 @@ const songs = [
     "tempo": 115,
     "mood": "melancholy",
     "year": 2024,
-    "coverImage": "https://images.unsplash.com/photo-1605722243979-fe0be8cbb4b9?w=400",
+    "coverImage": "https://images.unsplash.com/photo-1510915361894-db8b60106cb1?w=400",
     "previewUrl": ""
   },
   {
@@ -1168,7 +1168,7 @@ const songs = [
     "tempo": 120,
     "mood": "melancholy",
     "year": 2024,
-    "coverImage": "https://images.unsplash.com/photo-1605722243979-fe0be8cbb4b9?w=400",
+    "coverImage": "https://images.unsplash.com/photo-1510915361894-db8b60106cb1?w=400",
     "previewUrl": ""
   },
   {
@@ -1181,7 +1181,7 @@ const songs = [
     "tempo": 126,
     "mood": "confident",
     "year": 2024,
-    "coverImage": "https://images.unsplash.com/photo-1605722243979-fe0be8cbb4b9?w=400",
+    "coverImage": "https://images.unsplash.com/photo-1510915361894-db8b60106cb1?w=400",
     "previewUrl": ""
   },
   {
@@ -1194,7 +1194,7 @@ const songs = [
     "tempo": 105,
     "mood": "melancholy",
     "year": 2024,
-    "coverImage": "https://images.unsplash.com/photo-1605722243979-fe0be8cbb4b9?w=400",
+    "coverImage": "https://images.unsplash.com/photo-1510915361894-db8b60106cb1?w=400",
     "previewUrl": ""
   },
   {
@@ -1207,7 +1207,7 @@ const songs = [
     "tempo": 118,
     "mood": "melancholy",
     "year": 2024,
-    "coverImage": "https://images.unsplash.com/photo-1605722243979-fe0be8cbb4b9?w=400",
+    "coverImage": "https://images.unsplash.com/photo-1510915361894-db8b60106cb1?w=400",
     "previewUrl": ""
   },
   {
@@ -1220,7 +1220,7 @@ const songs = [
     "tempo": 112,
     "mood": "melancholy",
     "year": 2024,
-    "coverImage": "https://images.unsplash.com/photo-1605722243979-fe0be8cbb4b9?w=400",
+    "coverImage": "https://images.unsplash.com/photo-1510915361894-db8b60106cb1?w=400",
     "previewUrl": ""
   },
   {
@@ -1233,7 +1233,7 @@ const songs = [
     "tempo": 96,
     "mood": "romantic",
     "year": 2024,
-    "coverImage": "https://images.unsplash.com/photo-1605722243979-fe0be8cbb4b9?w=400",
+    "coverImage": "https://images.unsplash.com/photo-1510915361894-db8b60106cb1?w=400",
     "previewUrl": ""
   },
   {
@@ -1389,7 +1389,7 @@ const songs = [
     "tempo": 140,
     "mood": "happy",
     "year": 2025,
-    "coverImage": "https://images.unsplash.com/photo-1605722243979-fe0be8cbb4b9?w=400",
+    "coverImage": "https://images.unsplash.com/photo-1510915361894-db8b60106cb1?w=400",
     "previewUrl": ""
   },
   {
@@ -1402,7 +1402,7 @@ const songs = [
     "tempo": 118,
     "mood": "melancholy",
     "year": 2025,
-    "coverImage": "https://images.unsplash.com/photo-1605722243979-fe0be8cbb4b9?w=400",
+    "coverImage": "https://images.unsplash.com/photo-1510915361894-db8b60106cb1?w=400",
     "previewUrl": ""
   },
   {
@@ -1415,7 +1415,7 @@ const songs = [
     "tempo": 100,
     "mood": "melancholy",
     "year": 2025,
-    "coverImage": "https://images.unsplash.com/photo-1605722243979-fe0be8cbb4b9?w=400",
+    "coverImage": "https://images.unsplash.com/photo-1510915361894-db8b60106cb1?w=400",
     "previewUrl": ""
   },
   {
@@ -1428,7 +1428,7 @@ const songs = [
     "tempo": 100,
     "mood": "chill",
     "year": 2025,
-    "coverImage": "https://images.unsplash.com/photo-1605722243979-fe0be8cbb4b9?w=400",
+    "coverImage": "https://images.unsplash.com/photo-1510915361894-db8b60106cb1?w=400",
     "previewUrl": ""
   },
   {
@@ -1454,7 +1454,7 @@ const songs = [
     "tempo": 108,
     "mood": "melancholy",
     "year": 2025,
-    "coverImage": "https://images.unsplash.com/photo-1605722243979-fe0be8cbb4b9?w=400",
+    "coverImage": "https://images.unsplash.com/photo-1510915361894-db8b60106cb1?w=400",
     "previewUrl": ""
   },
   {
@@ -1584,7 +1584,7 @@ const songs = [
     "tempo": 90,
     "mood": "melancholy",
     "year": 2025,
-    "coverImage": "https://images.unsplash.com/photo-1605722243979-fe0be8cbb4b9?w=400",
+    "coverImage": "https://images.unsplash.com/photo-1510915361894-db8b60106cb1?w=400",
     "previewUrl": ""
   },
   {
@@ -1740,7 +1740,7 @@ const songs = [
     "tempo": 122,
     "mood": "dark",
     "year": 2025,
-    "coverImage": "https://images.unsplash.com/photo-1605722243979-fe0be8cbb4b9?w=400",
+    "coverImage": "https://images.unsplash.com/photo-1510915361894-db8b60106cb1?w=400",
     "previewUrl": ""
   },
   {
@@ -1753,7 +1753,7 @@ const songs = [
     "tempo": 125,
     "mood": "confident",
     "year": 2025,
-    "coverImage": "https://images.unsplash.com/photo-1605722243979-fe0be8cbb4b9?w=400",
+    "coverImage": "https://images.unsplash.com/photo-1510915361894-db8b60106cb1?w=400",
     "previewUrl": ""
   },
   {
@@ -1805,7 +1805,7 @@ const songs = [
     "tempo": 105,
     "mood": "melancholy",
     "year": 2025,
-    "coverImage": "https://images.unsplash.com/photo-1605722243979-fe0be8cbb4b9?w=400",
+    "coverImage": "https://images.unsplash.com/photo-1510915361894-db8b60106cb1?w=400",
     "previewUrl": ""
   },
   {
@@ -1909,7 +1909,7 @@ const songs = [
     "tempo": 86,
     "mood": "melancholy",
     "year": 2024,
-    "coverImage": "https://images.unsplash.com/photo-1605722243979-fe0be8cbb4b9?w=400",
+    "coverImage": "https://images.unsplash.com/photo-1510915361894-db8b60106cb1?w=400",
     "previewUrl": ""
   },
   {
@@ -1922,7 +1922,7 @@ const songs = [
     "tempo": 112,
     "mood": "melancholy",
     "year": 2025,
-    "coverImage": "https://images.unsplash.com/photo-1605722243979-fe0be8cbb4b9?w=400",
+    "coverImage": "https://images.unsplash.com/photo-1510915361894-db8b60106cb1?w=400",
     "previewUrl": ""
   },
   {
@@ -1935,7 +1935,7 @@ const songs = [
     "tempo": 118,
     "mood": "chill",
     "year": 2025,
-    "coverImage": "https://images.unsplash.com/photo-1605722243979-fe0be8cbb4b9?w=400",
+    "coverImage": "https://images.unsplash.com/photo-1510915361894-db8b60106cb1?w=400",
     "previewUrl": ""
   },
   {
