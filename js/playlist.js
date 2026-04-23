@@ -1,65 +1,275 @@
-let songs = [];
+// Playlist Generator — searches the song database and pads results with energy/tempo-similar songs
 
-// LOAD JSON FIRST
-$(document).ready(function () {
-    $.getJSON("data/songs.json", function (data) {
-        songs = data;
-        console.log("Songs loaded:", songs);
-    });
-});
-
-// BUTTON FUNCTION (GLOBAL)
-function generatePlaylist() {
-
-    // safety check (prevents clicking too early)
-    if (songs.length === 0) {
-        alert("Songs are still loading...");
-        return;
+// Fills the genre <select> from the GENRES array (runs once; skips if already populated)
+function initPlaylistGenerator() {
+    const genreSelect = document.getElementById('genre-select');
+    if (genreSelect.options.length === 1) {
+        GENRES.forEach(genre => {
+            const option = document.createElement('option');
+            option.value = genre;
+            option.textContent = genre;
+            genreSelect.appendChild(option);
+        });
     }
-
-    let type = $("#searchType").val();
-    let input = $("#searchInput").val().toLowerCase();
-
-    let results = songs
-        .filter(song => {
-            if (type === "genre") {
-                return song.genre.toLowerCase().replace(/\s/g, "")
-                    .includes(input.replace(/\s/g, ""));
-            } else {
-                return song.artist.toLowerCase().includes(input);
-            }
-        })
-        .sort((a, b) => b.energy - a.energy)
-        .slice(0, 10);
-
-    displayPlaylist(results);
 }
 
-function displayPlaylist(list) {
+// Swaps between the genre <select> and a free-text <input> depending on search mode
+function updateSearchInput() {
+    const searchType = document.getElementById('search-type').value;
+    const genreSelect = document.getElementById('genre-select');
+    const searchInput = document.getElementById('search-input');
+    const label = document.getElementById('search-label');
 
-    $("#playlist").html("");
+    if (searchType === 'genre') {
+        genreSelect.classList.remove('hidden');
+        searchInput.classList.add('hidden');
+        label.textContent = 'Select Genre';
+    } else {
+        genreSelect.classList.add('hidden');
+        searchInput.classList.remove('hidden');
 
-    if (list.length === 0) {
-        $("#playlist").append("<p>No songs found.</p>");
+        switch(searchType) {
+            case 'artist':
+                label.textContent = 'Artist Name';
+                searchInput.placeholder = 'Enter artist name...';
+                break;
+            case 'song':
+                label.textContent = 'Song or Album Name';
+                searchInput.placeholder = 'Enter song or album...';
+                break;
+            case 'mood':
+                label.textContent = 'Mood';
+                searchInput.placeholder = 'e.g., energetic, chill, happy...';
+                break;
+        }
+    }
+}
+
+// Finds matching songs, then pads the list with energy/tempo-similar songs, capped at 12
+function generatePlaylist() {
+    const searchType = document.getElementById('search-type').value;
+    let query = '';
+
+    if (searchType === 'genre') {
+        query = document.getElementById('genre-select').value;
+    } else {
+        query = document.getElementById('search-input').value.trim();
+    }
+
+    if (!query) {
+        alert('Please enter a search term or select a genre');
         return;
     }
 
-    list.forEach(song => {
+    let filtered = [];
 
-        // HANDLE MISSING / BAD IMAGES
-        let imageSrc = song.coverImage && song.coverImage.trim() !== ""
-            ? song.coverImage
-            : "https://via.placeholder.com/100?text=No+Image";
+    switch(searchType) {
+        case 'genre':
+            filtered = songs.filter(s => s.genre === query);
+            break;
+        case 'artist':
+            filtered = songs.filter(s =>
+                s.artist.toLowerCase().includes(query.toLowerCase())
+            );
+            break;
+        case 'song':
+            filtered = songs.filter(s =>
+                s.title.toLowerCase().includes(query.toLowerCase()) ||
+                s.album.toLowerCase().includes(query.toLowerCase())
+            );
+            break;
+        case 'mood':
+            filtered = songs.filter(s =>
+                s.mood.toLowerCase().includes(query.toLowerCase())
+            );
+            break;
+    }
 
-        $("#playlist").append(`
-            <div class="song">
-                <img src="${imageSrc}" 
-                     onerror="this.onerror=null; this.src='https://via.placeholder.com/100?text=No+Image'">
-                <div class="song-info">
-                    <p class="title">${song.title}</p>
-                    <p class="artist">${song.artist}</p>
-                </div>
+    // Related genres used to pad small-catalogue genres (e.g. K-Pop only has 2 songs)
+    const RELATED_GENRES = {
+        'K-Pop':       ['Pop', 'Indie Pop'],
+        'Afrobeats':   ['R&B', 'Hip Hop', 'Latin'],
+        'Indie Rock':  ['Indie Pop', 'Indie Folk', 'Pop'],
+        'Indie Pop':   ['Indie Rock', 'Indie Folk', 'Pop'],
+        'Indie Folk':  ['Indie Pop', 'Indie Rock', 'Country'],
+        'Country Pop': ['Country', 'Pop'],
+        'Latin':       ['Pop', 'R&B'],
+        'R&B':         ['Hip Hop', 'Pop'],
+        'Country':     ['Country Pop'],
+        'Hip Hop':     ['R&B'],
+        'Pop':         ['Indie Pop'],
+    };
+
+    // Expand the list with musically-related songs of similar energy (±2) and tempo (±20 BPM)
+    if (filtered.length > 0) {
+        const filteredGenres = new Set(filtered.map(s => s.genre));
+
+        // Build the set of allowed genres: exact matches first, then related genres as fallback
+        const allowedGenres = new Set(filteredGenres);
+        filteredGenres.forEach(g => {
+            (RELATED_GENRES[g] || []).forEach(r => allowedGenres.add(r));
+        });
+
+        const baseSong = filtered[0];
+
+        const similar = songs.filter(s => {
+            if (!allowedGenres.has(s.genre)) return false;       // must be same or related genre
+            if (filtered.some(f => f.id === s.id)) return false; // skip songs already in results
+            const energyDiff = Math.abs(s.energy - baseSong.energy);
+            const tempoDiff  = Math.abs(s.tempo  - baseSong.tempo);
+            return energyDiff <= 2 && tempoDiff <= 20;
+        });
+
+        // Merge, deduplicate by id, shuffle, and cap at 12 cards
+        const combined = [...filtered, ...similar];
+        const uniqueMap = new Map();
+        combined.forEach(song => uniqueMap.set(song.id, song));
+        const unique = Array.from(uniqueMap.values());
+
+        const shuffled = unique.sort(() => 0.5 - Math.random());
+        displayPlaylist(shuffled.slice(0, 12));
+    } else {
+        displayPlaylist([]);
+    }
+}
+
+function displayPlaylist(playlist) {
+    const resultsContainer = document.getElementById('playlist-results');
+
+    if (playlist.length === 0) {
+        resultsContainer.innerHTML = `
+            <div class="empty-state">
+                <span class="empty-icon">🎵</span>
+                <h3>No Results Found</h3>
+                <p>Try a different search term</p>
             </div>
-        `);
+        `;
+        return;
+    }
+
+    resultsContainer.innerHTML = `
+        <div class="playlist-header">
+            <h2>Your Playlist (${playlist.length} songs)</h2>
+            <div class="badge">🎵 Personalized</div>
+        </div>
+        <div class="playlist-grid" id="playlist-grid"></div>
+    `;
+
+    const grid = document.getElementById('playlist-grid');
+
+    playlist.forEach((song, index) => {
+        const card = createSongCard(song, index);
+        grid.appendChild(card);
     });
+}
+
+// Builds a song card with cover art, play/favorite buttons, and metadata badges
+function createSongCard(song, index) {
+    const card = document.createElement('div');
+    card.className = 'playlist-card';
+    card.style.animation = `fadeIn 0.5s ease ${index * 0.05}s both`;
+
+    const favorited = isFavorite(song.id);
+
+    card.innerHTML = `
+        <div style="position: relative;">
+            <img src="${song.coverImage}" alt="${song.title}" class="playlist-card-image">
+            <div class="playlist-card-overlay">
+                ${song.previewUrl && song.previewUrl.trim() !== '' ? `
+                <button class="btn-icon" id="play-btn-${song.id}" onclick="playPreview('${song.id}')" title="Play Preview">▶️</button>` : 
+                `<button class="btn-icon" style="opacity:0.3;cursor:default;" title="No preview available" disabled>▶️</button>`}
+                <button class="btn-icon ${favorited ? 'favorited' : ''}" 
+                        id="fav-btn-${song.id}"
+                        onclick="toggleFavorite('${song.id}')" 
+                        title="${favorited ? 'Remove from favorites' : 'Add to favorites'}">
+                    ${favorited ? '❤️' : '🤍'}
+                </button>
+            </div>
+        </div>
+        <div class="playlist-card-content">
+            <h3>${song.title}</h3>
+            <p class="playlist-card-artist">${song.artist}</p>
+            <div class="playlist-card-badges">
+                <span class="badge badge-genre">${song.genre}</span>
+                <span class="badge badge-mood">${song.mood}</span>
+            </div>
+            <div class="playlist-card-meta">
+                <span>Energy: ${song.energy}/10</span>
+                <span>BPM: ${song.tempo}</span>
+            </div>
+        </div>
+    `;
+
+    return card;
+}
+
+let _previewAudio = null;
+let _previewSongId = null;
+
+function setPlayBtnIcon(songId, icon) {
+    const btn = document.getElementById('play-btn-' + songId);
+    if (btn) btn.textContent = icon;
+}
+
+function stopPreview() {
+    if (_previewAudio) {
+        _previewAudio.pause();
+        _previewAudio = null;
+    }
+    if (_previewSongId) {
+        setPlayBtnIcon(_previewSongId, '▶️');
+        _previewSongId = null;
+    }
+}
+
+function playPreview(songId) {
+    // Clicking the currently playing song pauses it
+    if (_previewSongId === songId) {
+        stopPreview();
+        return;
+    }
+
+    // Stop whatever was playing before
+    stopPreview();
+
+    const song = songs.find(s => s.id === songId);
+    if (!song || !song.previewUrl || song.previewUrl.trim() === '') return;
+
+    _previewAudio  = new Audio(song.previewUrl);
+    _previewSongId = songId;
+    _previewAudio.volume = 0.6;
+
+    _previewAudio.addEventListener('ended', () => {
+        setPlayBtnIcon(songId, '▶️');
+        _previewAudio  = null;
+        _previewSongId = null;
+    });
+
+    _previewAudio.play()
+        .then(() => setPlayBtnIcon(songId, '⏸️'))
+        .catch(err => {
+            console.warn('Preview playback failed:', err);
+            _previewAudio  = null;
+            _previewSongId = null;
+        });
+}
+
+function toggleFavorite(songId) {
+    const song = songs.find(s => s.id === songId);
+
+    if (isFavorite(songId)) {
+        removeFavorite(songId);
+    } else {
+        addFavorite(song);
+    }
+
+    // Update the heart button in-place — do NOT call generatePlaylist() here
+    // because rebuilding the grid destroys play button elements mid-playback
+    const nowFavorited = isFavorite(songId);
+    const favBtn = document.getElementById('fav-btn-' + songId);
+    if (favBtn) {
+        favBtn.textContent = nowFavorited ? '❤️' : '🤍';
+        favBtn.title       = nowFavorited ? 'Remove from favorites' : 'Add to favorites';
+        favBtn.classList.toggle('favorited', nowFavorited);
+    }
 }

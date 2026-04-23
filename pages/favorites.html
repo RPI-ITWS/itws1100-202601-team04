@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<!-- Favorites page — renders saved songs from localStorage via favorites.js -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Favorites – MusicGame</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+
+    <nav id="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <span class="icon">🎵</span>
+                <span class="brand-text">MusicGame</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="../index.html"          class="nav-link">Home</a></li>
+                <li><a href="game.html"               class="nav-link">Play Game</a></li>
+                <li><a href="playlist.html"           class="nav-link">Playlist Generator</a></li>
+                <li><a href="scoreboard.html"         class="nav-link">Scoreboard</a></li>
+                <li><a href="favorites.html"          class="nav-link active">Favorites</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main id="app">
+        <section class="page active">
+            <div class="container">
+                <div class="page-header">
+                    <span class="page-icon">❤️</span>
+                    <h1>Your Favorites</h1>
+                    <p>Songs you've saved</p>
+                </div>
+                <!-- loadFavorites() renders cards into this grid -->
+                <div id="favorites-grid" class="playlist-grid"></div>
+            </div>
+        </section>
+    </main>
+
+    <script src="../data/songs.js"></script>
+    <script src="../js/storage.js"></script>
+    <script src="../js/favorites.js"></script>
+    <script>
+        let _favAudio = null;
+        let _favSongId = null;
+
+        function setPlayBtnIcon(songId, icon) {
+            const btn = document.getElementById('play-btn-' + songId);
+            if (btn) btn.textContent = icon;
+        }
+
+        function stopFavPreview() {
+            if (_favAudio) { _favAudio.pause(); _favAudio = null; }
+            if (_favSongId) { setPlayBtnIcon(_favSongId, '▶️'); _favSongId = null; }
+        }
+
+        function playPreview(songId) {
+            // Clicking the playing song pauses it
+            if (_favSongId === songId) { stopFavPreview(); return; }
+
+            stopFavPreview();
+
+            const song = songs.find(s => s.id === songId);
+            if (!song || !song.previewUrl || song.previewUrl.trim() === '') return;
+
+            _favAudio  = new Audio(song.previewUrl);
+            _favSongId = songId;
+            _favAudio.volume = 0.6;
+
+            _favAudio.addEventListener('ended', () => {
+                setPlayBtnIcon(songId, '▶️');
+                _favAudio = null; _favSongId = null;
+            });
+
+            _favAudio.play()
+                .then(() => setPlayBtnIcon(songId, '⏸️'))
+                .catch(() => { _favAudio = null; _favSongId = null; });
+        }
+
+        document.addEventListener('DOMContentLoaded', loadFavorites);
+    </script>
+
+</body>
+</html>

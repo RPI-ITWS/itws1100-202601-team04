@@ -1,4 +1,6 @@
-[
+const GENRES = ['Afrobeats','Country','Country Pop','Hip Hop','Indie Folk','Indie Pop','Indie Rock','K-Pop','Latin','Pop','R&B'];
+
+const songs = [
   {
     "id": "hh1",
     "title": "Not Like Us",

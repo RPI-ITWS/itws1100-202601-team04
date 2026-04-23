@@ -1,88 +1,77 @@
 <!DOCTYPE html>
+<!-- Landing page -->
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MusicQuest</title>
-  <link rel="stylesheet" href="css/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Musi Quest</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
 </head>
-<body class="home-page">
+<body>
 
-  <nav class="top-nav">
-  <div class="nav-inner">
+    <nav id="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <span class="icon">🎵</span>
+                <span class="brand-text">MusicGame</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html"              class="nav-link active">Home</a></li>
+                <li><a href="pages/game.html"         class="nav-link">Play Game</a></li>
+                <li><a href="pages/playlist.html"     class="nav-link">Playlist Generator</a></li>
+                <li><a href="pages/scoreboard.html"   class="nav-link">Scoreboard</a></li>
+                <li><a href="pages/favorites.html"    class="nav-link">Favorites</a></li>
+            </ul>
+        </div>
+    </nav>
 
-    <div class="logo">🎵 MusicQuest</div>
+    <main id="app">
 
-    <ul class="nav-links">
-      <li><a class="active" href="index.html">⌂ Home</a></li>
-      <li><a href="play.html">▷ Play Game</a></li>
-      <li><a href="playlist.html">☰ Playlist</a></li>
-      <li><a href="scoreboard.html">🏆 Scoreboard</a></li>
-    </ul>
+        <section class="page active">
+            <div class="container">
+                <div class="hero-section">
+                    <h1 class="hero-title">Musi-Quest</h1>
+                    <p class="hero-subtitle">Test your music knowledge and discover new playlists</p>
+                    <p class="team-info">Created by: Nathen Pride, Kevin Chen, D'Andre Collins &bull; ITWS 1100</p>
+                </div>
 
-  </div>
-</nav>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">🎮</div>
+                        <h3>Genre Guessing Game</h3>
+                        <p>Test your knowledge by guessing genres from blurred album covers</p>
+                        <a href="pages/game.html" class="btn btn-primary">Start Playing</a>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🎵</div>
+                        <h3>Playlist Generator</h3>
+                        <p>Create personalized playlists based on genre, artist, song, or mood</p>
+                        <a href="pages/playlist.html" class="btn btn-primary">Generate Playlist</a>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🏆</div>
+                        <h3>Scoreboard</h3>
+                        <p>Track your high scores and compete with yourself</p>
+                        <a href="pages/scoreboard.html" class="btn btn-primary">View Scores</a>
+                    </div>
+                </div>
 
-  <main class="page-wrap">
-    <section class="hero hero-home">
-      <div class="hero-icon">🎵</div>
-      <h1>Welcome to <span>MusicQuest</span></h1>
-      <p>
-        Explore new genres, discover amazing music, and challenge yourself with<br>
-        our interactive music guessing game!
-      </p>
+                <div class="info-section">
+                    <h2>Game Features</h2>
+                    <ul class="features-list">
+                        <li><strong>Three Difficulty Levels:</strong> Easy, Medium, and Hard with varying blur effects</li>
+                        <li><strong>Timer-Based Scoring:</strong> Earn more points for faster correct answers</li>
+                        <li><strong>Smart Playlist Generator:</strong> Finds similar songs based on energy, tempo, and mood</li>
+                        <li><strong>Favorites System:</strong> Save your favorite songs for quick access</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
 
-      <div class="hero-buttons">
-        <a class="btn btn-primary" href="play.html">▷ Start Playing</a>
-        <a class="btn btn-secondary" href="playlist.html">☰ Generate Playlist</a>
-      </div>
-    </section>
-
-    <section class="feature-grid">
-      <div class="feature-card">
-        <div class="feature-icon pink">▷</div>
-        <h3>Genre Guessing Game</h3>
-        <p>Test your music knowledge by guessing genres from blurred album covers</p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon purple">☰</div>
-        <h3>Smart Playlist Generator</h3>
-        <p>Discover new music based on your favorite songs, artists, or genres</p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon blue">🏆</div>
-        <h3>Track Your Progress</h3>
-        <p>Compete with yourself and see your high scores on the leaderboard</p>
-      </div>
-    </section>
-
-    <section class="about-box">
-      <h2>About MusicQuest</h2>
-
-      <p>
-        MusicQuest is an interactive platform that combines music discovery with engaging gameplay.
-        Whether you're a music enthusiast looking to explore new genres or someone who wants to
-        test their music knowledge, we've got you covered!
-      </p>
-
-      <p>
-        <strong>What makes us different?</strong> We blend entertainment and exploration in a single platform.
-        Instead of just streaming or gaming separately, you get both experiences seamlessly integrated.
-      </p>
-
-      <p>
-        <strong>Who is this for?</strong> Anyone who loves music! Whether you're looking to discover new artists
-        in genres you already enjoy, or want to pass time with an engaging music guessing game,
-        MusicQuest is designed for you.
-      </p>
-
-      <div class="about-footer">
-        Created by Nathen Pride, Kevin Chen, and D'Andre Collins for ITWS 1100
-      </div>
-    </section>
-  </main>
+    </main>
 
 </body>
 </html>

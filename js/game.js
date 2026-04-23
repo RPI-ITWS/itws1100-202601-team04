@@ -1,138 +1,254 @@
-let songs = [];
-let currentSong = null;
-let score = 0;
-let currentDifficulty = "easy";
-let roundsPlayed = 0;
-const MAX_ROUNDS = 10;
+// Genre Guessing Game — player sees a blurred album cover and picks the correct genre
 
-// All genres from songs.json
-const ALL_GENRES = ["Indie Folk", "Country", "K-Pop", "Indie Rock", "Pop", "R&B", "Country Pop", "Latin", "Hip Hop", "Indie Pop", "Afrobeats"];
-
-// How many genre options to show per difficulty
-const DIFFICULTY_OPTIONS = {
-    easy: 3,
-    medium: 6,
-    hard: ALL_GENRES.length
+// Single source of truth for all in-progress game data
+let gameState = {
+    difficulty: 'easy',
+    currentRound: 0,
+    score: 0,
+    correctAnswers: 0,
+    questions: [],
+    timeLeft: 20,
+    timerInterval: null,
+    audioEnabled: true
 };
 
-// Single shared audio player
-const audioPlayer = new Audio();
-audioPlayer.volume = 0.6;
+// Higher blur and shorter time on harder difficulties; timeBonus scales score reward for speed
+const difficultySettings = {
+    easy: { blur: 5, time: 30, timeBonus: 30 },
+    medium: { blur: 15, time: 20, timeBonus: 50 },
+    hard: { blur: 25, time: 15, timeBonus: 80 }
+};
 
-// LOAD DATA — only keep songs that have a preview URL
-$(document).ready(function () {
-    $.getJSON("data/songs.json", function (data) {
-        songs = data.filter(s => s.previewUrl && s.previewUrl.trim() !== "");
-        console.log(`Loaded ${songs.length} songs with previews`);
-    }).fail(function () {
-        console.error("Failed to load songs.json");
-    });
-});
+// ─── Audio Player ────────────────────────────────────────────────────────────
+const gameAudioPlayer = new Audio();
+gameAudioPlayer.volume = 0.3;
 
-// Called by difficulty buttons in play.html
+function stopDemoAudio() {
+    gameAudioPlayer.pause();
+    gameAudioPlayer.src = '';
+}
+
+// Resets state, picks 10 random songs, and starts the first round
 function startGame(difficulty) {
-    if (songs.length === 0) {
-        alert("Songs are still loading, try again in a second.");
-        return;
-    }
+    gameState.difficulty = difficulty;
+    gameState.currentRound = 0;
+    gameState.score = 0;
+    gameState.correctAnswers = 0;
+    gameState.questions = generateQuestions();
 
-    // Ask for player name before starting
-    let playerName = prompt("Enter your name for the scoreboard:") || "Player";
-    playerName = playerName.trim() || "Player";
-    window.currentPlayerName = playerName;
+    const settings = difficultySettings[difficulty];
+    gameState.timeLeft = settings.time;
 
-    currentDifficulty = difficulty;
-    score = 0;
-    roundsPlayed = 0;
+    // Play audio first — before navigating — so the call stays inside the user gesture.
+    // Any hash change (navigateTo) causes Chrome to treat later play() calls as autoplay.
+    playAudio();
 
-    $("#score").text(0);
-    $("#nextBtn").hide();
-    $("#gameSection").show();
-    $("html, body").animate({ scrollTop: $("#gameSection").offset().top }, 400);
-
-    nextRound();
+    navigateTo('#gameplay');
+    updateGameDisplay();
+    displayQuestion();
+    startTimer();
 }
 
-function nextRound() {
-    if (roundsPlayed >= MAX_ROUNDS) {
-        endGame();
-        return;
-    }
-
-    $("#result").text("");
-    $("#nextBtn").hide();
-    $("#options button").prop("disabled", false);
-
-    // Pick a random song (all have previews)
-    currentSong = songs[Math.floor(Math.random() * songs.length)];
-
-    // Play preview
-    audioPlayer.pause();
-    audioPlayer.src = currentSong.previewUrl;
-    audioPlayer.currentTime = 0;
-    audioPlayer.play().catch(err => {
-        console.warn("Audio playback failed:", err);
-    });
-
-    // Show cover image
-    $("#cover")
-        .attr("src", currentSong.coverImage || "")
-        .off("error")
-        .on("error", function () {
-            $(this).attr("src", "https://via.placeholder.com/200?text=No+Image");
-        });
-
-    // Build genre options based on difficulty
-    let numOptions = DIFFICULTY_OPTIONS[currentDifficulty];
-    let correct = currentSong.genre;
-
-    let optionPool = ALL_GENRES.filter(g => g !== correct);
-    optionPool.sort(() => Math.random() - 0.5);
-    let options = optionPool.slice(0, numOptions - 1);
-    options.push(correct);
-    options.sort(() => Math.random() - 0.5);
-
-    // Render buttons
-    $("#options").html("");
-    options.forEach(g => {
-        $("#options").append(
-            `<button onclick="checkAnswer('${g}')">${g}</button>`
-        );
-    });
-
-    $("#round").text(`Round ${roundsPlayed + 1} / ${MAX_ROUNDS}`);
+// Picks 10 songs that have a preview URL and shuffles them
+function generateQuestions() {
+    const pool = songs.filter(s => s.previewUrl);
+    const shuffled = pool.sort(() => 0.5 - Math.random());
+    return shuffled.slice(0, 10);
 }
 
-function checkAnswer(choice) {
-    audioPlayer.pause();
+// Resets the timer and renders the next question for a new round
+function startRound() {
+    const settings = difficultySettings[gameState.difficulty];
+    gameState.timeLeft = settings.time;
 
-    // Disable answer buttons and show Next
-    $("#options button").prop("disabled", true);
-    $("#nextBtn").show();
+    updateGameDisplay();
+    displayQuestion();
+    startTimer();
+    playAudio();
+}
 
-    if (choice === currentSong.genre) {
-        score++;
-        $("#result").text("✅ Correct!");
+function updateGameDisplay() {
+    document.getElementById('round-display').textContent =
+        `${gameState.currentRound + 1}/10`;
+    document.getElementById('score-display').textContent = gameState.score;
+    document.getElementById('correct-display').textContent =
+        `${gameState.correctAnswers}/10`;
+}
+
+// Sets the blurred album cover and generates 4 genre buttons (1 correct, 3 random wrong)
+function displayQuestion() {
+    const currentSong = gameState.questions[gameState.currentRound];
+    const settings    = difficultySettings[gameState.difficulty];
+
+    const albumImg = document.getElementById('album-cover');
+    albumImg.onerror = function () {
+        this.onerror = null;
+        this.src = 'https://via.placeholder.com/300x300/1a1a2e/e0e0e0?text=🎵';
+    };
+    albumImg.src   = currentSong.coverImage || '';
+    albumImg.style.filter = `blur(${settings.blur}px)`;
+
+    const correctGenre = currentSong.genre;
+    const wrongGenres  = GENRES.filter(g => g !== correctGenre)
+        .sort(() => 0.5 - Math.random())
+        .slice(0, 3);
+
+    const allOptions = [correctGenre, ...wrongGenres].sort(() => 0.5 - Math.random());
+
+    const optionsContainer = document.getElementById('genre-options');
+    optionsContainer.innerHTML = '';
+
+    allOptions.forEach(genre => {
+        const button     = document.createElement('button');
+        button.className = 'genre-option';
+        button.textContent = genre;
+        button.onclick   = () => handleAnswer(genre);
+        optionsContainer.appendChild(button);
+    });
+
+    document.getElementById('feedback').classList.add('hidden');
+}
+
+// Locks buttons, reveals the album, calculates score (base 100 + speed bonus), then advances
+function handleAnswer(selectedGenre) {
+    stopTimer();
+    stopDemoAudio();
+
+    const currentSong = gameState.questions[gameState.currentRound];
+    const isCorrect   = selectedGenre === currentSong.genre;
+
+    document.querySelectorAll('.genre-option').forEach(btn => {
+        btn.classList.add('disabled');
+        btn.onclick = null;
+
+        if (btn.textContent === currentSong.genre) {
+            btn.classList.add('correct');
+        } else if (btn.textContent === selectedGenre && !isCorrect) {
+            btn.classList.add('incorrect');
+        }
+    });
+
+    // Unblur the album so the player can see the answer
+    document.getElementById('album-cover').style.filter = 'blur(0px)';
+
+    if (isCorrect) {
+        const settings   = difficultySettings[gameState.difficulty];
+        const timeBonus  = Math.floor(gameState.timeLeft * settings.timeBonus);
+        const roundScore = 100 + timeBonus;
+        gameState.score += roundScore;
+        gameState.correctAnswers++;
+        showFeedback(true, `Correct! +${roundScore} points`, currentSong);
     } else {
-        $("#result").text("❌ Wrong! It was " + currentSong.genre);
+        showFeedback(false, `Wrong! The correct genre was ${currentSong.genre}`, currentSong);
     }
 
-    $("#score").text(score);
-    roundsPlayed++;
+    updateGameDisplay();
+
+    // 3-second pause so the player can read the feedback before the next round loads
+    setTimeout(() => {
+        gameState.currentRound++;
+        if (gameState.currentRound < 10) {
+            startRound();
+        } else {
+            endGame();
+        }
+    }, 3000);
 }
 
+function showFeedback(isCorrect, message, song) {
+    const feedback = document.getElementById('feedback');
+    const icon     = document.getElementById('feedback-icon');
+    const text     = document.getElementById('feedback-text');
+
+    feedback.className = 'feedback';
+    feedback.classList.add(isCorrect ? 'correct' : 'incorrect');
+    icon.textContent = isCorrect ? '✓' : '✗';
+    text.innerHTML = `${message}<br><span class="feedback-song">"${song.title}" — ${song.artist}</span>`;
+}
+
+// Counts down every second; auto-submits an empty answer when time hits zero
+function startTimer() {
+    const settings  = difficultySettings[gameState.difficulty];
+    const totalTime = settings.time;
+
+    gameState.timerInterval = setInterval(() => {
+        gameState.timeLeft--;
+
+        document.getElementById('timer-display').textContent = gameState.timeLeft;
+
+        const progress = (gameState.timeLeft / totalTime) * 100;
+        document.getElementById('timer-progress').style.width = `${progress}%`;
+
+        if (gameState.timeLeft <= 0) {
+            handleAnswer(''); // empty string won't match any genre → treated as wrong
+        }
+    }, 1000);
+}
+
+function stopTimer() {
+    if (gameState.timerInterval) {
+        clearInterval(gameState.timerInterval);
+        gameState.timerInterval = null;
+    }
+}
+
+// Mutes/unmutes without stopping the game; resumes from the paused position on unmute
+function toggleAudio() {
+    gameState.audioEnabled = !gameState.audioEnabled;
+
+    const icon = document.getElementById('audio-icon');
+    const text = document.getElementById('audio-text');
+
+    if (gameState.audioEnabled) {
+        icon.textContent = '🔊';
+        text.textContent = 'Audio Enabled';
+        gameAudioPlayer.volume = 0.3;
+        // Resume from the paused spot — don't reset src/currentTime
+        if (gameState.questions.length > 0 && gameState.currentRound < 10) {
+            gameAudioPlayer.play().catch(err => console.warn('Audio playback failed:', err));
+        }
+    } else {
+        icon.textContent = '🔇';
+        text.textContent = 'Audio Muted';
+        // Pause only — keeping src intact so resume works
+        gameAudioPlayer.pause();
+    }
+}
+
+function playAudio() {
+    if (!gameState.audioEnabled) return;
+
+    const currentSong = gameState.questions[gameState.currentRound];
+
+    if (currentSong.previewUrl) {
+        gameAudioPlayer.pause();
+        gameAudioPlayer.src         = currentSong.previewUrl;
+        gameAudioPlayer.currentTime = 0;
+        gameAudioPlayer.volume      = 0.3;
+        gameAudioPlayer.play().catch(err => console.warn('Audio playback failed:', err));
+    }
+}
+
+// Saves the score to localStorage and navigates to the results screen
 function endGame() {
-    audioPlayer.pause();
+    stopTimer();
+    stopDemoAudio();
 
-    let scores = JSON.parse(localStorage.getItem("scores")) || [];
-    scores.push({ name: window.currentPlayerName || "Player", score: score });
-    localStorage.setItem("scores", JSON.stringify(scores));
+    const finalScore = {
+        score:          gameState.score,
+        correctAnswers: gameState.correctAnswers,
+        totalQuestions: 10,
+        accuracy:       Math.round((gameState.correctAnswers / 10) * 100),
+        difficulty:     gameState.difficulty
+    };
 
-    $("#gameSection").html(`
-        <h2>Game Over!</h2>
-        <p>Nice work, ${window.currentPlayerName || "Player"}!</p>
-        <p>Your final score: <strong>${score} / ${MAX_ROUNDS}</strong></p>
-        <a href="scoreboard.html"><button>View Scoreboard</button></a>
-        <button onclick="location.reload()">Play Again</button>
-    `);
+    saveScore(finalScore);
+
+    document.getElementById('final-score').textContent     = gameState.score;
+    document.getElementById('final-correct').textContent   = `${gameState.correctAnswers}/10`;
+    document.getElementById('final-accuracy').textContent  = `${finalScore.accuracy}%`;
+    document.getElementById('final-difficulty').textContent =
+        gameState.difficulty.charAt(0).toUpperCase() + gameState.difficulty.slice(1);
+
+    navigateTo('#results');
 }

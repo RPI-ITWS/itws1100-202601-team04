@@ -1,0 +1,851 @@
+/* ── Reset & Base ─────────────────────────────────────────────────────────────
+   Box-sizing reset + full-viewport purple gradient background used on every page */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+    min-height: 100vh;
+    color: #ffffff;
+    overflow-x: hidden;
+}
+
+/* ── Navigation ───────────────────────────────────────────────────────────────
+   Sticky frosted-glass nav bar; active link gets a slightly brighter background */
+#navbar {
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    padding: 1rem 2rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.nav-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-brand {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.icon {
+    font-size: 2rem;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+}
+
+.nav-link {
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.nav-link:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.nav-link.active {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* ── Layout ───────────────────────────────────────────────────────────────────
+   Centered max-width wrapper used inside every page section */
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+/* ── Page Routing ─────────────────────────────────────────────────────────────
+   All .page sections are hidden by default; the router adds .active to show one.
+   fadeIn animation runs every time a page becomes active. */
+.page {
+    display: none;
+    animation: fadeIn 0.5s ease;
+}
+
+.page.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ── Buttons ──────────────────────────────────────────────────────────────────
+   Base .btn + three variants (primary gradient, secondary ghost, danger red)
+   and a full-width .btn-large modifier used in the playlist search panel */
+.btn {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+.btn-secondary {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.btn-danger {
+    background: rgba(239, 68, 68, 0.8);
+    color: white;
+}
+
+.btn-danger:hover {
+    background: rgba(239, 68, 68, 1);
+}
+
+.btn-large {
+    width: 100%;
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+    margin-top: 1rem;
+}
+
+/* ── Home Page ────────────────────────────────────────────────────────────────
+   Hero section with gradient text title + responsive 3-column feature card grid */
+.hero-section {
+    text-align: center;
+    padding: 3rem 0;
+}
+
+.hero-title {
+    font-size: 3.5rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+    background: linear-gradient(135deg, #fff 0%, #f093fb 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.hero-subtitle {
+    font-size: 1.5rem;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 0.5rem;
+}
+
+.team-info {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 1rem;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin: 3rem 0;
+}
+
+.feature-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    padding: 2rem;
+    border-radius: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.feature-icon {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+}
+
+.feature-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.feature-card p {
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 1.5rem;
+}
+
+.info-section {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    padding: 2rem;
+    border-radius: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    margin-top: 3rem;
+}
+
+.info-section h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.features-list {
+    list-style: none;
+    padding: 0;
+}
+
+.features-list li {
+    padding: 0.75rem 0;
+    color: rgba(255, 255, 255, 0.9);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.features-list li:last-child {
+    border-bottom: none;
+}
+
+/* ── Game Selection ───────────────────────────────────────────────────────────
+   Centered header + responsive grid of clickable game-mode and difficulty cards */
+.game-select-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.game-select-header h1 {
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
+}
+
+.game-select-header p {
+    font-size: 1.2rem;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.difficulty-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+}
+
+/* Game Mode Selection */
+.game-mode-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.game-mode-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    padding: 2.5rem;
+    border-radius: 1rem;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.game-mode-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    border-color: rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.game-mode-icon {
+    font-size: 5rem;
+    margin-bottom: 1rem;
+}
+
+.game-mode-card h3 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.game-mode-desc {
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 1.5rem;
+    font-size: 1.1rem;
+}
+
+.game-mode-features {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.95rem;
+    text-align: left;
+}
+
+/* ── Song Guessing Game ───────────────────────────────────────────────────────
+   Audio player card (wave animation, progress bar) + multiple choice option grid */
+.song-game-content {
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.audio-player-container {
+    margin-bottom: 2rem;
+}
+
+.audio-player-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    padding: 2rem;
+    border-radius: 1rem;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    text-align: center;
+}
+
+.audio-wave {
+    font-size: 3rem;
+    margin-bottom: 1.5rem;
+    animation: wave 2s ease-in-out infinite;
+}
+
+@keyframes wave {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+}
+
+.audio-info {
+    margin-bottom: 1.5rem;
+}
+
+.audio-timer {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+}
+
+.audio-progress-bar {
+    width: 100%;
+    height: 12px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.audio-progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #667eea 0%, #f093fb 100%);
+    width: 0%;
+    transition: width 0.1s linear;
+}
+
+.btn-play {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 0.75rem;
+    font-size: 1.2rem;
+    font-weight: 700;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    transition: all 0.3s ease;
+}
+
+.btn-play:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+.btn-play:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.audio-hint {
+    margin-top: 1rem;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.9rem;
+}
+
+.guess-form {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    padding: 2rem;
+    border-radius: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    margin-bottom: 2rem;
+}
+
+.guess-form .form-group {
+    margin-bottom: 1.5rem;
+}
+
+.guess-input {
+    font-size: 1.1rem;
+    padding: 1rem;
+}
+
+.guess-form .btn {
+    margin-top: 0.5rem;
+}
+
+.guess-form .btn-secondary {
+    width: 100%;
+}
+
+/* ── Responsive Design ────────────────────────────────────────────────────────
+   768px: stack grids to single column, collapse game stats vertically.
+   480px: hide nav links entirely and reduce container padding. */
+@media (max-width: 768px) {
+    .nav-links {
+        gap: 1rem;
+        font-size: 0.9rem;
+    }
+
+    .hero-title {
+        font-size: 2rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1.2rem;
+    }
+
+    .features-grid,
+    .difficulty-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .game-stats {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .search-row {
+        grid-template-columns: 1fr;
+    }
+
+    .playlist-grid {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    }
+
+    .scoreboard-controls {
+        justify-content: center;
+    }
+
+    .score-item {
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .nav-links {
+        display: none;
+    }
+
+    .container {
+        padding: 1rem;
+    }
+
+    .playlist-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ─── Utility ─────────────────────────────────────────────────────────────── */
+.hidden { display: none !important; }
+
+/* ─── Difficulty Cards ────────────────────────────────────────────────────── */
+.difficulty-card {
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(10px);
+    padding: 2.5rem;
+    border-radius: 1rem;
+    border: 2px solid rgba(255,255,255,0.2);
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.difficulty-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    border-color: rgba(255,255,255,0.5);
+    background: rgba(255,255,255,0.15);
+}
+.difficulty-icon { font-size: 4rem; margin-bottom: 1rem; }
+.difficulty-card h3 { font-size: 1.8rem; margin-bottom: 0.75rem; }
+.difficulty-desc { color: rgba(255,255,255,0.8); margin-bottom: 1rem; }
+.difficulty-stats {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    color: rgba(255,255,255,0.7);
+    font-size: 0.95rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(255,255,255,0.2);
+}
+
+/* ─── Game Header / Stats Bar ─────────────────────────────────────────────── */
+.game-header {
+    margin-bottom: 2rem;
+}
+.game-stats {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(10px);
+    padding: 1rem 2rem;
+    border-radius: 1rem;
+    border: 1px solid rgba(255,255,255,0.2);
+}
+.stat { text-align: center; }
+.stat-label {
+    display: block;
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.7);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.25rem;
+}
+.stat-value {
+    display: block;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+/* ─── Timer ───────────────────────────────────────────────────────────────── */
+.timer-container { text-align: center; margin-bottom: 1.5rem; }
+.timer-circle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.15);
+    border: 3px solid rgba(255,255,255,0.4);
+    font-size: 2rem;
+    font-weight: 800;
+    margin-bottom: 0.75rem;
+}
+.timer-bar {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+    height: 8px;
+    background: rgba(255,255,255,0.2);
+    border-radius: 4px;
+    overflow: hidden;
+}
+.timer-progress {
+    height: 100%;
+    width: 100%;
+    background: linear-gradient(90deg, #667eea 0%, #f093fb 100%);
+    transition: width 1s linear;
+    border-radius: 4px;
+}
+
+/* ─── Album Cover ─────────────────────────────────────────────────────────── */
+.game-content { max-width: 700px; margin: 0 auto; }
+.album-container { position: relative; margin-bottom: 1.5rem; text-align: center; }
+.album-image {
+    width: 280px;
+    height: 280px;
+    object-fit: cover;
+    border-radius: 1rem;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+    transition: filter 0.5s ease;
+}
+.audio-control { margin-top: 1rem; }
+.btn-audio {
+    background: rgba(255,255,255,0.15);
+    color: white;
+    border: 1px solid rgba(255,255,255,0.3);
+    padding: 0.5rem 1.25rem;
+    border-radius: 2rem;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+}
+.btn-audio:hover { background: rgba(255,255,255,0.25); }
+
+/* ─── Genre Options ───────────────────────────────────────────────────────── */
+.genre-options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+.genre-option {
+    background: rgba(255,255,255,0.12);
+    color: white;
+    border: 2px solid rgba(255,255,255,0.25);
+    padding: 1rem;
+    border-radius: 0.75rem;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+.genre-option:hover:not(.disabled) {
+    background: rgba(255,255,255,0.22);
+    transform: translateY(-2px);
+}
+.genre-option.correct {
+    background: rgba(34,197,94,0.4);
+    border-color: #22c55e;
+}
+.genre-option.incorrect {
+    background: rgba(239,68,68,0.4);
+    border-color: #ef4444;
+}
+.genre-option.disabled {
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+/* ─── Feedback Banner ─────────────────────────────────────────────────────── */
+.feedback {
+    padding: 1.25rem 1.5rem;
+    border-radius: 0.75rem;
+    text-align: center;
+    font-size: 1rem;
+    font-weight: 600;
+    margin-top: 1rem;
+}
+.feedback.correct  { background: rgba(34,197,94,0.3);  border: 1px solid #22c55e; }
+.feedback.incorrect{ background: rgba(239,68,68,0.3);  border: 1px solid #ef4444; }
+.feedback-content  { display: flex; align-items: center; justify-content: center; gap: 0.75rem; font-size: 1.1rem; }
+.feedback-song     { display: block; font-size: 0.9rem; opacity: 0.85; margin-top: 0.25rem; }
+
+/* ─── Results Page ────────────────────────────────────────────────────────── */
+.results-container { max-width: 600px; margin: 0 auto; text-align: center; padding: 2rem; }
+.results-header { margin-bottom: 2rem; }
+.results-header h1 { font-size: 2.5rem; margin-bottom: 1rem; }
+.final-score {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgba(255,255,255,0.1);
+    padding: 1.5rem 3rem;
+    border-radius: 1rem;
+    border: 2px solid rgba(255,255,255,0.3);
+}
+.score-label { font-size: 0.9rem; color: rgba(255,255,255,0.7); text-transform: uppercase; letter-spacing: 0.1em; }
+.score-value { font-size: 4rem; font-weight: 800; }
+.results-stats {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+    margin: 2rem 0;
+}
+.result-stat {
+    background: rgba(255,255,255,0.1);
+    padding: 1rem 1.5rem;
+    border-radius: 0.75rem;
+    text-align: center;
+}
+.result-label { display: block; font-size: 0.85rem; color: rgba(255,255,255,0.7); margin-bottom: 0.5rem; }
+.result-value { display: block; font-size: 1.5rem; font-weight: 700; }
+.results-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+/* ─── Page Headers ────────────────────────────────────────────────────────── */
+.page-header { text-align: center; margin-bottom: 2.5rem; }
+.page-icon   { font-size: 3.5rem; display: block; margin-bottom: 0.5rem; }
+.page-header h1 { font-size: 2.5rem; margin-bottom: 0.5rem; }
+.page-header p  { color: rgba(255,255,255,0.8); font-size: 1.1rem; }
+
+/* ─── Playlist / Favorites ────────────────────────────────────────────────── */
+.search-panel {
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(10px);
+    padding: 2rem;
+    border-radius: 1rem;
+    border: 1px solid rgba(255,255,255,0.2);
+    margin-bottom: 2rem;
+}
+.search-row {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+.form-group { display: flex; flex-direction: column; gap: 0.5rem; }
+.form-group label { font-weight: 600; font-size: 0.95rem; }
+.form-control {
+    background: rgba(255,255,255,0.15);
+    color: white;
+    border: 1px solid rgba(255,255,255,0.3);
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.2s ease;
+}
+.form-control:focus { border-color: rgba(255,255,255,0.6); }
+.form-control option { background: #4c3480; color: white; }
+
+.playlist-results { margin-bottom: 2rem; }
+.playlist-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+.playlist-header h2 { font-size: 1.5rem; }
+.playlist-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1.5rem;
+}
+.playlist-card {
+    background: rgba(255,255,255,0.1);
+    border-radius: 1rem;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.15);
+    transition: all 0.3s ease;
+}
+.playlist-card:hover { transform: translateY(-4px); box-shadow: 0 12px 30px rgba(0,0,0,0.3); }
+.playlist-card-image { width: 100%; aspect-ratio: 1; object-fit: cover; display: block; }
+.playlist-card-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+.playlist-card:hover .playlist-card-overlay { opacity: 1; }
+.btn-icon {
+    background: rgba(255,255,255,0.2);
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s ease;
+}
+.btn-icon:hover { background: rgba(255,255,255,0.35); }
+.btn-icon.favorited { background: rgba(239,68,68,0.4); }
+
+.playlist-card-content { padding: 1rem; }
+.playlist-card-content h3 { font-size: 1rem; margin-bottom: 0.25rem; }
+.playlist-card-artist { color: rgba(255,255,255,0.7); font-size: 0.9rem; margin-bottom: 0.5rem; }
+.playlist-card-badges { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 0.5rem; }
+.playlist-card-meta { display: flex; gap: 1rem; color: rgba(255,255,255,0.6); font-size: 0.8rem; }
+
+.badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.2rem 0.6rem;
+    border-radius: 2rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    background: rgba(255,255,255,0.15);
+}
+.badge-genre { background: rgba(102,126,234,0.4); }
+.badge-mood  { background: rgba(240,147,251,0.3); }
+
+/* ─── Scoreboard ──────────────────────────────────────────────────────────── */
+.scoreboard-controls {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    margin-bottom: 1.5rem;
+}
+.scoreboard-list { display: flex; flex-direction: column; gap: 1rem; }
+.score-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(10px);
+    padding: 1.25rem 1.5rem;
+    border-radius: 1rem;
+    border: 1px solid rgba(255,255,255,0.2);
+}
+.score-item-left { display: flex; align-items: center; gap: 1rem; }
+.score-rank { font-size: 1.5rem; min-width: 2.5rem; text-align: center; }
+.score-rank.top { font-size: 2rem; }
+.score-details h3 { font-size: 1rem; margin-bottom: 0.25rem; }
+.score-meta { color: rgba(255,255,255,0.7); font-size: 0.85rem; }
+.score-value-large { font-size: 2rem; font-weight: 800; }
+
+/* ─── Info Panel ──────────────────────────────────────────────────────────── */
+.info-panel {
+    background: rgba(255,255,255,0.08);
+    padding: 1.5rem;
+    border-radius: 1rem;
+    border: 1px solid rgba(255,255,255,0.15);
+    margin-top: 2rem;
+}
+.info-panel h3 { font-size: 1.2rem; margin-bottom: 1rem; }
+.info-panel ul { list-style: none; padding: 0; }
+.info-panel li { padding: 0.5rem 0; color: rgba(255,255,255,0.85); border-bottom: 1px solid rgba(255,255,255,0.08); }
+.info-panel li:last-child { border-bottom: none; }
+.info-note { color: rgba(255,255,255,0.6); font-size: 0.9rem; margin-top: 1rem; font-style: italic; }
+
+/* ─── Empty State ─────────────────────────────────────────────────────────── */
+.empty-state { text-align: center; padding: 3rem; }
+.empty-icon  { font-size: 4rem; display: block; margin-bottom: 1rem; }
+.empty-state h3 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+.empty-state p  { color: rgba(255,255,255,0.7); }

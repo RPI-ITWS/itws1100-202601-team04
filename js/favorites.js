@@ -1,0 +1,66 @@
+// Renders the Favorites page by reading saved songs from localStorage
+
+// Clears and redraws the favorites grid; shows an empty state when the list is empty
+function loadFavorites() {
+    const favorites = getFavorites();
+    const container = document.getElementById('favorites-grid');
+
+    if (favorites.length === 0) {
+        container.innerHTML = `
+            <div class="empty-state">
+                <span class="empty-icon">❤️</span>
+                <h3>No Favorites Yet</h3>
+                <p>Add songs to your favorites from the Playlist Generator</p>
+            </div>
+        `;
+        return;
+    }
+
+    container.innerHTML = '';
+
+    // Stagger card animations by index so they fade in one after another
+    favorites.forEach((song, index) => {
+        const card = createFavoriteCard(song, index);
+        container.appendChild(card);
+    });
+}
+
+// Builds a single song card with play + remove buttons
+function createFavoriteCard(storedSong, index) {
+    // Use fresh data from songs array so stale localStorage coverImages are updated
+    const song = (typeof songs !== 'undefined' && songs.find(s => s.id === storedSong.id)) || storedSong;
+    const card = document.createElement('div');
+    card.className = 'playlist-card';
+    card.style.animation = `fadeIn 0.5s ease ${index * 0.05}s both`;
+
+    card.innerHTML = `
+        <div style="position: relative;">
+            <img src="${song.coverImage}" alt="${song.title}" class="playlist-card-image">
+            <div class="playlist-card-overlay">
+                ${song.previewUrl && song.previewUrl.trim() !== '' ?
+                `<button class="btn-icon" id="play-btn-${song.id}" onclick="playPreview('${song.id}')" title="Play Preview">▶️</button>` :
+                `<button class="btn-icon" style="opacity:0.3;cursor:default;" title="No preview available" disabled>▶️</button>`}
+                <button class="btn-icon favorited"
+                        onclick="removeFavoriteAndRefresh('${song.id}')"
+                        title="Remove from favorites">
+                    ❤️
+                </button>
+            </div>
+        </div>
+        <div class="playlist-card-content">
+            <h3>${song.title}</h3>
+            <p class="playlist-card-artist">${song.artist}</p>
+            <div class="playlist-card-badges">
+                <span class="badge badge-genre">${song.genre}</span>
+            </div>
+        </div>
+    `;
+
+    return card;
+}
+
+// Removes a song then immediately re-renders the grid so the UI stays in sync
+function removeFavoriteAndRefresh(songId) {
+    removeFavorite(songId);
+    loadFavorites();
+}
