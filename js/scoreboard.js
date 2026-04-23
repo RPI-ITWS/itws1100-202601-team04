@@ -74,6 +74,7 @@ function createScoreItem(score, rank) {
             <div class="score-details">
                 <h3>${difficultyEmoji[score.difficulty] || '🎮'} ${displayName}</h3>
                 <p class="score-meta">
+                    <strong>${score.playerName || 'Player'}</strong> &bull;
                     ${score.correctAnswers}/${score.totalQuestions} correct
                     (${score.accuracy}%) • ${dateStr}
                 </p>

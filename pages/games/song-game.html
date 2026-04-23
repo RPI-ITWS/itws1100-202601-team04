@@ -37,7 +37,14 @@
                     <h1>Song Guessing</h1>
                     <p>Listen to a 30-second clip and pick the correct song from 4 choices</p>
                 </div>
-                <button class="btn btn-primary btn-large" style="max-width:300px; margin:2rem auto;"
+                <div style="max-width:340px;margin:0 auto 0;">
+                    <label for="player-name-input" style="display:block;margin-bottom:0.4rem;font-weight:600;color:var(--text-secondary,#ccc);">Your Name</label>
+                    <input type="text" id="player-name-input" maxlength="24"
+                           placeholder="Enter your name..."
+                           style="width:100%;padding:0.6rem 0.9rem;border-radius:8px;border:1px solid rgba(255,255,255,0.2);background:rgba(255,255,255,0.08);color:#fff;font-size:1rem;"
+                           oninput="localStorage.setItem('musicGamePlayerName', this.value.trim() || 'Player')">
+                </div>
+                <button class="btn btn-primary btn-large" style="max-width:300px; margin:1.5rem auto;"
                         onclick="startSongGame()">
                     🎵 Start Game
                 </button>

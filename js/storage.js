@@ -12,6 +12,7 @@ function saveScore(score) {
     const scores = getScores();
     scores.push({
         ...score,
+        playerName: score.playerName || localStorage.getItem('musicGamePlayerName') || 'Player',
         timestamp: new Date().toISOString(),
         id: Date.now()
     });

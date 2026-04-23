@@ -37,6 +37,13 @@
                     <h1>Choose Your Difficulty</h1>
                     <p>Select a difficulty level for the genre guessing game</p>
                 </div>
+                <div style="max-width:340px;margin:0 auto 1.5rem;">
+                    <label for="player-name-input" style="display:block;margin-bottom:0.4rem;font-weight:600;color:var(--text-secondary,#ccc);">Your Name</label>
+                    <input type="text" id="player-name-input" maxlength="24"
+                           placeholder="Enter your name..."
+                           style="width:100%;padding:0.6rem 0.9rem;border-radius:8px;border:1px solid rgba(255,255,255,0.2);background:rgba(255,255,255,0.08);color:#fff;font-size:1rem;"
+                           oninput="localStorage.setItem('musicGamePlayerName', this.value.trim() || 'Player')">
+                </div>
                 <div class="difficulty-grid">
                     <div class="difficulty-card" onclick="startGame('easy')">
                         <div class="difficulty-icon">😊</div>
