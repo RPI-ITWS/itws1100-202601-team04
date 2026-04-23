@@ -1,19 +1,20 @@
-// Router - Handle page navigation
+// Hash-based SPA router — each page is a <section class="page"> toggled with .active
 
+// Changing the hash triggers hashchange, which calls handleRoute
 function navigateTo(hash) {
     window.location.hash = hash;
 }
 
 function handleRoute() {
     const hash = window.location.hash || '#home';
-    const page = hash.substring(1); // Remove the #
+    const page = hash.substring(1); // strip the leading #
 
-    // Hide all pages
+    // Hide every page, then reveal only the matching one
     document.querySelectorAll('.page').forEach(p => {
         p.classList.remove('active');
     });
 
-    // Update nav links
+    // Highlight the nav link whose href matches the current hash
     document.querySelectorAll('.nav-link').forEach(link => {
         link.classList.remove('active');
         if (link.getAttribute('href') === hash) {
@@ -21,17 +22,16 @@ function handleRoute() {
         }
     });
 
-    // Show the current page
+    // Show the target page; fall back to home if the id doesn't exist
     const pageElement = document.getElementById(`${page}-page`);
     if (pageElement) {
         pageElement.classList.add('active');
     } else {
-        // Fallback to home
         const homePage = document.getElementById('home-page');
         if (homePage) homePage.classList.add('active');
     }
 
-    // Load page-specific content
+    // Some pages need fresh data pulled from localStorage on every visit
     if (page === 'scoreboard') {
         if (typeof loadScoreboard === 'function') loadScoreboard();
     } else if (page === 'favorites') {
@@ -41,7 +41,7 @@ function handleRoute() {
     }
 }
 
-// Listen for hash changes
+// Re-run routing whenever the URL hash changes (back/forward or navigateTo calls)
 window.addEventListener('hashchange', handleRoute);
 
 // Run after DOM is ready (works whether loaded via script tag or dynamically)

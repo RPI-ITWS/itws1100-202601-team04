@@ -1,5 +1,6 @@
-// Game Logic
+// Genre Guessing Game — player sees a blurred album cover and picks the correct genre
 
+// Single source of truth for all in-progress game data
 let gameState = {
     difficulty: 'easy',
     currentRound: 0,
@@ -11,6 +12,7 @@ let gameState = {
     audioEnabled: true
 };
 
+// Higher blur and shorter time on harder difficulties; timeBonus scales score reward for speed
 const difficultySettings = {
     easy: { blur: 5, time: 30, timeBonus: 30 },
     medium: { blur: 15, time: 20, timeBonus: 50 },
@@ -26,6 +28,7 @@ function stopDemoAudio() {
     gameAudioPlayer.src = '';
 }
 
+// Resets state, picks 10 random songs, and starts the first round
 function startGame(difficulty) {
     gameState.difficulty = difficulty;
     gameState.currentRound = 0;
@@ -46,12 +49,14 @@ function startGame(difficulty) {
     startTimer();
 }
 
+// Picks 10 songs that have a preview URL and shuffles them
 function generateQuestions() {
     const pool = songs.filter(s => s.previewUrl);
     const shuffled = pool.sort(() => 0.5 - Math.random());
     return shuffled.slice(0, 10);
 }
 
+// Resets the timer and renders the next question for a new round
 function startRound() {
     const settings = difficultySettings[gameState.difficulty];
     gameState.timeLeft = settings.time;
@@ -59,7 +64,7 @@ function startRound() {
     updateGameDisplay();
     displayQuestion();
     startTimer();
-    playAudio(); // ← audio plays as soon as timer starts
+    playAudio();
 }
 
 function updateGameDisplay() {
@@ -70,6 +75,7 @@ function updateGameDisplay() {
         `${gameState.correctAnswers}/10`;
 }
 
+// Sets the blurred album cover and generates 4 genre buttons (1 correct, 3 random wrong)
 function displayQuestion() {
     const currentSong = gameState.questions[gameState.currentRound];
     const settings    = difficultySettings[gameState.difficulty];
@@ -103,9 +109,10 @@ function displayQuestion() {
     document.getElementById('feedback').classList.add('hidden');
 }
 
+// Locks buttons, reveals the album, calculates score (base 100 + speed bonus), then advances
 function handleAnswer(selectedGenre) {
     stopTimer();
-    stopDemoAudio(); // stop music when answer is given
+    stopDemoAudio();
 
     const currentSong = gameState.questions[gameState.currentRound];
     const isCorrect   = selectedGenre === currentSong.genre;
@@ -121,6 +128,7 @@ function handleAnswer(selectedGenre) {
         }
     });
 
+    // Unblur the album so the player can see the answer
     document.getElementById('album-cover').style.filter = 'blur(0px)';
 
     if (isCorrect) {
@@ -136,6 +144,7 @@ function handleAnswer(selectedGenre) {
 
     updateGameDisplay();
 
+    // 3-second pause so the player can read the feedback before the next round loads
     setTimeout(() => {
         gameState.currentRound++;
         if (gameState.currentRound < 10) {
@@ -157,6 +166,7 @@ function showFeedback(isCorrect, message) {
     text.textContent = message;
 }
 
+// Counts down every second; auto-submits an empty answer when time hits zero
 function startTimer() {
     const settings  = difficultySettings[gameState.difficulty];
     const totalTime = settings.time;
@@ -170,7 +180,7 @@ function startTimer() {
         document.getElementById('timer-progress').style.width = `${progress}%`;
 
         if (gameState.timeLeft <= 0) {
-            handleAnswer(''); // time's up
+            handleAnswer(''); // empty string won't match any genre → treated as wrong
         }
     }, 1000);
 }
@@ -182,6 +192,7 @@ function stopTimer() {
     }
 }
 
+// Mutes/unmutes without stopping the game; re-starts audio when un-muting mid-round
 function toggleAudio() {
     gameState.audioEnabled = !gameState.audioEnabled;
 
@@ -217,6 +228,7 @@ function playAudio() {
     }
 }
 
+// Saves the score to localStorage and navigates to the results screen
 function endGame() {
     stopTimer();
     stopDemoAudio();

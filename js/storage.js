@@ -1,11 +1,13 @@
-// LocalStorage utility functions
+// Thin wrappers around localStorage so the rest of the app never touches it directly
 
-// Scores
+// ── Scores ───────────────────────────────────────────────────────────────────
+
 function getScores() {
     const scores = localStorage.getItem('musicGameScores');
     return scores ? JSON.parse(scores) : [];
 }
 
+// Stamps each entry with a timestamp + unique id, then caps the list at 50
 function saveScore(score) {
     const scores = getScores();
     scores.push({
@@ -13,7 +15,6 @@ function saveScore(score) {
         timestamp: new Date().toISOString(),
         id: Date.now()
     });
-    // Keep only the latest 50 scores
     if (scores.length > 50) {
         scores.splice(0, scores.length - 50);
     }
@@ -24,12 +25,14 @@ function clearScores() {
     localStorage.removeItem('musicGameScores');
 }
 
-// Favorites
+// ── Favorites ────────────────────────────────────────────────────────────────
+
 function getFavorites() {
     const favorites = localStorage.getItem('musicGameFavorites');
     return favorites ? JSON.parse(favorites) : [];
 }
 
+// Silently ignores duplicates (checked by song.id)
 function addFavorite(song) {
     const favorites = getFavorites();
     if (!favorites.find(f => f.id === song.id)) {
@@ -49,7 +52,9 @@ function isFavorite(songId) {
     return favorites.some(f => f.id === songId);
 }
 
-// Game State
+// ── Game State ───────────────────────────────────────────────────────────────
+// Persists mid-game state so a page refresh could theoretically resume
+
 function saveGameState(state) {
     localStorage.setItem('currentGameState', JSON.stringify(state));
 }

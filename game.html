@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!-- Game hub — contains all game sections (mode select, difficulty, gameplay, results) as hash-routed pages -->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -29,7 +30,7 @@
 
     <main id="app">
 
-        <!-- Game Mode Selection -->
+        <!-- Step 1: Choose a game mode (Genre Guessing or Song Guessing) -->
         <section id="game-page" class="page active">
             <div class="container">
                 <div class="game-select-header">
@@ -37,6 +38,7 @@
                     <p>Select a game to test your music knowledge</p>
                 </div>
                 <div class="game-mode-grid">
+                    <!-- Clicking navigates to the difficulty picker -->
                     <div class="game-mode-card" onclick="navigateTo('#genre-game')">
                         <div class="game-mode-icon">🖼️</div>
                         <h3>Genre Guessing</h3>
@@ -47,6 +49,7 @@
                             <span>&bull; 10 Rounds</span>
                         </div>
                     </div>
+                    <!-- Clicking directly starts the song game (no difficulty selection needed) -->
                     <div class="game-mode-card" onclick="startSongGame()">
                         <div class="game-mode-icon">🎵</div>
                         <h3>Song Guessing</h3>
@@ -61,7 +64,7 @@
             </div>
         </section>
 
-        <!-- Genre Game Difficulty Selection -->
+        <!-- Step 2 (Genre only): Pick a difficulty — each card calls startGame(difficulty) -->
         <section id="genre-game-page" class="page">
             <div class="container">
                 <div class="game-select-header">
@@ -100,9 +103,10 @@
             </div>
         </section>
 
-        <!-- Song Guessing Game -->
+        <!-- Song Guessing Game — audio player + 4-option multiple choice per round -->
         <section id="song-game-page" class="page">
             <div class="container">
+                <!-- Stats bar: round counter, running score, points earned so far -->
                 <div class="game-header">
                     <div class="game-stats">
                         <div class="stat">
@@ -121,6 +125,7 @@
                 </div>
 
                 <div class="song-game-content">
+                    <!-- Audio player card: progress bar + play/pause toggle -->
                     <div class="audio-player-container">
                         <div class="audio-player-card">
                             <div class="audio-wave">🎵 🎶 🎵</div>
@@ -131,6 +136,7 @@
                                     <span id="audio-duration">0:30</span>
                                 </div>
                                 <div class="audio-progress-bar">
+                                    <!-- Width is animated by songGame.js via inline style -->
                                     <div id="audio-progress" class="audio-progress-fill"></div>
                                 </div>
                             </div>
@@ -142,11 +148,13 @@
                         </div>
                     </div>
 
+                    <!-- Multiple choice buttons injected by displaySongQuestion() -->
                     <div class="guess-form">
                         <p class="audio-hint" style="margin-bottom:0.75rem;">Which song is playing?</p>
                         <div id="song-options" class="genre-options"></div>
                     </div>
 
+                    <!-- Hidden until the player answers; shown by showSongFeedback() -->
                     <div id="song-feedback" class="feedback hidden">
                         <div class="feedback-content">
                             <span id="song-feedback-icon"></span>
@@ -157,7 +165,7 @@
             </div>
         </section>
 
-        <!-- Genre Gameplay -->
+        <!-- Genre Gameplay — blurred album cover + countdown timer + 4 genre buttons -->
         <section id="gameplay-page" class="page">
             <div class="container">
                 <div class="game-header">
@@ -178,6 +186,7 @@
                 </div>
 
                 <div class="game-content">
+                    <!-- Circular countdown display + shrinking progress bar -->
                     <div class="timer-container">
                         <div class="timer-circle">
                             <span id="timer-display">20</span>
@@ -187,6 +196,7 @@
                         </div>
                     </div>
 
+                    <!-- Album cover; CSS blur is set per difficulty in game.js -->
                     <div class="album-container">
                         <img id="album-cover" src="" alt="Album Cover" class="album-image">
                         <div class="audio-control">
@@ -197,8 +207,10 @@
                         </div>
                     </div>
 
+                    <!-- Genre choice buttons are injected by displayQuestion() -->
                     <div class="genre-options" id="genre-options"></div>
 
+                    <!-- Correct/wrong banner; toggled by showFeedback() -->
                     <div id="feedback" class="feedback hidden">
                         <div class="feedback-content">
                             <span id="feedback-icon"></span>
@@ -209,7 +221,7 @@
             </div>
         </section>
 
-        <!-- Results -->
+        <!-- Shared results screen used by both game modes after round 10 -->
         <section id="results-page" class="page">
             <div class="container results-container">
                 <div class="results-header">
@@ -243,6 +255,7 @@
 
     </main>
 
+    <!-- Hidden audio element; game.js sets its src each round -->
     <audio id="game-audio"></audio>
 
     <script src="data/songs.js"></script>
@@ -250,7 +263,7 @@
     <script src="js/game.js"></script>
     <script src="js/songGame.js"></script>
     <script>
-        // Cross-page aware router for game.html
+        // Minimal router for game.html — just shows/hides sections by hash, no page-specific init needed
         function navigateTo(hash) {
             window.location.hash = hash;
         }

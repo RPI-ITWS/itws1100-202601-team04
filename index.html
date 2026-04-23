@@ -1,9 +1,11 @@
 <!DOCTYPE html>
+<!-- Landing page — also hosts the Favorites section (shown via hash routing) -->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Music Playlist & Genre Guessing Game</title>
+    <!-- Inter font for consistent typography across all pages -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
@@ -11,6 +13,7 @@
 </head>
 <body>
 
+    <!-- Sticky nav bar shared by all pages -->
     <nav id="navbar">
         <div class="nav-container">
             <div class="nav-brand">
@@ -22,6 +25,7 @@
                 <li><a href="game.html"        class="nav-link">Play Game</a></li>
                 <li><a href="playlist.html"    class="nav-link">Playlist Generator</a></li>
                 <li><a href="scoreboard.html"  class="nav-link">Scoreboard</a></li>
+                <!-- Favorites lives on index.html and is toggled via #favorites hash -->
                 <li><a href="#favorites"       class="nav-link">Favorites</a></li>
             </ul>
         </div>
@@ -29,7 +33,7 @@
 
     <main id="app">
 
-        <!-- Home Page -->
+        <!-- Home Page — hero section + feature cards linking to other pages -->
         <section id="home-page" class="page active">
             <div class="container">
                 <div class="hero-section">
@@ -38,6 +42,7 @@
                     <p class="team-info">Created by: Nathen Pride, Kevin Chen, D'Andre Collins &bull; ITWS 1100</p>
                 </div>
 
+                <!-- Three cards that link to the main features -->
                 <div class="features-grid">
                     <div class="feature-card">
                         <div class="feature-icon">🎮</div>
@@ -71,7 +76,7 @@
             </div>
         </section>
 
-        <!-- Favorites Page -->
+        <!-- Favorites Page — populated dynamically by favorites.js when hash == #favorites -->
         <section id="favorites-page" class="page">
             <div class="container">
                 <div class="page-header">
@@ -79,16 +84,19 @@
                     <h1>Your Favorites</h1>
                     <p>Songs you've saved</p>
                 </div>
+                <!-- loadFavorites() renders cards into this grid -->
                 <div id="favorites-grid" class="playlist-grid"></div>
             </div>
         </section>
 
     </main>
 
+    <!-- songs.js must load first — storage and favorites both depend on the songs array -->
     <script src="data/songs.js"></script>
     <script src="js/storage.js"></script>
     <script src="js/favorites.js"></script>
     <script>
+        // Inline mini-router for index.html (only home + favorites pages live here)
         function playPreview(songId) {
             const song = songs.find(s => s.id === songId);
             if (song && song.audioPreviewUrl) {

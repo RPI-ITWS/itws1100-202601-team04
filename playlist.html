@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!-- Playlist Generator page — single static section, no hash routing needed -->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -37,10 +38,12 @@
                     <p>Discover new music based on your preferences</p>
                 </div>
 
+                <!-- Search controls: mode selector + dynamic input (genre dropdown or text field) -->
                 <div class="search-panel">
                     <div class="search-row">
                         <div class="form-group">
                             <label for="search-type">Search By</label>
+                            <!-- Changing this swaps between genre-select and search-input -->
                             <select id="search-type" class="form-control" onchange="updateSearchInput()">
                                 <option value="genre">Genre</option>
                                 <option value="artist">Artist</option>
@@ -50,9 +53,11 @@
                         </div>
                         <div class="form-group">
                             <label for="search-input" id="search-label">Select Genre</label>
+                            <!-- Genre dropdown — options are populated by initPlaylistGenerator() -->
                             <select id="genre-select" class="form-control">
                                 <option value="">Choose a genre</option>
                             </select>
+                            <!-- Free-text input — hidden by default, shown for artist/song/mood modes -->
                             <input type="text" id="search-input" class="form-control hidden" placeholder="Enter search...">
                         </div>
                     </div>
@@ -61,6 +66,7 @@
                     </button>
                 </div>
 
+                <!-- Song cards are rendered here by displayPlaylist() -->
                 <div id="playlist-results" class="playlist-results">
                     <div class="empty-state">
                         <span class="empty-icon">🎵</span>
@@ -69,6 +75,7 @@
                     </div>
                 </div>
 
+                <!-- Static explainer — no JS interaction -->
                 <div class="info-panel">
                     <h3>How It Works</h3>
                     <ul>
@@ -86,9 +93,11 @@
 
     <script src="data/songs.js"></script>
     <script src="js/storage.js"></script>
+    <!-- favorites.js needed so toggleFavorite() works on playlist cards -->
     <script src="js/favorites.js"></script>
     <script src="js/playlist.js"></script>
     <script>
+        // Populate the genre dropdown once the DOM is ready
         document.addEventListener('DOMContentLoaded', initPlaylistGenerator);
     </script>
 
