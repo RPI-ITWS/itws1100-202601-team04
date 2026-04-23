@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<!-- Song Guessing — self-contained SPA: gameplay → results -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Song Guessing – MusicGame</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../styles.css">
+</head>
+<body>
+
+    <nav id="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <span class="icon">🎵</span>
+                <span class="brand-text">MusicGame</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="../../index.html"          class="nav-link">Home</a></li>
+                <li><a href="../game.html"               class="nav-link active">Play Game</a></li>
+                <li><a href="../playlist.html"           class="nav-link">Playlist Generator</a></li>
+                <li><a href="../scoreboard.html"         class="nav-link">Scoreboard</a></li>
+                <li><a href="../../index.html#favorites" class="nav-link">Favorites</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main id="app">
+
+        <!-- Gameplay section — audio player + 4-option multiple choice per round -->
+        <section id="song-game-page" class="page active">
+            <div class="container">
+                <!-- Round counter, running score, points earned so far -->
+                <div class="game-header">
+                    <div class="game-stats">
+                        <div class="stat">
+                            <span class="stat-label">Round</span>
+                            <span class="stat-value" id="song-round-display">1/10</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-label">Score</span>
+                            <span class="stat-value" id="song-score-display">0</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-label">Points</span>
+                            <span class="stat-value" id="song-points-display">0/10</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="song-game-content">
+                    <!-- Audio player card: progress bar driven by songGame.js setInterval -->
+                    <div class="audio-player-container">
+                        <div class="audio-player-card">
+                            <div class="audio-wave">🎵 🎶 🎵</div>
+                            <div class="audio-info">
+                                <div class="audio-timer">
+                                    <span id="audio-current-time">0:00</span>
+                                    <span>/</span>
+                                    <span id="audio-duration">0:30</span>
+                                </div>
+                                <div class="audio-progress-bar">
+                                    <!-- Width animated via inline style by songGame.js -->
+                                    <div id="audio-progress" class="audio-progress-fill"></div>
+                                </div>
+                            </div>
+                            <button id="play-audio-btn" class="btn-play" onclick="playSongAudio()">
+                                <span id="play-icon">▶️</span>
+                                <span id="play-text">Play Song</span>
+                            </button>
+                            <p class="audio-hint">Listen carefully to guess the song and artist!</p>
+                        </div>
+                    </div>
+
+                    <!-- 4 multiple choice buttons injected by displaySongQuestion() -->
+                    <div class="guess-form">
+                        <p class="audio-hint" style="margin-bottom:0.75rem;">Which song is playing?</p>
+                        <div id="song-options" class="genre-options"></div>
+                    </div>
+
+                    <!-- Hidden until the player answers; shown by showSongFeedback() -->
+                    <div id="song-feedback" class="feedback hidden">
+                        <div class="feedback-content">
+                            <span id="song-feedback-icon"></span>
+                            <div id="song-feedback-text"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Results screen shown by endSongGame() -->
+        <section id="results-page" class="page">
+            <div class="container results-container">
+                <div class="results-header">
+                    <h1>Game Complete!</h1>
+                    <div class="final-score">
+                        <span class="score-label">Final Score</span>
+                        <span id="final-score" class="score-value">0</span>
+                    </div>
+                </div>
+                <div class="results-stats">
+                    <div class="result-stat">
+                        <span class="result-label">Correct Answers</span>
+                        <span id="final-correct" class="result-value">0/10</span>
+                    </div>
+                    <div class="result-stat">
+                        <span class="result-label">Accuracy</span>
+                        <span id="final-accuracy" class="result-value">0%</span>
+                    </div>
+                    <div class="result-stat">
+                        <span class="result-label">Difficulty</span>
+                        <span id="final-difficulty" class="result-value">Song Guessing</span>
+                    </div>
+                </div>
+                <div class="results-actions">
+                    <button class="btn btn-primary"   onclick="location.reload()">Play Again</button>
+                    <button class="btn btn-secondary" onclick="window.location.href='../scoreboard.html'">View Scoreboard</button>
+                    <button class="btn btn-secondary" onclick="window.location.href='../../index.html'">Home</button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script src="../../data/songs.js"></script>
+    <script src="../../js/storage.js"></script>
+    <script src="../../js/songGame.js"></script>
+    <script>
+        // Local hash router: songGame.js calls navigateTo('#song-game') and navigateTo('#results')
+        function navigateTo(hash) {
+            window.location.hash = hash;
+        }
+
+        function handleRoute() {
+            const hash = window.location.hash || '#song-game';
+            const page = hash.substring(1);
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            const el = document.getElementById(page + '-page');
+            (el || document.getElementById('song-game-page')).classList.add('active');
+        }
+
+        window.addEventListener('hashchange', handleRoute);
+
+        // Start the game as soon as the DOM and songs are ready
+        document.addEventListener('DOMContentLoaded', () => {
+            handleRoute();
+            startSongGame();
+        });
+    </script>
+
+</body>
+</html>

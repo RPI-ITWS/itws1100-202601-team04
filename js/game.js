@@ -192,7 +192,7 @@ function stopTimer() {
     }
 }
 
-// Mutes/unmutes without stopping the game; re-starts audio when un-muting mid-round
+// Mutes/unmutes without stopping the game; resumes from the paused position on unmute
 function toggleAudio() {
     gameState.audioEnabled = !gameState.audioEnabled;
 
@@ -203,14 +203,15 @@ function toggleAudio() {
         icon.textContent = '🔊';
         text.textContent = 'Audio Enabled';
         gameAudioPlayer.volume = 0.3;
+        // Resume from the paused spot — don't reset src/currentTime
         if (gameState.questions.length > 0 && gameState.currentRound < 10) {
-            playAudio();
+            gameAudioPlayer.play().catch(err => console.warn('Audio playback failed:', err));
         }
     } else {
         icon.textContent = '🔇';
         text.textContent = 'Audio Muted';
-        gameAudioPlayer.volume = 0;
-        stopDemoAudio();
+        // Pause only — keeping src intact so resume works
+        gameAudioPlayer.pause();
     }
 }
 
