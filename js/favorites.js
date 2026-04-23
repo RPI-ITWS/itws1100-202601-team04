@@ -35,9 +35,9 @@ function createFavoriteCard(song, index) {
         <div style="position: relative;">
             <img src="${song.coverImage}" alt="${song.title}" class="playlist-card-image">
             <div class="playlist-card-overlay">
-                <button class="btn-icon" onclick="playPreview('${song.id}')" title="Play Preview">
-                    ▶️
-                </button>
+                ${song.previewUrl && song.previewUrl.trim() !== '' ?
+                `<button class="btn-icon" id="play-btn-${song.id}" onclick="playPreview('${song.id}')" title="Play Preview">▶️</button>` :
+                `<button class="btn-icon" style="opacity:0.3;cursor:default;" title="No preview available" disabled>▶️</button>`}
                 <button class="btn-icon favorited"
                         onclick="removeFavoriteAndRefresh('${song.id}')"
                         title="Remove from favorites">

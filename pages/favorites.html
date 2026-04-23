@@ -46,13 +46,40 @@
     <script src="../js/storage.js"></script>
     <script src="../js/favorites.js"></script>
     <script>
+        let _favAudio = null;
+        let _favSongId = null;
+
+        function setPlayBtnIcon(songId, icon) {
+            const btn = document.getElementById('play-btn-' + songId);
+            if (btn) btn.textContent = icon;
+        }
+
+        function stopFavPreview() {
+            if (_favAudio) { _favAudio.pause(); _favAudio = null; }
+            if (_favSongId) { setPlayBtnIcon(_favSongId, '▶️'); _favSongId = null; }
+        }
+
         function playPreview(songId) {
+            // Clicking the playing song pauses it
+            if (_favSongId === songId) { stopFavPreview(); return; }
+
+            stopFavPreview();
+
             const song = songs.find(s => s.id === songId);
-            if (song && song.previewUrl && song.previewUrl.trim() !== '') {
-                const audio = new Audio(song.previewUrl);
-                audio.volume = 0.6;
-                audio.play().catch(() => {});
-            }
+            if (!song || !song.previewUrl || song.previewUrl.trim() === '') return;
+
+            _favAudio  = new Audio(song.previewUrl);
+            _favSongId = songId;
+            _favAudio.volume = 0.6;
+
+            _favAudio.addEventListener('ended', () => {
+                setPlayBtnIcon(songId, '▶️');
+                _favAudio = null; _favSongId = null;
+            });
+
+            _favAudio.play()
+                .then(() => setPlayBtnIcon(songId, '⏸️'))
+                .catch(() => { _favAudio = null; _favSongId = null; });
         }
 
         document.addEventListener('DOMContentLoaded', loadFavorites);
