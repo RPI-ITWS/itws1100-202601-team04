@@ -5,8 +5,9 @@
   Each song object includes metadata such as genre, energy, tempo, mood,
   and media assets used for playlist generation and gameplay.
 */
+// List of available genres used for filtering and playlist generation
 const GENRES = ['Afrobeats','Country','Country Pop','Hip Hop','Indie Folk','Indie Pop','Indie Rock','K-Pop','Latin','Pop','R&B'];
-
+// Main dataset (150+ songs) used across playlist generation and games
 const songs = [
   {
     "id": "hh1",
