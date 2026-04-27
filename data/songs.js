@@ -1,3 +1,10 @@
+/*
+  songs.js
+
+  Contains the full dataset of songs used in Musi-Quest.
+  Each song object includes metadata such as genre, energy, tempo, mood,
+  and media assets used for playlist generation and gameplay.
+*/
 const GENRES = ['Afrobeats','Country','Country Pop','Hip Hop','Indie Folk','Indie Pop','Indie Rock','K-Pop','Latin','Pop','R&B'];
 
 const songs = [

@@ -1,3 +1,12 @@
+"""
+fetch_previews.py
+
+This script retrieves audio preview URLs for songs using the iTunes Search API.
+It reads from songs.json, queries the API using song title and artist,
+and updates the dataset with previewUrl values.
+
+Used during development to populate missing audio previews.
+"""
 import json
 import urllib.request
 import urllib.parse
